@@ -30,3 +30,4 @@ src/test/
 *.njsproj
 *.sln
 *.sw?
+.vercel
