@@ -10,7 +10,7 @@ This application is a task management dashboard that allows users to organize, t
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - npm or yarn
 
 ### Installation & Development
