@@ -1,69 +1,137 @@
-# React + TypeScript + Vite
+# Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React, TypeScript, and GraphQL Ravn's final challenge.
 
-Currently, two official plugins are available:
+## 📋 Project Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application is a task management dashboard that allows users to organize, track, and manage tasks across different status columns (Backlog, Todo, In Progress, Done, Cancelled). Built with modern React patterns and GraphQL for efficient data management.
 
-## Expanding the ESLint configuration
+## 🚀 Setup/Running Instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 18+
+- npm or yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Installation & Development
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+````bash
+# Clone the repository
+git clone <repository-url>
+cd task-manager-app
+
+# Install dependencies
+yarn install
+
+# Start development server
+yarn dev
+
+### Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run format       # Format code with Prettier
+npm run type-check   # TypeScript type checking
+npm run codegen      # Generate GraphQL types
+````
+
+## 🛠 Technologies/Libraries Used
+
+### Core Stack
+
+- **React 19**
+- **TypeScript**
+- **Vite**
+- **React Router DOM**
+
+### GraphQL & State Management
+
+- **Apollo Client**
+- **GraphQL Code Generator**
+
+### Development Tools
+
+- **ESLint**
+- **Prettier**
+- **Husky**
+- **lint-staged**
+- **react-error-boundary**
+
+### CI/CD
+
+- **GitHub Actions**
+- **Vercel**
+
+## 🏗 Project Structure & Architecture
+
+**Feature-Driven Development (FDD)**
+
+```
+src/
+├── components/
+│   ├── ui/
+│   ├── layout/
+│   └── features/
+├── pages/
+├── hooks/
+├── graphql/
+├── lib/
+├── utils/
+├── types/
+└── styles/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📝 Development Progress
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### ✅ Completed (Day 1 - Sept 9, 2025)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Project Setup & Configuration:**
+
+- [x] Initial React + TypeScript + Vite setup
+- [x] GraphQL stack configuration (Apollo Client + Code Generator)
+- [x] Development tooling setup (ESLint, Prettier, Husky)
+- [x] CI/CD pipeline with GitHub Actions
+- [x] Vercel deployment configuration with SPA routing
+- [x] Project architecture planning and folder structure design
+- [x] Error boundary strategy with react-error-boundary
+
+**Quality Assurance Setup:**
+
+- [x] Pre-commit hooks with Husky
+- [x] Automated linting and formatting
+- [x] TypeScript strict mode configuration
+- [x] GitHub Actions workflow for testing and deployment
+- [x] Proper SPA routing configuration for Vercel
+
+### 🔄 Next Steps (Day 2 - Sept 10, 2025)
+
+- [ ] Implement folder structure and core architecture
+- [ ] Setup Apollo Client with GraphQL endpoint
+- [ ] Create layout components (Sidebar, Header, MainLayout)
+- [ ] Implement routing with React Router and error pages
+- [ ] Begin dashboard UI development
+
+## 🎯 Features Roadmap
+
+### Week 1: Foundation & Core UI
+
+- [ ] Dashboard layout with sidebar navigation
+- [ ] Task board with status columns
+- [ ] Task cards with all required information
+- [ ] Basic routing setup with NotFound and Error pages
+- [ ] SCSS styling architecture
+
+### Week 2: Functionality & Advanced Features
+
+- [ ] GraphQL integration for CRUD operations
+- [ ] Search and filtering functionality
+- [ ] User settings page
+- [ ] Bonus features (drag & drop, animations, etc.)
+
+## 🚧 Current Status
+
+**Day 1 Complete** - Project foundation and development environment fully configured with modern tooling, CI/CD pipeline, error handling, and deployment strategy.
