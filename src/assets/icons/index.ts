@@ -4,3 +4,4 @@ export { NotificationIcon } from './NotificationIcon';
 export { PlusIcon } from './PlusIcon';
 export { RavnIcon } from './RavnIcon';
 export { SearchIcon } from './SearchIcon';
+export { AddIcon } from './AddIcon';
