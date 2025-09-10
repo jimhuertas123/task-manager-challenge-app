@@ -1,0 +1,6 @@
+export { DashboardIcon } from './DashboardIcon';
+export { ListIcon } from './ListIcon';
+export { NotificationIcon } from './NotificationIcon';
+export { PlusIcon } from './PlusIcon';
+export { RavnIcon } from './RavnIcon';
+export { SearchIcon } from './SearchIcon';
