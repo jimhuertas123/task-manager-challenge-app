@@ -1,5 +1,5 @@
 import { SearchIcon, NotificationIcon } from '@/assets/icons';
-import Avatar1 from '@/assets/avatar-1.png';
+import Avatar1 from '@/assets/avatar1.png';
 
 export const SearchTasks = () => {
   return (
