@@ -16,7 +16,7 @@ export const NavLinkCard = ({
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `font-[500] md:text-nav-bar-m flex items-center mb-2.5 gap-2 px-5 py-[7%] transition-colors duration-200 
+        `font-[500] text-nav-bar-m flex items-center mb-2.5 gap-2 px-5 py-[7%] transition-colors duration-200 
         hover:text-primary-4 text-neutro-2
 
       ${isActive && styleOnIsActive}`

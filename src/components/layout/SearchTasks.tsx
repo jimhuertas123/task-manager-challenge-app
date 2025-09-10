@@ -12,7 +12,7 @@ export const SearchTasks = () => {
         <input
           id="search-tasks"
           type="text"
-          className="text-neutro-2 placeholder-neutro-2 border-none outline-none flex-1 pl-3.5"
+          className="text-neutro-2 placeholder-neutro-2 border-none outline-none flex-1 pl-3.5 focus:placeholder-transparent"
           placeholder="Search"
         />
       </div>
