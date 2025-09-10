@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { MainLayout } from '@/components/layout/MainLayout/MainLayout';
-import { DashboardPage, ErrorPage, NotFoundPage } from '@/pages';
+import { DashboardPage, ErrorPage, MyTasksPage, NotFoundPage } from '@/pages';
 
 export const router = createBrowserRouter([
   {
@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <DashboardPage />,
+      },
+      {
+        path: 'mytasks',
+        element: <MyTasksPage />,
       },
       {
         path: '*',

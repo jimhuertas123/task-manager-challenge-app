@@ -1,3 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'SF Pro Display', sans-serif;
+  --color-primary-1: #f4ccc8;
+  --color-primary-2: #eba59e;
+  --color-primary-3: #e27d73;
+  --color-primary-4: #da584b;
+  --color-secondary-1: #c8e1bc;
+  --color-secondary-2: #aad199;
+  --color-secondary-3: #8dc275;
+  --color-secondary-4: #70b252;
+  --color-tertiuary-1: #f9eed7;
+  --color-tertiuary-2: #f2daab;
+  --color-tertiuary-3: #ebc77f;
+  --color-tertiuary-4: #e5b454;
+  --color-neutro-1: #ffffff;
+  --color-neutro-2: #94979a;
+  --color-neutro-3: #393d41;
+  --color-neutro-4: #2c2f33;
+  --color-neutro-5: #222528;
+  --text-nav-bar-xl: 20px;
+  --text-nav-bar-l: 18px;
+  --text-nav-bar-m: 15px;
+  --text-nav-bar-s: 13px;
+}
