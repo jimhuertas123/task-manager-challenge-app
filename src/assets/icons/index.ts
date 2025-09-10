@@ -6,3 +6,4 @@ export { RavnIcon } from './RavnIcon';
 export { SearchIcon } from './SearchIcon';
 export { AddIcon } from './AddIcon';
 export { CircleXIcon } from './CircleXIcon';
+export { TaskIcon } from './TaskIcon';
