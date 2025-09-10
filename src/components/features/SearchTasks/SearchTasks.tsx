@@ -5,7 +5,7 @@ import Avatar1 from '@/assets/avatar1.png';
 export const SearchTasks = () => {
   const [search, setSearch] = useState('');
   return (
-    <header className="rounded-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex items-center sm:pr-6 py-2">
+    <header className="rounded-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex items-center pr-4 sm:pr-6 py-2">
       <div className="flex relative bg-neutro-4 sm:bg-transparent items-center pl-6.5 h-full w-full rounded-[16px] justify-start">
         <SearchIcon className="fill-neutro-2 mr-3" />
         <label htmlFor="search-tasks" className="sr-only text-neutro-2">

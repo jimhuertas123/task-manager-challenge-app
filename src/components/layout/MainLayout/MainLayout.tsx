@@ -8,7 +8,7 @@ export const MainLayout = () => {
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
   const smallDeviceStyle =
-    'flex flex-col bg-neutro-5 min-h-screen pt-4 pl-4 pr-4 pb-18 h-full w-full';
+    'flex flex-col bg-neutro-5 min-h-screen pt-4 pl-4 pr-0 sm:pr-4 pb-18 h-full w-full';
 
   const largeDeviceStyle =
     'grid min-h-screen grid-cols-[232px_1fr] gap-x-8 bg-neutro-5 text-neutro pt-8 pl-8 pb-8 pr-9';
