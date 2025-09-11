@@ -8,3 +8,8 @@ export { AddIcon } from './AddIcon';
 export { CircleXIcon } from './CircleXIcon';
 export { TaskIcon } from './TaskIcon';
 export { ArrowIcon } from './ArrowIcon';
+export { ChatBubbleIcon } from './ChatBubbleIcon';
+export { AlarmIcon } from './AlarmIcon';
+export { ClipIcon } from './ClipIcon';
+export { ThreatIcon } from './ThreatIcon';
+export { ThreeDotsIcon } from './ThreeDotsIcon';

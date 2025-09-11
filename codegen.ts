@@ -6,7 +6,11 @@ const config: CodegenConfig = {
   ignoreNoDocuments: true,
   generates: {
     './src/types/__generated__/graphql.ts': {
-      plugins: ['typescript', 'typescript-operations'],
+      plugins: [
+        'typescript',
+        'typescript-operations',
+        'typescript-react-apollo',
+      ],
       config: {
         avoidOptionals: {
           field: true,
