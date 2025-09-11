@@ -1,20 +1,18 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
 import { ListCards } from '@/components/ui/ListCards';
 import { GridCards } from '@/components/ui/GridCards';
-import { GET_TASKS } from '@/graphql/fragments/getTasks';
+
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useQuery } from '@apollo/client/react';
 import { useState } from 'react';
+import { useGetTasksQuery, Status } from '@/generated/graphql';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
-  const viewModeStyle =
-    'w-10 h-10 fill-neutro-1 p-2.5 border-rad-[8px] border-[1px]  rounded-[8px] cursor-pointer hover:fill-primary-4';
-
-  const { data, loading, error } = useQuery(GET_TASKS, {
-    variables: { status: 'BACKLOG' },
+  const { data, loading, error } = useGetTasksQuery({
+    variables: { status: Status.Backlog },
+    fetchPolicy: 'cache-and-network',
   });
 
   if (loading) return <p>Loading...</p>;
@@ -23,6 +21,9 @@ export const DashboardPage = () => {
   if (data) {
     console.log('Fetched tasks:', data);
   }
+
+  const viewModeStyle =
+    'w-10 h-10 fill-neutro-1 p-2.5 border-rad-[8px] border-[1px]  rounded-[8px] cursor-pointer hover:fill-primary-4';
 
   return (
     <div className="h-full w-full">
@@ -83,7 +84,7 @@ export const DashboardPage = () => {
                 : 'opacity-0 pointer-events-none'
             }`}
           >
-            <GridCards />
+            <GridCards tasks={data?.tasks ?? []} />
           </div>
           <div
             className={`absolute min-h-full h-full w-full inset-0 transition-opacity duration-300 ${

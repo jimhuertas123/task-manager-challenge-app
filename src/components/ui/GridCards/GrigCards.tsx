@@ -1,4 +1,7 @@
-export const GridCards = () => {
+import { GridCard } from '@/components/features';
+import type { GetTasksQuery } from '@/generated/graphql';
+
+export const GridCards = ({ tasks }: { tasks: GetTasksQuery['tasks'] }) => {
   return (
     <div className="w-full overflow-x-auto">
       <div className="grid grid-cols-3 gap-4 md:gap-9 max-w-[1800px] min-w-[1050px] md:m-auto">
@@ -6,6 +9,7 @@ export const GridCards = () => {
         <div className="w-full h-[calc(100vh-200px)] flex flex-col pt-1 bg-red-500">
           <h3 className="text-lg font-bold tracking-wide pb-5">Working (03)</h3>
           <div className="flex-1 overflow-y-auto pb-4 w-full">
+            <GridCard task={tasks.length > 0 ? tasks[0] : undefined} />
             {[
               'bg-gradient-to-r from-green-400 to-blue-500',
               'bg-gradient-to-r from-pink-500 to-yellow-500',
