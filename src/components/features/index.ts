@@ -1,2 +1,2 @@
-export * from './TaskCard/TaskCard';
+export * from './ListCards/ListTaskCard';
 // export * from './search';

@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: 'SF Pro Display', sans-serif;
+  --breakpoint-sm: 681px;
   --color-primary-1: #f4ccc8;
   --color-primary-2: #eba59e;
   --color-primary-3: #e27d73;
