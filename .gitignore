@@ -19,6 +19,9 @@ src/test/
 #enviroment
 .env
 
+#for testing purpose
+**/pixel-perfect/*
+**/pixel-perfect
 # Editor directories and files
 .vscode/*
 .vscode
