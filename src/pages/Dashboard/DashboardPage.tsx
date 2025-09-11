@@ -1,7 +1,9 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
-import { ListCards } from '@/components/features/ListCards';
-import { GridCards } from '@/components/GridCards';
+import { ListCards } from '@/components/ui/ListCards';
+import { GridCards } from '@/components/ui/GridCards';
+import { GET_TASKS } from '@/graphql/fragments/getTasks';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useQuery } from '@apollo/client/react';
 import { useState } from 'react';
 
 export const DashboardPage = () => {
@@ -10,6 +12,17 @@ export const DashboardPage = () => {
 
   const viewModeStyle =
     'w-10 h-10 fill-neutro-1 p-2.5 border-rad-[8px] border-[1px]  rounded-[8px] cursor-pointer hover:fill-primary-4';
+
+  const { data, loading, error } = useQuery(GET_TASKS, {
+    variables: { status: 'BACKLOG' },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  if (data) {
+    console.log('Fetched tasks:', data);
+  }
 
   return (
     <div className="h-full w-full">
