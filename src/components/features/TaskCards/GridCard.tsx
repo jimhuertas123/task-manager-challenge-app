@@ -1,4 +1,7 @@
-import { PointEstimate, type GetTasksQuery } from '@/generated/graphql';
+import {
+  PointEstimate,
+  type GetAllTasksQuery,
+} from '@/types/__generated__/graphql';
 
 import {
   AlarmIcon,
@@ -42,13 +45,13 @@ const colorBGAvatar = [
 export const GridCard = ({
   task,
 }: {
-  task?: GetTasksQuery['tasks'][number];
+  task?: GetAllTasksQuery['tasks'][number];
 }) => {
   if (!task) {
     return <div className="bg-neutro-4 w-full h-[208px] mb-3">No Task</div>;
   }
 
-  const dueDate = new Date(task.dueDate);
+  const dueDate = new Date(task.dueDate as string | number | Date);
   const now = new Date();
   const isToday = dueDate.toDateString() === now.toDateString();
 

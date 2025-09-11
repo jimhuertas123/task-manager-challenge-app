@@ -1,4 +1,4 @@
-import type { TaskTag } from '@/generated/graphql';
+import type { TaskTag } from '@/types/__generated__/graphql';
 
 const tagColors: { [key in TaskTag]: { color: string; bg: string } } = {
   RAILS: { color: '#FFFFFF', bg: 'rgba(148, 151, 154, 0.1)' },
@@ -8,21 +8,17 @@ const tagColors: { [key in TaskTag]: { color: string; bg: string } } = {
   REACT: { color: '#DA584B', bg: 'rgba(218, 88, 75, 0.1)' },
 };
 
-const TagCard = ({ tag }: { tag: TaskTag }) => {
-  console.log('tag', tagColors[tag].color);
-
-  return (
-    <div
-      className={'flex rounded-md px-4 py-1 w-fit'}
-      style={{
-        color: tagColors[tag].color,
-        backgroundColor: tagColors[tag].bg,
-      }}
-    >
-      {tag === 'IOS' ? 'IOS APP' : tag}
-    </div>
-  );
-};
+const TagCard = ({ tag }: { tag: TaskTag }) => (
+  <div
+    className={'flex rounded-md px-4 py-1 w-fit'}
+    style={{
+      color: tagColors[tag].color,
+      backgroundColor: tagColors[tag].bg,
+    }}
+  >
+    {tag}
+  </div>
+);
 
 export const TagCards = ({ tags }: { tags: TaskTag[] }) => {
   const visibleTags = tags.slice(0, 2);

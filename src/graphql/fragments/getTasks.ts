@@ -4,9 +4,9 @@ import { gql } from '@apollo/client';
 //status can be: "BACKLOG", "CANCELLED", "DONE", IN_PROGRESS", "TODO",
 //pointEstimate : EIGHT, FOUR, ONE, TWO, ZERO
 
-export const GET_TASKS = gql`
-  query GetTasks($status: Status) {
-    tasks(input: { status: $status }) {
+export const GET_ALL_TASKS = gql`
+  query GetAllTasks {
+    tasks(input: {}) {
       id
       name
       status

@@ -4,14 +4,14 @@ import { GridCards } from '@/components/ui/GridCards';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useState } from 'react';
-import { useGetTasksQuery, Status } from '@/generated/graphql';
+
+import { useGetAllTasksQuery } from '@/types/__generated__/graphql';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
-  const { data, loading, error } = useGetTasksQuery({
-    variables: { status: Status.Backlog },
+  const { data, loading, error } = useGetAllTasksQuery({
     fetchPolicy: 'cache-and-network',
   });
 
