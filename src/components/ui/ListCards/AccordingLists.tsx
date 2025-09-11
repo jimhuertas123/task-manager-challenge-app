@@ -2,6 +2,7 @@ import { ArrowIcon } from '@/assets/icons';
 import './ListCard.style.css';
 import * as Accordion from '@radix-ui/react-accordion';
 import type { ListTask } from './ListCards.types';
+// import { TaskCard } from './ListTaskCard';
 
 const tasksMock: ListTask[] = [
   {
@@ -39,33 +40,23 @@ export const AccordingLists = ({
       type="single"
       collapsible
       defaultValue="item-1"
-      className="mt-2"
+      className="mt-4"
     >
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger
-            className={`AccordionTrigger ${listTitleStyle} h-[55px] border-neutro-3 border-[1px] rounded-t-[4px]`}
+            className={`AccordionTrigger ${listTitleStyle} h-[56px] border-neutro-3 border-x-[1px] border-y-[1px] rounded-t-[4px]`}
           >
             <ArrowIcon className="AccordionChevron fill-neutro-2" />
             {tasks[0].title}
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="AccordionContent">
-          <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-            Content for item 1
-          </div>
-          <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-            Content for item 1
-          </div>
-          <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-            Content for item 1
-          </div>
-          <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-            Content for item 1
-          </div>
-          <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-            Content for item 1
-          </div>
+          {/* <TaskCard />
+          <TaskCard />
+          <TaskCard />
+          <TaskCard />
+          <TaskCard /> */}
         </Accordion.Content>
       </Accordion.Item>
     </Accordion.Root>
