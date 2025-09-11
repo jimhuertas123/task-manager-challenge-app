@@ -1,4 +1,5 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
+import { ListCards } from '@/components/features/ListCards';
 import { GridCards } from '@/components/GridCards';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useState } from 'react';
@@ -78,7 +79,7 @@ export const DashboardPage = () => {
                 : 'opacity-0 pointer-events-none'
             }`}
           >
-            <p>Welcome to the dashboard in list view!</p>
+            <ListCards />
           </div>
         </div>
       </div>
