@@ -1,7 +1,7 @@
 import { ArrowIcon } from '@/assets/icons';
 import './ListCard.style.css';
 import * as Accordion from '@radix-ui/react-accordion';
-import { TaskCard } from './ListTaskCard';
+import { ListTaskCard } from './ListTaskCard';
 import type { GetAllTasksQuery } from '@/types/__generated__/graphql';
 
 export const AccordingLists = ({
@@ -40,7 +40,7 @@ export const AccordingLists = ({
         </Accordion.Header>
         <Accordion.Content className="AccordionContent">
           {tasks?.map((task, index) => (
-            <TaskCard key={task.id} task={task} index={index} />
+            <ListTaskCard key={task.id} task={task} index={index} />
           ))}
         </Accordion.Content>
       </Accordion.Item>

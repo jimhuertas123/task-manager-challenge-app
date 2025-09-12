@@ -17,7 +17,7 @@ export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
   ];
 
   return (
-    <div className="bg-amber-950 w-full h-full pt-2 overflow-x-auto ">
+    <div className="w-full h-full pt-2 overflow-x-auto ">
       <div className="min-w-[835px] max-w-[1800px] mx-auto pt-[5%] sm:pt-[0]">
         <header className={listTitleGridStyle}>
           <div

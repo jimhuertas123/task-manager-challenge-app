@@ -5,7 +5,7 @@ import { CircleAvatar } from '../UICardComponents/CircleAvatar';
 import { DueDate } from '../UICardComponents/DueDate';
 import { ChatBubbleIcon, RightArrowIcon, ThreatIcon } from '@/assets/icons';
 
-export const TaskCard = ({
+export const ListTaskCard = ({
   index,
   task,
 }: {
