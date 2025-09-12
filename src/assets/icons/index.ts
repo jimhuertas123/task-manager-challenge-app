@@ -14,3 +14,7 @@ export { ClipIcon } from './ClipIcon';
 export { ThreatIcon } from './ThreatIcon';
 export { ThreeDotsIcon } from './ThreeDotsIcon';
 export { RightArrowIcon } from './RightArrowIcon';
+export { CalendarIcon } from './CalendarIcon';
+export { LabelIcon } from './LabelIcon';
+export { PlusMinusIcon } from './PlusMinusIcon';
+export { ProfileIcon } from './ProfileIcon';

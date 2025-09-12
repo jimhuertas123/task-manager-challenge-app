@@ -14,7 +14,10 @@ export const MainLayout = () => {
     'grid min-h-screen grid-cols-[232px_1fr] gap-x-8 bg-neutro-5 text-neutro pt-8 pl-8 pb-8 pr-9';
 
   return (
-    <div className={isSmallDevice ? smallDeviceStyle : largeDeviceStyle}>
+    <div
+      id="main-layout"
+      className={isSmallDevice ? smallDeviceStyle : largeDeviceStyle}
+    >
       {!isSmallDevice && <NavBar />}
       <main className="grid grid-rows-[64px_1fr] flex-1 w-full gap-y-3.5 sm:gap-y-6 text-neutro-1">
         <SearchTasks />
