@@ -93,7 +93,7 @@ export const DashboardPage = () => {
                 : 'opacity-0 pointer-events-none'
             }`}
           >
-            <ListCards />
+            <ListCards tasks={data?.tasks ?? []} />
           </div>
         </div>
       </div>
