@@ -13,3 +13,4 @@ export { AlarmIcon } from './AlarmIcon';
 export { ClipIcon } from './ClipIcon';
 export { ThreatIcon } from './ThreatIcon';
 export { ThreeDotsIcon } from './ThreeDotsIcon';
+export { RightArrowIcon } from './RightArrowIcon';

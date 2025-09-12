@@ -42,7 +42,7 @@ export const GridCard = ({
       <div className="flex justify-between">
         <div className="flex items-center mb-auto">
           {task.assignee?.fullName ? (
-            <CircleAvatar fullName={task.assignee.fullName} size={8} />
+            <CircleAvatar fullName={task.assignee.fullName} size={'10px'} />
           ) : (
             <div></div>
           )}

@@ -1,40 +1,22 @@
 import { ArrowIcon } from '@/assets/icons';
 import './ListCard.style.css';
 import * as Accordion from '@radix-ui/react-accordion';
-import type { ListTask } from './ListCards.types';
-// import { TaskCard } from './ListTaskCard';
-
-const tasksMock: ListTask[] = [
-  {
-    title: 'Design new homepage',
-    taskTags: ['design', 'UI/UX'],
-    estimate: 5,
-    taskAssignName: 'Alice Johnson',
-    dueDate: new Date('2023-10-15'),
-  },
-  {
-    title: 'Implement authentication',
-    taskTags: ['backend', 'security'],
-    estimate: 8,
-    taskAssignName: 'Bob Smith',
-    dueDate: new Date('2023-10-20'),
-  },
-  {
-    title: 'Set up database',
-    taskTags: ['database', 'infrastructure'],
-    estimate: 6,
-    taskAssignName: 'Charlie Brown',
-    dueDate: new Date('2023-10-18'),
-  },
-];
+import { TaskCard } from './ListTaskCard';
+import type { GetAllTasksQuery } from '@/types/__generated__/graphql';
 
 export const AccordingLists = ({
   listTitleStyle,
-  tasks = tasksMock,
+  title,
+  tasks,
 }: {
   listTitleStyle: string;
-  tasks?: ListTask[];
+  title: string;
+  tasks?: GetAllTasksQuery['tasks'];
 }) => {
+  if (!tasks) {
+    return <div className="bg-neutro-4 w-full h-full pt-2">No Tasks</div>;
+  }
+
   return (
     <Accordion.Root
       type="single"
@@ -47,16 +29,19 @@ export const AccordingLists = ({
           <Accordion.Trigger
             className={`AccordionTrigger ${listTitleStyle} h-[56px] border-neutro-3 border-x-[1px] border-y-[1px] rounded-t-[4px]`}
           >
-            <ArrowIcon className="AccordionChevron fill-neutro-2" />
-            {tasks[0].title}
+            <ArrowIcon className="AccordionChevron w-2.8 h-2.8 fill-neutro-2 ml-1 mr-4" />
+            <h2 className="text-nav-bar-l font-semibold tracking-[0.4px]">
+              {title.charAt(0) + title.slice(1).toLowerCase().replace('_', ' ')}
+            </h2>
+            <h2 className="ml-1 text-nav-bar-l font-normal text-neutro-2">
+              {`(0${tasks.filter((task) => task.status === title).length})`}
+            </h2>
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="AccordionContent">
-          {/* <TaskCard />
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-          <TaskCard /> */}
+          {tasks?.map((task, index) => (
+            <TaskCard key={task.id} task={task} index={index} />
+          ))}
         </Accordion.Content>
       </Accordion.Item>
     </Accordion.Root>

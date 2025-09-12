@@ -3,7 +3,7 @@ export const CircleAvatar = ({
   size,
 }: {
   fullName: string;
-  size: number;
+  size: string;
 }) => {
   const colorBGAvatar = [
     '#8B0000',
@@ -28,8 +28,15 @@ export const CircleAvatar = ({
 
   return (
     <div
-      className={`w-${size} h-${size} p-1 rounded-[50%] flex align border-[0.5px] border-neutro-2 text-nav-bar-s font-normal justify-center items-center`}
-      style={{ backgroundColor: bgColorAvatar }}
+      className={`flex items-center justify-center border-[0.5px] border-neutro-2 text-nav-bar-s font-normal rounded-full`}
+      style={{
+        backgroundColor: bgColorAvatar,
+        width: size,
+        height: size,
+        minWidth: size,
+        minHeight: size,
+        padding: '15px',
+      }}
     >
       {getInitialsFromUrl(fullName)}
     </div>

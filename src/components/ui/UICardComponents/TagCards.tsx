@@ -10,7 +10,9 @@ const tagColors: { [key in TaskTag]: { color: string; bg: string } } = {
 
 const TagCard = ({ tag }: { tag: TaskTag }) => (
   <div
-    className={'flex rounded-md px-4 py-1 w-fit'}
+    className={
+      'flex rounded-md px-2 lg:px-4 py-1 w-fit text-nav-bar-s lg:text-nav-bar-m'
+    }
     style={{
       color: tagColors[tag].color,
       backgroundColor: tagColors[tag].bg,
@@ -20,16 +22,22 @@ const TagCard = ({ tag }: { tag: TaskTag }) => (
   </div>
 );
 
-export const TagCards = ({ tags }: { tags: TaskTag[] }) => {
-  const visibleTags = tags.slice(0, 2);
-  const extraCount = tags.length - 2;
+export const TagCards = ({
+  tags,
+  limitShow = 2,
+}: {
+  tags: TaskTag[];
+  limitShow?: number;
+}) => {
+  const visibleTags = tags.slice(0, limitShow);
+  const extraCount = tags.length - limitShow;
   return (
-    <div className="flex gap-x-2">
+    <div className="flex gap-x-2 items-center">
       {visibleTags.map((tag, index) => (
         <TagCard key={index} tag={tag} />
       ))}
       {extraCount > 0 && (
-        <div className="flex rounded-md px-4 py-1 w-fit bg-neutro-3 text-neutro-2">
+        <div className="flex text-nav-bar-s lg:text-nav-bar-m rounded-md px-2 lg:px-4 py-1 w-fit bg-neutro-3 text-neutro-2">
           +{extraCount}
         </div>
       )}

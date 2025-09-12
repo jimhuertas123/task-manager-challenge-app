@@ -1,17 +1,24 @@
 import './ListCard.style.css';
 import { AccordingLists } from './AccordingLists';
-// import type { GetAllTasksQuery } from '@/types/__generated__/graphql';
-// { tasks }: { tasks: GetAllTasksQuery['tasks'] }
-export const ListCards = () => {
+import { Status, type GetAllTasksQuery } from '@/types/__generated__/graphql';
+
+export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
   const listTitleStyle =
     'flex bg-neutro-4 pl-4 items-center font-normal text-nav-bar-m w-full tracking-[2px]';
 
   const listTitleGridStyle = `grid p-[1px] gap-x-[1px] grid-cols-[45%_15.1%_12.6%_14.3%_auto]
     rounded-[4px] text-lg font-bold tracking-wide bg-neutro-3 h-[56px]`;
-  // tasks;
+
+  const allStatuses = Object.values(Status);
+  const endStatuses = [Status.Done, Status.Cancelled];
+  const statusOrder = [
+    ...allStatuses.filter((status) => !endStatuses.includes(status)),
+    ...endStatuses.filter((status) => allStatuses.includes(status)),
+  ];
+
   return (
     <div className="bg-amber-950 w-full h-full pt-2 overflow-x-auto ">
-      <div className="min-w-[745px] max-w-[1800px] mx-auto pt-[5%] sm:pt-[0]">
+      <div className="min-w-[835px] max-w-[1800px] mx-auto pt-[5%] sm:pt-[0]">
         <header className={listTitleGridStyle}>
           <div
             className={`${listTitleStyle} sm:tracking-[0.7px] rounded-tl-[4px] rounded-bl-[4px]`}
@@ -36,9 +43,14 @@ export const ListCards = () => {
           </div>
         </header>
 
-        <AccordingLists listTitleStyle={listTitleStyle} />
-        <AccordingLists listTitleStyle={listTitleStyle} />
-        <AccordingLists listTitleStyle={listTitleStyle} />
+        {statusOrder.map((status) => (
+          <AccordingLists
+            key={status}
+            listTitleStyle={listTitleStyle}
+            title={status}
+            tasks={tasks.filter((task) => task.status === status)}
+          />
+        ))}
         {/* <Accordion.Root type="single" collapsible defaultValue="item-1">
           <Accordion.Item value="item-1">
             <Accordion.Header>
