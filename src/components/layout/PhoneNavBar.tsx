@@ -1,9 +1,17 @@
 import { DashboardIcon, ListIcon, AddIcon } from '@/assets/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { MobileModalTask } from '../features/ModalTask/MobileModalTask';
 
 export const PhoneNavBar = () => {
   const [isMiddleActive, setIsMiddleActive] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    if (!openModal) {
+      setIsMiddleActive(false);
+    }
+  }, [openModal]);
 
   return (
     <aside className="col-span-1">
@@ -29,6 +37,7 @@ export const PhoneNavBar = () => {
           <div
             onClick={() => {
               setIsMiddleActive(true);
+              setOpenModal(true);
             }}
             className={`flex flex-col items-center hover:text-primary-4 ${
               isMiddleActive ? 'text-primary-4' : 'text-neutro-2'
@@ -55,6 +64,7 @@ export const PhoneNavBar = () => {
             }}
           </NavLink>
         </div>
+        <MobileModalTask open={openModal} setOpen={setOpenModal} />
       </div>
     </aside>
   );
