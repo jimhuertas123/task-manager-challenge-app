@@ -1,12 +1,26 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
-import { ListCards } from '@/components/features/ListCards';
-import { GridCards } from '@/components/GridCards';
+import { ListCards } from '@/components/ui/ListCards';
+import { GridCards } from '@/components/ui/GridCards';
+
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useState } from 'react';
+
+import { useGetAllTasksQuery } from '@/types/__generated__/graphql';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
+
+  const { data, loading, error } = useGetAllTasksQuery({
+    fetchPolicy: 'cache-and-network',
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  if (data) {
+    console.log('Fetched tasks:', data);
+  }
 
   const viewModeStyle =
     'w-10 h-10 fill-neutro-1 p-2.5 border-rad-[8px] border-[1px]  rounded-[8px] cursor-pointer hover:fill-primary-4';
@@ -70,7 +84,7 @@ export const DashboardPage = () => {
                 : 'opacity-0 pointer-events-none'
             }`}
           >
-            <GridCards />
+            <GridCards tasks={data?.tasks ?? []} />
           </div>
           <div
             className={`absolute min-h-full h-full w-full inset-0 transition-opacity duration-300 ${
@@ -79,7 +93,7 @@ export const DashboardPage = () => {
                 : 'opacity-0 pointer-events-none'
             }`}
           >
-            <ListCards />
+            <ListCards tasks={data?.tasks ?? []} />
           </div>
         </div>
       </div>

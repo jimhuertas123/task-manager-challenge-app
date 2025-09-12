@@ -1,2 +1,3 @@
-export * from './ListCards/ListTaskCard';
-// export * from './search';
+export * from './SearchTasks/SearchTasks';
+export * from './TaskCards/GridCard';
+export * from './TaskCards/ListCard';
