@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 import {
   skipToken,
   useLazyQuery,
@@ -343,7 +344,7 @@ export const CreateTaskDocument = gql`
   }
   ${TaskFieldsFragmentDoc}
 `;
-export type CreateTaskMutationFn = MutationFunction<
+export type CreateTaskMutationFn = Apollo.MutationFunction<
   CreateTaskMutation,
   CreateTaskMutationVariables
 >;
@@ -380,8 +381,9 @@ export function useCreateTaskMutation(
 export type CreateTaskMutationHookResult = ReturnType<
   typeof useCreateTaskMutation
 >;
-export type CreateTaskMutationResult = MutationResult<CreateTaskMutation>;
-export type CreateTaskMutationOptions = BaseMutationOptions<
+export type CreateTaskMutationResult =
+  Apollo.MutationResult<CreateTaskMutation>;
+export type CreateTaskMutationOptions = Apollo.BaseMutationOptions<
   CreateTaskMutation,
   CreateTaskMutationVariables
 >;
@@ -392,7 +394,7 @@ export const DeleteTaskDocument = gql`
     }
   }
 `;
-export type DeleteTaskMutationFn = MutationFunction<
+export type DeleteTaskMutationFn = Apollo.MutationFunction<
   DeleteTaskMutation,
   DeleteTaskMutationVariables
 >;
@@ -429,8 +431,9 @@ export function useDeleteTaskMutation(
 export type DeleteTaskMutationHookResult = ReturnType<
   typeof useDeleteTaskMutation
 >;
-export type DeleteTaskMutationResult = MutationResult<DeleteTaskMutation>;
-export type DeleteTaskMutationOptions = BaseMutationOptions<
+export type DeleteTaskMutationResult =
+  Apollo.MutationResult<DeleteTaskMutation>;
+export type DeleteTaskMutationOptions = Apollo.BaseMutationOptions<
   DeleteTaskMutation,
   DeleteTaskMutationVariables
 >;
