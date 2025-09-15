@@ -1,4 +1,4 @@
-export const ErrorPage = () => {
+export const ErrorPage = ({ error }: { error: string }) => {
   return (
     <div>
       <h1 className="bg-red-500 text-4xl font-bold text-gray-900 mb-8">
@@ -6,6 +6,7 @@ export const ErrorPage = () => {
       </h1>
       <div className="text-center">
         <p className="text-gray-600">An unexpected error has occurred.</p>
+        <p className="text-gray-600">{error}</p>
       </div>
     </div>
   );

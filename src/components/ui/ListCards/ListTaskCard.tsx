@@ -41,7 +41,7 @@ export const ListTaskCard = ({
           </span>
           <span className="tracking-[0.2px]">{task.name}</span>
         </div>
-        <div className="flex items-end gap-x-2 h-full pr-2 opacity-80 sm:active:scale-95 sm:opacity-10 sm:cursor-pointer sm:hover:opacity-100">
+        <div className="flex items-end gap-x-2 h-full pr-2 opacity-80 sm:active:scale-95 sm:opacity-10 sm:cursor-pointer active:opacity-100 sm:hover:opacity-100">
           <div className="flex items-center h-full gap-x-1">
             <span>3</span>
             <ChatBubbleIcon className="inline-block fill-neutro-1" />

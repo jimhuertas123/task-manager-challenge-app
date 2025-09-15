@@ -51,35 +51,6 @@ export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
             tasks={tasks.filter((task) => task.status === status)}
           />
         ))}
-        {/* <Accordion.Root type="single" collapsible defaultValue="item-1">
-          <Accordion.Item value="item-1">
-            <Accordion.Header>
-              <Accordion.Trigger
-                className={`AccordionTrigger ${listTitleStyle} h-[55px] border-neutro-3 border-[1px] rounded-t-[4px]`}
-              >
-                Item 1
-                <ArrowIcon className="AccordionChevron fill-neutro-2" />
-              </Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Content className="AccordionContent">
-              <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-                Content for item 1
-              </div>
-              <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-                Content for item 1
-              </div>
-              <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-                Content for item 1
-              </div>
-              <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-                Content for item 1
-              </div>
-              <div className="w-full bg-amber-100 max-h-[300px] overflow-y-auto">
-                Content for item 1
-              </div>
-            </Accordion.Content>
-          </Accordion.Item>
-        </Accordion.Root> */}
       </div>
     </div>
   );
