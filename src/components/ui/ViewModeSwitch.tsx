@@ -3,6 +3,7 @@ import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
 // import { FormNewTask } from '../features/FormNewTask';
 import { useState } from 'react';
 import { ModalTask } from '../features/ModalTask/ModalTask';
+import { useGetAllUsersQuery } from '@/types/__generated__/graphql';
 
 export const ViewModeSwitch = ({
   isSmallDevice,
@@ -17,6 +18,12 @@ export const ViewModeSwitch = ({
     'w-10 h-10 fill-neutro-1 p-2.5 border-rad-[8px] border-[1px]  rounded-[8px] cursor-pointer hover:fill-primary-4';
 
   const [openModalNewTask, setOpenModalNewTask] = useState(false);
+
+  const {
+    data: usersData,
+    loading: usersLoading,
+    error: usersError,
+  } = useGetAllUsersQuery();
 
   return (
     <>
@@ -33,13 +40,16 @@ export const ViewModeSwitch = ({
             />
           </div>
 
-          <PlusIcon
-            onClick={() => setOpenModalNewTask(true)}
-            className="w-[40px] h-[40px] bg-primary-4 fill-neutro-1 p-2 rounded-[8px] transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
-          />
+          {!usersLoading && !usersError && (
+            <PlusIcon
+              onClick={() => setOpenModalNewTask(true)}
+              className="w-[40px] h-[40px] bg-primary-4 fill-neutro-1 p-2 rounded-[8px] transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
+            />
+          )}
 
           {openModalNewTask && (
             <ModalTask
+              usersData={usersData?.users}
               isOpen={openModalNewTask}
               onClose={() => setOpenModalNewTask(false)}
             />

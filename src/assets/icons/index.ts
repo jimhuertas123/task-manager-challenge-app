@@ -18,3 +18,7 @@ export { CalendarIcon } from './CalendarIcon';
 export { LabelIcon } from './LabelIcon';
 export { PlusMinusIcon } from './PlusMinusIcon';
 export { ProfileIcon } from './ProfileIcon';
+export { ChevronRightIcon } from './ChevronRightIcon';
+export { ChevronLeftIcon } from './ChevronLeftIcon';
+export { TwoLeftArrows } from './TwoLeftArrows';
+export { TwoRightArrows } from './TwoRightArrows';

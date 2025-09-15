@@ -525,6 +525,11 @@
   resolved "https://registry.npmjs.org/@csstools/css-tokenizer/-/css-tokenizer-3.0.4.tgz"
   integrity sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==
 
+"@date-fns/tz@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@date-fns/tz/-/tz-1.4.1.tgz#2d905f282304630e07bef6d02d2e7dbf3f0cc4e4"
+  integrity sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==
+
 "@emnapi/core@^1.4.3", "@emnapi/core@^1.4.5":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@emnapi/core/-/core-1.5.0.tgz#85cd84537ec989cebb2343606a1ee663ce4edaf0"
@@ -2132,6 +2137,13 @@
   dependencies:
     undici-types "~7.10.0"
 
+"@types/react-day-picker@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@types/react-day-picker/-/react-day-picker-5.3.0.tgz#10e931f8f1d8585f62ee47d210f708750789cbfe"
+  integrity sha512-iMMXQjwTH8uxPTW3WYP6ZufZBSMFFEScGIztENtKfvukefrojmX/WCUNPrimC9ys1ll5nnM0VGaHolYLAbcEtw==
+  dependencies:
+    react-day-picker "*"
+
 "@types/react-dom@^19.1.7":
   version "19.1.9"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.1.9.tgz"
@@ -2871,6 +2883,16 @@ dataloader@^2.2.3:
   version "2.2.3"
   resolved "https://registry.npmjs.org/dataloader/-/dataloader-2.2.3.tgz"
   integrity sha512-y2krtASINtPFS1rSDjacrFgn1dcUuoREVabwlOGOe4SdxenREqwjwjElAdwvbGM7kgZz9a3KVicWR7vcz8rnzA==
+
+date-fns-jalali@^4.1.0-0:
+  version "4.1.0-0"
+  resolved "https://registry.yarnpkg.com/date-fns-jalali/-/date-fns-jalali-4.1.0-0.tgz#9c7fb286004fab267a300d3e9f1ada9f10b4b6b0"
+  integrity sha512-hTIP/z+t+qKwBDcmmsnmjWTduxCg+5KfdqWQvb2X/8C9+knYY6epN/pfxdDuyVlSVeFz0sM5eEfwIUQ70U4ckg==
+
+date-fns@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-4.1.0.tgz#64b3d83fff5aa80438f5b1a633c2e83b8a1c2d14"
+  integrity sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==
 
 debounce@^2.0.0:
   version "2.2.0"
@@ -4307,6 +4329,15 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
+
+react-day-picker@*, react-day-picker@^9.10.0:
+  version "9.10.0"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-9.10.0.tgz#1470f59ebeaf1a41659d9d65c736efeb72394db0"
+  integrity sha512-tedecLSd+fpSN+J08601MaMsf122nxtqZXxB6lwX37qFoLtuPNuRJN8ylxFjLhyJS1kaLfAqL1GUkSLd2BMrpQ==
+  dependencies:
+    "@date-fns/tz" "^1.4.1"
+    date-fns "^4.1.0"
+    date-fns-jalali "^4.1.0-0"
 
 react-dom@^19.1.1:
   version "19.1.1"

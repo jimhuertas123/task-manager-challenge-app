@@ -1,16 +1,19 @@
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { FormNewTask } from '../FormNewTask';
-import type { Task } from '@/types/__generated__/graphql';
+import type { GetAllUsersQuery, Task } from '@/types/__generated__/graphql';
+
 // import { useForm } from 'react-hook-form';
 // import { newTaskDataSchema } from '@/schema/schemaNewTask';
 // import { zodResolver } from '@hookform/resolvers/zod';
 
 export const ModalTask = ({
+  usersData,
   task,
   isOpen,
   onClose,
 }: {
+  usersData: GetAllUsersQuery['users'] | undefined;
   task?: Task | null;
   // register: ReturnType<typeof useForm<NewTaskData>>['register'];
   isOpen: boolean;
@@ -54,7 +57,7 @@ export const ModalTask = ({
     >
       <div className="bg-neutro-3  w-[572px] relative max-w-4xl mx-4 rounded-2xl overflow-hidden shadow-2xl">
         <div className="p-5">
-          <FormNewTask />
+          <FormNewTask usersData={usersData ?? []} />
           {task?.name}
         </div>
       </div>

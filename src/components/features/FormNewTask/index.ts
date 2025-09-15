@@ -1,2 +1,3 @@
 export * from './FormNewTask';
-export * from './EditabaleLabel';
+export * from './TaskFields/EditabaleLabel';
+export * from './TaskFields/CalendarNavbar';
