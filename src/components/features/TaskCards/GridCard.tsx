@@ -5,16 +5,21 @@ import {
   ClipIcon,
   ThreatIcon,
   ChatBubbleIcon,
+  PencilIcon,
+  TrashIcon,
 } from '@/assets/icons';
 import { TagCards } from '@/components/ui/UICardComponents/TagCards';
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 import { pointEstimateToNumber } from '@/components/ui/UICardComponents/pointEstimate';
 import { DueDate } from '@/components/ui/UICardComponents/DueDate';
+import { Popover } from '@/components/ui';
 
 export const GridCard = ({
   task,
+  onDelete,
 }: {
   task?: GetAllTasksQuery['tasks'][number];
+  onDelete: (id: string) => void;
 }) => {
   if (!task) {
     return <div className="bg-neutro-4 w-full h-[208px] mb-3">No Task</div>;
@@ -27,10 +32,35 @@ export const GridCard = ({
     >
       <div className="flex justify-between items-start tracking-[0.8px] pr-[1.45%]">
         <h2 className="text-lg font-[500]">{task.name}</h2>
-        <ThreeDotsIcon
+        {/* <ThreeDotsIcon
           className="inline-block fill-neutro-2 my-auto rounded-[50%]  h-6.5 w-6.5 p-1
             hover:scale-105 hover:bg-neutro-3 active:scale-95 cursor-pointer "
-        />
+        /> */}
+        <Popover
+          side="bottom"
+          button={
+            <ThreeDotsIcon
+              className="inline-block fill-neutro-2 my-auto rounded-[50%]  h-6.5 w-6.5 p-1
+            hover:scale-105 hover:bg-neutro-3 active:bg-neutro-3 active:scale-95 cursor-pointer "
+            />
+          }
+        >
+          <div className="p-2 bg-neutro-3 rounded-[8px] border-[1px] border-neutro-2 shadow mt-2 gap-y-1 flex flex-col">
+            <div className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200">
+              <PencilIcon className="fill-neutro-1" />
+              <p className="text-sm">Edit</p>
+            </div>
+            <div
+              onClick={() => {
+                onDelete(task.id);
+              }}
+              className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200"
+            >
+              <TrashIcon className="fill-neutro-1" />
+              <p className="text-sm">Delete</p>
+            </div>
+          </div>
+        </Popover>
       </div>
       <div className="flex justify-between">
         <p className="flex items-center">

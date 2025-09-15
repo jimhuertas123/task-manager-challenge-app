@@ -7,7 +7,11 @@ import { apolloClient } from './lib/apolloClient';
 
 export const TodoManagerApp = () => {
   return (
-    <ErrorBoundary fallback={<ErrorPage />}>
+    <ErrorBoundary
+      fallbackRender={({ error }: { error: Error }) => (
+        <ErrorPage error={error.message} />
+      )}
+    >
       <ApolloProvider client={apolloClient}>
         <RouterProvider router={router} />
       </ApolloProvider>

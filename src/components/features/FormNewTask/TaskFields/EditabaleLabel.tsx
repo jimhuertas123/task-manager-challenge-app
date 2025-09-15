@@ -17,14 +17,12 @@ export const EditableLabel = ({
     flushSync(() => {
       setEditing(true);
     });
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
+    inputRef.current?.focus();
   };
 
   return editing ? (
     <input
-      className="flex w-full h-[30px] text-neutro-1 focus:outline-none focus:ring-0 focus:border-none"
+      className="text-nav-bar-xl flex w-full h-[30px] text-neutro-1 focus:outline-none focus:ring-0 focus:border-none"
       autoFocus
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === 'Escape') {
@@ -43,10 +41,10 @@ export const EditableLabel = ({
     />
   ) : (
     <span
-      className={`flex w-full items-center h-[30px] ${!value ? 'text-neutro-1 italic' : ''}`}
+      className={`text-neutro-1 text-nav-bar-xl flex w-full items-center h-[30px] ${!value ? 'text-neutro-2 font-normal' : ''}`}
       onClick={handleLabelClick}
     >
-      {value || 'Title'}
+      {value || 'Task Title'}
     </span>
   );
 };

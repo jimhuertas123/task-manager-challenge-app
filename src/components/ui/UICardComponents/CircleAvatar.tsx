@@ -28,7 +28,7 @@ export const CircleAvatar = ({
 
   return (
     <div
-      className={`flex items-center justify-center border-[0.5px] border-neutro-2 text-nav-bar-s font-normal rounded-full`}
+      className={`flex items-center text-neutro-1 justify-center border-[0.5px] border-neutro-2 text-nav-bar-s font-normal rounded-full`}
       style={{
         backgroundColor: bgColorAvatar,
         width: size,
