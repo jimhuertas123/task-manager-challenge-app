@@ -1,16 +1,18 @@
 import { EditableLabel } from './TaskFields/EditabaleLabel';
 // import { useFormContext } from 'react-hook-form';
 import { newTaskDataSchema, type NewTaskData } from '@/schema/schemaNewTask';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Popover } from '@/components/ui';
 
 import {
+  AnimatedFailed,
+  AnimatedLoading,
+  AnimatedSuccess,
   CalendarIcon,
   LabelIcon,
   PlusMinusIcon,
   ProfileIcon,
 } from '@/assets/icons';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 import {
   PointEstimate,
@@ -51,8 +53,10 @@ function parseLocalDate(dateString: string): Date | undefined {
 
 export const FormNewTask = ({
   usersData,
+  onClose,
 }: {
   usersData: GetAllUsersQuery['users'];
+  onClose: () => void;
 }) => {
   const {
     register,
@@ -60,10 +64,7 @@ export const FormNewTask = ({
     setValue,
     watch,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<NewTaskData>({
-    mode: 'onTouched',
-    resolver: zodResolver(newTaskDataSchema),
-  });
+  } = useFormContext<NewTaskData>();
 
   const [isEstimatedPopoverClose, setIsEstimatedPopoverClose] = useState(false);
   const [isAssigneePopoverClose, setIsAssigneePopoverClose] = useState(false);
@@ -71,13 +72,24 @@ export const FormNewTask = ({
   const [isDueDatePopoverClose, setIsDueDatePopoverClose] = useState(false);
 
   const dueDateInputRef = useRef<HTMLInputElement>(null);
+  const [successSubmit, setSuccessSubmit] = useState<boolean | null>();
 
   const onSubmit = async (data: NewTaskData) => {
     try {
       const validatedData = newTaskDataSchema.parse(data);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log('Form submitted with valid data:', validatedData);
+
+      if (Math.random() > 0.5) {
+        setSuccessSubmit(true);
+        setTimeout(() => {
+          onClose();
+        }, 1000);
+      } else {
+        throw new Error('Random failure to test validation');
+      }
     } catch (error) {
+      setSuccessSubmit(false);
       console.error('Validation failed:', error);
     }
   };
@@ -399,38 +411,23 @@ export const FormNewTask = ({
 
         <div className="mt-6 flex justify-end gap-x-2">
           <button
-            className="hover:bg-white/10 hover:bg-opacity-80 py-2 px-4 rounded text-neutro-1 text-nav-bar-m"
+            className="hover:bg-white/10 hover:bg-opacity-80 py-2 px-4 rounded-[8px] text-neutro-1 text-nav-bar-m"
             type="button"
+            onClick={onClose}
           >
             cancel
           </button>
           <button
-            className="flex text-nav-bar-m min-w-20 bg-primary-4 justify-center text-neutro-1 py-2 px-4 rounded disabled:opacity-50 hover:scale-105 active:scale-95 transition-all duration-200"
+            className="flex text-nav-bar-m min-w-20 max-h-[40px] bg-primary-4 justify-center text-neutro-1 py-2 px-4 rounded-[8px] disabled:opacity-50 hover:scale-105 active:scale-95 transition-all duration-200"
             type="submit"
             disabled={!isValid || isSubmitting}
           >
             {isSubmitting ? (
-              <svg
-                className="animate-spin h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                style={{ color: '#fff' }}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                />
-              </svg>
+              <AnimatedLoading />
+            ) : successSubmit === true ? (
+              <AnimatedSuccess stroke="white" />
+            ) : successSubmit === false ? (
+              <AnimatedFailed className="w-4 h-4 p-0 m-0" stroke="white" />
             ) : (
               <span>create</span>
             )}

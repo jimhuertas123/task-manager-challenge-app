@@ -36,6 +36,7 @@
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-navigation-menu": "^1.2.14",
     "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-toast": "^1.2.15",
     "@tailwindcss/vite": "^4.1.13",
     "graphql": "^16.11.0",
     "react": "^19.1.1",

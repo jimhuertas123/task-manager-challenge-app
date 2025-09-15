@@ -22,7 +22,7 @@ export const EditableLabel = ({
 
   return editing ? (
     <input
-      className="text-nav-bar-l flex w-full h-[30px] text-neutro-1 focus:outline-none focus:ring-0 focus:border-none"
+      className="text-nav-bar-xl flex w-full h-[30px] text-neutro-1 focus:outline-none focus:ring-0 focus:border-none"
       autoFocus
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === 'Escape') {
@@ -41,7 +41,7 @@ export const EditableLabel = ({
     />
   ) : (
     <span
-      className={`text-neutro-1 text-nav-bar-l flex w-full items-center h-[30px] ${!value ? 'text-neutro-2 font-semibold' : ''}`}
+      className={`text-neutro-1 text-nav-bar-xl flex w-full items-center h-[30px] ${!value ? 'text-neutro-2 font-normal' : ''}`}
       onClick={handleLabelClick}
     >
       {value || 'Task Title'}

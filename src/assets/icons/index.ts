@@ -22,3 +22,6 @@ export { ChevronRightIcon } from './ChevronRightIcon';
 export { ChevronLeftIcon } from './ChevronLeftIcon';
 export { TwoLeftArrows } from './TwoLeftArrows';
 export { TwoRightArrows } from './TwoRightArrows';
+export { AnimatedLoading } from './AnimatedLoading';
+export { AnimatedFailed } from './AnimatedStatus/AnimatedFailed';
+export { AnimatedSuccess } from './AnimatedStatus/AnimatedSuccess';

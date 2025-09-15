@@ -1,6 +1,4 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
-// import { Popover } from '../ui';
-// import { FormNewTask } from '../features/FormNewTask';
 import { useState } from 'react';
 import { ModalTask } from '../features/ModalTask/ModalTask';
 import { useGetAllUsersQuery } from '@/types/__generated__/graphql';
@@ -60,11 +58,9 @@ export const ViewModeSwitch = ({
         <div className="w-full h-full flex justify-center items-center px-4.5">
           <div className="relative flex bg-neutro-4 rounded-[10px] p-1 w-full h-[40px]">
             <span
-              className={`absolute top-1 left-1 h-[32px] w-[80px] rounded-[8px] bg-neutro-2
+              className={`absolute top-1 left-1 h-[32px] w-[50%] rounded-[8px] bg-neutro-2
                   transition-all duration-300 z-0`}
               style={{
-                width: '50%',
-                height: '32px',
                 transform: isGridViewMode
                   ? 'translateX(0)'
                   : 'translateX(100%)',
