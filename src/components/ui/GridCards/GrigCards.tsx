@@ -1,5 +1,10 @@
 import { GridCard } from '@/components/features';
-import { Status, type GetAllTasksQuery } from '@/types/__generated__/graphql';
+import {
+  GetAllTasksDocument,
+  Status,
+  useDeleteTaskMutation,
+  type GetAllTasksQuery,
+} from '@/types/__generated__/graphql';
 
 export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
   const allStatuses = Object.values(Status);
@@ -8,6 +13,35 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     ...allStatuses.filter((status) => !endStatuses.includes(status)),
     ...endStatuses.filter((status) => allStatuses.includes(status)),
   ];
+
+  const [deleteTask] = useDeleteTaskMutation();
+
+  //TODO EDIT OPEN IN MODAL FORM WITH THE TASK DATA
+  // const handleEdit = (taskId: string) => {
+
+  // };
+
+  const handleDelete = async (taskId: string) => {
+    await deleteTask({
+      variables: { input: { id: taskId } },
+      update: (cache, { data }) => {
+        if (!data?.deleteTask?.id) return;
+        const existing = cache.readQuery<GetAllTasksQuery>({
+          query: GetAllTasksDocument,
+        });
+        if (existing && existing.tasks) {
+          cache.writeQuery<GetAllTasksQuery>({
+            query: GetAllTasksDocument,
+            data: {
+              tasks: existing.tasks.filter(
+                (task) => task.id !== data.deleteTask.id
+              ),
+            },
+          });
+        }
+      },
+    });
+  };
 
   return (
     <div className="w-full overflow-x-auto">
@@ -28,7 +62,11 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
               {tasks
                 .filter((task) => task.status === status)
                 .map((task) => (
-                  <GridCard key={task.id} task={task} />
+                  <GridCard
+                    key={task.id}
+                    task={task}
+                    onDelete={() => handleDelete(task.id)}
+                  />
                 ))}
             </div>
           </div>

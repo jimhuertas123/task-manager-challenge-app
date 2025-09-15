@@ -6,7 +6,6 @@ import { PhoneNavBar } from '../PhoneNavBar';
 import { FormProvider, useForm } from 'react-hook-form';
 import { newTaskDataSchema, type NewTaskData } from '@/schema/schemaNewTask';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as Toast from '@radix-ui/react-toast';
 
 export const MainLayout = () => {
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
@@ -30,11 +29,9 @@ export const MainLayout = () => {
       {!isSmallDevice && <NavBar />}
       <main className="grid grid-rows-[64px_1fr] flex-1 w-full gap-y-3.5 sm:gap-y-6 text-neutro-1">
         <SearchTasks />
-        <Toast.Provider swipeDirection="right">
-          <FormProvider {...methods}>
-            <Outlet />
-          </FormProvider>
-        </Toast.Provider>
+        <FormProvider {...methods}>
+          <Outlet />
+        </FormProvider>
       </main>
 
       {isSmallDevice && (

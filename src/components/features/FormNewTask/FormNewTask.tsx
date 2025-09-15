@@ -15,11 +15,18 @@ import {
 import { useFormContext } from 'react-hook-form';
 
 import {
+  GetAllTasksDocument,
   PointEstimate,
+  Status,
   TaskTag,
+  useCreateTaskMutation,
   type GetAllUsersQuery,
+  type TaskFieldsFragment,
 } from '@/types/__generated__/graphql';
-import { pointEstimateToNumber } from '@/components/ui/UICardComponents/pointEstimate';
+import {
+  numberToPointEstimate,
+  pointEstimateToNumber,
+} from '@/components/ui/UICardComponents/pointEstimate';
 import { useRef, useState } from 'react';
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 
@@ -66,31 +73,42 @@ export const FormNewTask = ({
     formState: { errors, isSubmitting, isValid },
   } = useFormContext<NewTaskData>();
 
+  const [createTask, { data, loading, error }] = useCreateTaskMutation();
+
   const [isEstimatedPopoverClose, setIsEstimatedPopoverClose] = useState(false);
   const [isAssigneePopoverClose, setIsAssigneePopoverClose] = useState(false);
   const [isLabelPopoverClose, setIsLabelPopoverClose] = useState(false);
   const [isDueDatePopoverClose, setIsDueDatePopoverClose] = useState(false);
 
   const dueDateInputRef = useRef<HTMLInputElement>(null);
-  const [successSubmit, setSuccessSubmit] = useState<boolean | null>();
 
   const onSubmit = async (data: NewTaskData) => {
     try {
       const validatedData = newTaskDataSchema.parse(data);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Form submitted with valid data:', validatedData);
 
-      if (Math.random() > 0.5) {
-        setSuccessSubmit(true);
-        setTimeout(() => {
-          onClose();
-        }, 1000);
-      } else {
-        throw new Error('Random failure to test validation');
-      }
-    } catch (error) {
-      setSuccessSubmit(false);
-      console.error('Validation failed:', error);
+      await createTask({
+        variables: {
+          input: {
+            name: validatedData.name,
+            assigneeId: validatedData.assigneeId,
+            dueDate: validatedData.dueDate,
+            pointEstimate: numberToPointEstimate(validatedData.estimate),
+            status: Status.Backlog,
+            tags: validatedData.tags as TaskTag[],
+          },
+        },
+        update: (cache, { data }) => {
+          const existing = cache.readQuery<{ tasks: TaskFieldsFragment[] }>({
+            query: GetAllTasksDocument,
+          });
+          cache.writeQuery({
+            query: GetAllTasksDocument,
+            data: { tasks: [data?.createTask, ...(existing?.tasks ?? [])] },
+          });
+        },
+      });
+    } catch (errorCatch) {
+      throw new Error((errorCatch as Error)?.message);
     }
   };
 
@@ -420,13 +438,13 @@ export const FormNewTask = ({
           <button
             className="flex text-nav-bar-m min-w-20 max-h-[40px] bg-primary-4 justify-center text-neutro-1 py-2 px-4 rounded-[8px] disabled:opacity-50 hover:scale-105 active:scale-95 transition-all duration-200"
             type="submit"
-            disabled={!isValid || isSubmitting}
+            disabled={!isValid || isSubmitting || loading}
           >
             {isSubmitting ? (
               <AnimatedLoading />
-            ) : successSubmit === true ? (
+            ) : data ? (
               <AnimatedSuccess stroke="white" />
-            ) : successSubmit === false ? (
+            ) : error ? (
               <AnimatedFailed className="w-4 h-4 p-0 m-0" stroke="white" />
             ) : (
               <span>create</span>
