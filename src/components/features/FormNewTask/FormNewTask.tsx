@@ -44,29 +44,7 @@ import {
   type UserFieldsFragment,
 } from '@/__generated__/graphql';
 import { useMutation } from '@apollo/client/react';
-
-function parseLocalDate(dateString: string): Date | undefined {
-  if (!dateString) return undefined;
-  const match = dateString.match(/^(\w{3})\. (\d{2}) (\d{4})$/);
-  if (!match) return undefined;
-  const [monthShort, day, year] = match;
-  const monthIndex = [
-    'Jan.',
-    'Feb.',
-    'Mar.',
-    'Apr.',
-    'May.',
-    'Jun.',
-    'Jul.',
-    'Aug.',
-    'Sep.',
-    'Oct.',
-    'Nov.',
-    'Dec.',
-  ].indexOf(monthShort + '.');
-  if (monthIndex === -1) return undefined;
-  return new Date(Number(year), monthIndex, Number(day));
-}
+import { parseLocalDate } from './TaskFields/parseLocalDate';
 
 // import { NavigationForm } from '@/components/ui/NavigationForm/NavigationForm';
 
