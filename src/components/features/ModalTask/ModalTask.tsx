@@ -1,9 +1,13 @@
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { FormNewTask } from '../FormNewTask';
-import type { GetAllUsersQuery, Task } from '@/types/__generated__/graphql';
 import { useFormContext } from 'react-hook-form';
 import type { NewTaskData } from '@/schema/schemaNewTask';
+import type {
+  GetAllUsersQuery,
+  Task,
+  UserFieldsFragment,
+} from '@/__generated__/graphql';
 
 // import { useForm } from 'react-hook-form';
 // import { newTaskDataSchema } from '@/schema/schemaNewTask';
@@ -50,7 +54,10 @@ export const ModalTask = ({
     >
       <div className="bg-neutro-3  w-[572px] relative max-w-4xl mx-4 rounded-2xl overflow-hidden shadow-2xl">
         <div className="p-5">
-          <FormNewTask usersData={usersData ?? []} onClose={onClose} />
+          <FormNewTask
+            usersData={usersData as UserFieldsFragment[] | undefined}
+            onClose={onClose}
+          />
           {task?.name}
         </div>
       </div>

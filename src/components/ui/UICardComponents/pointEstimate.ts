@@ -1,4 +1,4 @@
-import { PointEstimate } from '@/types/__generated__/graphql';
+import { PointEstimate } from '@/__generated__/graphql';
 
 export function pointEstimateToNumber(
   pointEstimate: PointEstimate

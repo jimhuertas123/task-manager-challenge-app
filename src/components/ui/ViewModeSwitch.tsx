@@ -1,7 +1,12 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
 import { useState } from 'react';
 import { ModalTask } from '../features/ModalTask/ModalTask';
-import { useGetAllUsersQuery } from '@/types/__generated__/graphql';
+import {
+  GetAllUsersDocument,
+  type GetAllUsersQuery,
+  type GetAllUsersQueryVariables,
+} from '@/__generated__/graphql';
+import { useQuery } from '@apollo/client/react';
 
 export const ViewModeSwitch = ({
   isSmallDevice,
@@ -21,7 +26,9 @@ export const ViewModeSwitch = ({
     data: usersData,
     loading: usersLoading,
     error: usersError,
-  } = useGetAllUsersQuery();
+  } = useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(
+    GetAllUsersDocument
+  );
 
   return (
     <>

@@ -1,26 +1,19 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 const config: CodegenConfig = {
-  overwrite: true,
   schema: 'https://syn-api-prod.herokuapp.com/graphql',
-  documents: ['src/**/*.{ts,tsx}'],
-  ignoreNoDocuments: true,
+  documents: ['src/**/*.tsx', 'src/graphql/**/*.ts'],
   generates: {
-    './src/types/__generated__/graphql.ts': {
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-react-apollo',
-      ],
+    './src/__generated__/': {
+      preset: 'client',
+      presetConfig: {
+        gqlTagName: 'gql',
+      },
       config: {
-        avoidOptionals: {
-          field: true,
-          inputValue: false,
-        },
-        defaultScalarType: 'unknown',
-        nonOptionalTypename: true,
-        skipTypeNameForRoot: true,
+        useTypeImports: true,
+        enumsAsConst: true,
       },
     },
   },
+  ignoreNoDocuments: true,
 };
 export default config;
