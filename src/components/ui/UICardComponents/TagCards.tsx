@@ -1,4 +1,4 @@
-import type { TaskTag } from '@/types/__generated__/graphql';
+import type { TaskTag } from '@/__generated__/graphql';
 
 const tagColors: { [key in TaskTag]: { color: string; bg: string } } = {
   RAILS: { color: '#FFFFFF', bg: 'rgba(148, 151, 154, 0.1)' },
