@@ -4,14 +4,22 @@ import { GridCards } from '@/components/ui/GridCards';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useState } from 'react';
 
-import { useGetAllTasksQuery } from '@/types/__generated__/graphql';
 import { ViewModeSwitch } from '@/components/ui';
+import { useQuery } from '@apollo/client/react';
+import {
+  GetAllTasksDocument,
+  type GetAllTasksQuery,
+  type GetAllTasksQueryVariables,
+} from '@/__generated__/graphql';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
-  const { data, loading, error } = useGetAllTasksQuery({
+  const { data, loading, error } = useQuery<
+    GetAllTasksQuery,
+    GetAllTasksQueryVariables
+  >(GetAllTasksDocument, {
     fetchPolicy: 'cache-and-network',
   });
 

@@ -1,6 +1,10 @@
 import './ListCard.style.css';
 import { AccordingLists } from './AccordingLists';
-import { Status, type GetAllTasksQuery } from '@/types/__generated__/graphql';
+import {
+  Status,
+  type GetAllTasksQuery,
+  type TaskFieldsFragment,
+} from '@/__generated__/graphql';
 
 export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
   const listTitleStyle =
@@ -10,7 +14,7 @@ export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     rounded-[4px] text-lg font-bold tracking-wide bg-neutro-3 h-[56px]`;
 
   const allStatuses = Object.values(Status);
-  const endStatuses = [Status.Done, Status.Cancelled];
+  const endStatuses: Status[] = [Status.Done, Status.Cancelled];
   const statusOrder = [
     ...allStatuses.filter((status) => !endStatuses.includes(status)),
     ...endStatuses.filter((status) => allStatuses.includes(status)),
@@ -48,7 +52,9 @@ export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
             key={status}
             listTitleStyle={listTitleStyle}
             title={status}
-            tasks={tasks.filter((task) => task.status === status)}
+            tasks={(tasks as TaskFieldsFragment[]).filter(
+              (task) => task.status === status
+            )}
           />
         ))}
       </div>

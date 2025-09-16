@@ -1,5 +1,3 @@
-import { type GetAllTasksQuery } from '@/types/__generated__/graphql';
-
 import {
   ThreeDotsIcon,
   ClipIcon,
@@ -13,15 +11,22 @@ import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 import { pointEstimateToNumber } from '@/components/ui/UICardComponents/pointEstimate';
 import { DueDate } from '@/components/ui/UICardComponents/DueDate';
 import { Popover } from '@/components/ui';
+import {
+  UserFieldsFragmentDoc,
+  type TaskFieldsFragment,
+} from '@/__generated__/graphql';
+import { useFragment } from '@/__generated__';
 
 export const GridCard = ({
   task,
   onDelete,
 }: {
-  task?: GetAllTasksQuery['tasks'][number];
+  task?: TaskFieldsFragment;
   onDelete: (id: string) => void;
 }) => {
-  if (!task) {
+  const assignee = useFragment(UserFieldsFragmentDoc, task?.assignee);
+
+  if (!task || task.__typename !== 'Task') {
     return <div className="bg-neutro-4 w-full h-[208px] mb-3">No Task</div>;
   }
 
@@ -71,8 +76,8 @@ export const GridCard = ({
       <TagCards tags={task.tags} />
       <div className="flex justify-between">
         <div className="flex items-center mb-auto">
-          {task.assignee?.fullName ? (
-            <CircleAvatar fullName={task.assignee.fullName} size={'10px'} />
+          {assignee?.fullName ? (
+            <CircleAvatar fullName={assignee.fullName} size={'10px'} />
           ) : (
             <div></div>
           )}

@@ -2,7 +2,10 @@ import { ArrowIcon } from '@/assets/icons';
 import './ListCard.style.css';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ListTaskCard } from './ListTaskCard';
-import type { GetAllTasksQuery } from '@/types/__generated__/graphql';
+import type {
+  GetAllTasksQuery,
+  TaskFieldsFragment,
+} from '@/__generated__/graphql';
 
 export const AccordingLists = ({
   listTitleStyle,
@@ -34,12 +37,12 @@ export const AccordingLists = ({
               {title.charAt(0) + title.slice(1).toLowerCase().replace('_', ' ')}
             </h2>
             <h2 className="ml-1 text-nav-bar-l font-normal text-neutro-2">
-              {`(0${tasks.filter((task) => task.status === title).length})`}
+              {`(0${(tasks as TaskFieldsFragment[]).filter((task) => task.status === title).length})`}
             </h2>
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="AccordionContent">
-          {tasks?.map((task, index) => (
+          {(tasks as TaskFieldsFragment[])?.map((task, index) => (
             <ListTaskCard key={task.id} task={task} index={index} />
           ))}
         </Accordion.Content>

@@ -14,15 +14,15 @@ import {
 } from '@/assets/icons';
 import { useFormContext } from 'react-hook-form';
 
-import {
-  GetAllTasksDocument,
-  PointEstimate,
-  Status,
-  TaskTag,
-  useCreateTaskMutation,
-  type GetAllUsersQuery,
-  type TaskFieldsFragment,
-} from '@/types/__generated__/graphql';
+// import {
+//   GetAllTasksDocument,
+//   PointEstimate,
+//   Status,
+//   TaskTag,
+//   useCreateTaskMutation,
+//   type GetAllUsersQuery,
+//   type TaskFieldsFragment,
+// }
 import {
   numberToPointEstimate,
   pointEstimateToNumber,
@@ -32,6 +32,18 @@ import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 
 import { DayPicker } from 'react-day-picker';
 import { CalendarNavbar } from './';
+import {
+  CreateTaskDocument,
+  GetAllTasksDocument,
+  PointEstimate,
+  Status,
+  TaskTag,
+  type CreateTaskMutation,
+  type CreateTaskMutationVariables,
+  type TaskFieldsFragment,
+  type UserFieldsFragment,
+} from '@/__generated__/graphql';
+import { useMutation } from '@apollo/client/react';
 
 function parseLocalDate(dateString: string): Date | undefined {
   if (!dateString) return undefined;
@@ -62,7 +74,7 @@ export const FormNewTask = ({
   usersData,
   onClose,
 }: {
-  usersData: GetAllUsersQuery['users'];
+  usersData: UserFieldsFragment[] | undefined;
   onClose: () => void;
 }) => {
   const {
@@ -73,7 +85,10 @@ export const FormNewTask = ({
     formState: { errors, isSubmitting, isValid },
   } = useFormContext<NewTaskData>();
 
-  const [createTask, { data, loading, error }] = useCreateTaskMutation();
+  const [createTask, { data, loading, error }] = useMutation<
+    CreateTaskMutation,
+    CreateTaskMutationVariables
+  >(CreateTaskDocument);
 
   const [isEstimatedPopoverClose, setIsEstimatedPopoverClose] = useState(false);
   const [isAssigneePopoverClose, setIsAssigneePopoverClose] = useState(false);
@@ -103,7 +118,11 @@ export const FormNewTask = ({
           });
           cache.writeQuery({
             query: GetAllTasksDocument,
-            data: { tasks: [data?.createTask, ...(existing?.tasks ?? [])] },
+            data: {
+              tasks: data?.createTask
+                ? [data.createTask, ...(existing?.tasks ?? [])]
+                : [...(existing?.tasks ?? [])],
+            },
           });
         },
       });
@@ -200,14 +219,14 @@ export const FormNewTask = ({
                     <div className="flex items-center">
                       <CircleAvatar
                         fullName={
-                          usersData.find(
+                          usersData?.find(
                             (user) => user.id === watch('assigneeId')
                           )?.fullName ?? 'No Name'
                         }
                         size={'12px'}
                       />
                       <span className="text-neutro-1 ml-2 font-[500] text-nav-bar-m overflow-ellipsis whitespace-nowrap overflow-hidden">
-                        {usersData.find(
+                        {usersData?.find(
                           (user) => user.id === watch('assigneeId')
                         )?.fullName ?? 'No Name'}
                       </span>
@@ -227,7 +246,7 @@ export const FormNewTask = ({
                 <span className="text-neutro-2 text-nav-bar-xl pl-3">
                   Assign To...
                 </span>
-                {usersData.length > 0 ? (
+                {usersData ? (
                   usersData.map((user) => (
                     <div
                       key={user.id}
