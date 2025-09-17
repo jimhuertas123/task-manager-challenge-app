@@ -11,6 +11,9 @@ import {
   type GetAllTasksQuery,
   type GetAllTasksQueryVariables,
 } from '@/__generated__/graphql';
+import { ModalTask } from '@/components/features/ModalTask/ModalTask';
+import { FormNewTask } from '@/components/features/FormNewTask';
+import { useEditTaskModal } from '@/contexts/useEditTaskModal';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
@@ -22,6 +25,8 @@ export const DashboardPage = () => {
   >(GetAllTasksDocument, {
     fetchPolicy: 'cache-first',
   });
+
+  const { open, setOpen, task } = useEditTaskModal();
 
   return (
     <div className="h-full w-full">
@@ -54,6 +59,22 @@ export const DashboardPage = () => {
               <ListCards tasks={data?.tasks ?? []} />
             </div>
           </div>
+        )}
+
+        {open && (
+          <ModalTask
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            className="bg-neutro-3 w-[572px] relative max-w-4xl mx-4 rounded-2xl overflow-hidden shadow-2xl"
+            backgroundStyle="backdrop-blur-[20px] bg-black/5"
+          >
+            <div className="p-5">
+              <FormNewTask
+                defaultValues={task}
+                onClose={() => setOpen(false)}
+              />
+            </div>
+          </ModalTask>
         )}
       </div>
     </div>

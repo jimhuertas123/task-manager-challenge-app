@@ -3,6 +3,7 @@ import { parseLocalDate } from './parseLocalDate';
 import type { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import type { NewTaskData } from '@/schema/schemaNewTask';
 import { CalendarNavbar } from './CalendarNavbar';
+import { normalizeDate } from './normalizeDate';
 
 export const CalendarPicker = ({
   watch,
@@ -38,13 +39,7 @@ export const CalendarPicker = ({
             closeAction(false);
             return;
           }
-
-          const monthShort = date.toLocaleString('default', {
-            month: 'short',
-          });
-          const day = String(date.getDate()).padStart(2, '0');
-          const year = date.getFullYear();
-          const formatted = `${monthShort}. ${day} ${year}`;
+          const formatted = normalizeDate(date);
           setValue('dueDate', formatted, { shouldValidate: true });
           closeAction(false);
         }}

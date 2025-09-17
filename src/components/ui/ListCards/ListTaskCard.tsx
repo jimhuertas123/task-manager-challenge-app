@@ -1,5 +1,5 @@
 import { TagCards } from '../UICardComponents/TagCards';
-import { pointEstimateToNumber } from '../UICardComponents/pointEstimate';
+import { pointEstimateToNumber } from '../../features/FormNewTask/TaskFields/EstimateField/pointEstimate';
 import { CircleAvatar } from '../UICardComponents/CircleAvatar';
 import { DueDate } from '../UICardComponents/DueDate';
 import { ChatBubbleIcon, RightArrowIcon, ThreatIcon } from '@/assets/icons';

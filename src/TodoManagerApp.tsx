@@ -8,7 +8,8 @@ import { apolloClient } from './lib/apolloClient';
 import { FormProvider, useForm } from 'react-hook-form';
 import { newTaskDataSchema, type NewTaskData } from './schema/schemaNewTask';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UsersProvider } from './context/UsersContext';
+import { UsersProvider } from './contexts/UsersContext';
+import { EditTaskModalProvider } from './contexts/EditTaskModalContext';
 
 export const TodoManagerApp = () => {
   const methods = useForm<NewTaskData>({
@@ -23,11 +24,13 @@ export const TodoManagerApp = () => {
       )}
     >
       <ApolloProvider client={apolloClient}>
-        <UsersProvider>
-          <FormProvider {...methods}>
-            <RouterProvider router={router} />
-          </FormProvider>
-        </UsersProvider>
+        <EditTaskModalProvider>
+          <UsersProvider>
+            <FormProvider {...methods}>
+              <RouterProvider router={router} />
+            </FormProvider>
+          </UsersProvider>
+        </EditTaskModalProvider>
       </ApolloProvider>
     </ErrorBoundary>
   );

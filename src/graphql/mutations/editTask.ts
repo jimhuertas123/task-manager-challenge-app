@@ -6,5 +6,4 @@ export const EDIT_TASK = gql`
       ...TaskFields
     }
   }
-  id
 `;

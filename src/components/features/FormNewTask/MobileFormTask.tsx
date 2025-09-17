@@ -32,8 +32,8 @@ import {
 
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 import { useMutation } from '@apollo/client/react';
-import { numberToPointEstimate } from '@/components/ui/UICardComponents/pointEstimate';
-import { useUsers } from '@/context/useUsers';
+import { numberToPointEstimate } from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
+import { useUsers } from '@/contexts/useUsers';
 
 export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
   const {
@@ -88,7 +88,7 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
 
   useEffect(() => {
     resetMutation();
-  }, []);
+  }, [resetMutation]);
 
   const onSubmit = async (data: NewTaskData) => {
     try {

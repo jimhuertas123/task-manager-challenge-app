@@ -27,7 +27,7 @@ export const ModalTask = ({
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   return createPortal(
     <dialog
