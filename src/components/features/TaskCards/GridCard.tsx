@@ -8,7 +8,7 @@ import {
 } from '@/assets/icons';
 import { TagCards } from '@/components/ui/UICardComponents/TagCards';
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
-import { pointEstimateToNumber } from '@/components/ui/UICardComponents/pointEstimate';
+import { pointEstimateToNumber } from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
 import { DueDate } from '@/components/ui/UICardComponents/DueDate';
 import { Popover } from '@/components/ui';
 import {
@@ -16,6 +16,7 @@ import {
   type TaskFieldsFragment,
 } from '@/__generated__/graphql';
 import { useFragment } from '@/__generated__';
+import { useEditTaskModal } from '@/contexts/useEditTaskModal';
 
 export const GridCard = ({
   task,
@@ -25,6 +26,8 @@ export const GridCard = ({
   onDelete: (id: string) => void;
 }) => {
   const assignee = useFragment(UserFieldsFragmentDoc, task?.assignee);
+
+  const { setOpen, setTask } = useEditTaskModal();
 
   if (!task || task.__typename !== 'Task') {
     return <div className="bg-neutro-4 w-full h-[208px] mb-3">No Task</div>;
@@ -47,7 +50,13 @@ export const GridCard = ({
           }
         >
           <div className="p-2 bg-neutro-3 rounded-[8px] border-[1px] border-neutro-2 shadow mt-2 gap-y-1 flex flex-col">
-            <div className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200">
+            <div
+              onClick={() => {
+                setTask(task);
+                setOpen(true);
+              }}
+              className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200"
+            >
               <PencilIcon className="fill-neutro-1" />
               <p className="text-sm">Edit</p>
             </div>

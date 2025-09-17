@@ -5,6 +5,8 @@ export * from './TaskFields/AssigneeField/AssigneeOptions';
 export * from './TaskFields/DueDateField/parseLocalDate';
 export * from './TaskFields/DueDateField/DueDateField';
 export * from './TaskFields/DueDateField/CalendarPicker';
+export * from './TaskFields/DueDateField/normalizeDate';
+export * from './TaskFields/DueDateField/normalizeUTCDate';
 export * from './TaskFields/EstimateField/EstimateField';
 export * from './TaskFields/EstimateField/EstimateOptions';
 export * from './TaskFields/LabelTagField/LabelTagField';

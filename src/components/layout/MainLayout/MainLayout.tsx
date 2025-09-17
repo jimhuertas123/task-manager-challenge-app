@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { NavBar } from '../NavBar';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { PhoneNavBar } from '../PhoneNavBar';
-import { SearchTasks } from '../SearchTasks';
+import { SearchTasks } from '@/components/features';
 
 export const MainLayout = () => {
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
