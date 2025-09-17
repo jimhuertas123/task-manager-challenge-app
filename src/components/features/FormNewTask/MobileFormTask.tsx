@@ -1,4 +1,4 @@
-import { useState, type JSX } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 import { ModalTask } from '../ModalTask/ModalTask';
 import {
   TitleLabelField,
@@ -81,10 +81,14 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
     ],
   ]);
 
-  const [createTask, { data, loading, error }] = useMutation<
-    CreateTaskMutation,
-    CreateTaskMutationVariables
-  >(CreateTaskDocument);
+  const [createTask, { data, loading, error, reset: resetMutation }] =
+    useMutation<CreateTaskMutation, CreateTaskMutationVariables>(
+      CreateTaskDocument
+    );
+
+  useEffect(() => {
+    resetMutation();
+  }, []);
 
   const onSubmit = async (data: NewTaskData) => {
     try {

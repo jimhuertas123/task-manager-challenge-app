@@ -19,7 +19,7 @@ export const MobileModalTask = ({
   const { reset } = useFormContext<NewTaskData>();
 
   useEffect(() => {
-    if (!open) {
+    if (open) {
       reset();
     }
   }, [open, reset]);
