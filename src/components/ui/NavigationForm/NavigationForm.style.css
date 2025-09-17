@@ -56,7 +56,6 @@ p {
   height: 10px;
   top: 100%;
   overflow: hidden;
-  z-index: 1;
   transition:
     width,
     transform 250ms ease;

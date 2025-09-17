@@ -7,5 +7,17 @@ export const apolloClient = new ApolloClient({
       Authorization: `Bearer ${import.meta.env.VITE_GRAPHQL_API_KEY}`,
     },
   }),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          tasks: {
+            merge(_, incoming) {
+              return incoming;
+            },
+          },
+        },
+      },
+    },
+  }),
 });

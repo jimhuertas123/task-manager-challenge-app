@@ -43,9 +43,7 @@ export const ListTaskCard = ({
             className={`flex h-12 w-1 mr-9`}
             style={{ backgroundColor: tagColors[task.tags[0]].color }}
           />
-          <span className="mr-2">
-            {index < 9 ? `0${index + 1}` : index + 1}
-          </span>
+          <span className="mr-2">{index < 9 ? `0${index}` : index}</span>
           <span className="tracking-[0.2px]">{task.name}</span>
         </div>
         <div className="flex items-end gap-x-2 h-full pr-2 opacity-80 sm:active:scale-95 sm:opacity-10 sm:cursor-pointer active:opacity-100 sm:hover:opacity-100">
