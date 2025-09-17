@@ -18,6 +18,7 @@ type Documents = {
   '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n  }\n': typeof types.UserFieldsFragmentDoc;
   '\n  mutation CreateTask($input: CreateTaskInput!) {\n    createTask(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.CreateTaskDocument;
   '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n': typeof types.DeleteTaskDocument;
+  '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n': typeof types.UpdateTaskDocument;
   '\n  query GetAllTasks {\n    tasks(input: {}) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.GetAllTasksDocument;
   '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n': typeof types.GetAllUsersDocument;
   '\n    query GetMyTasks {\n      tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ': typeof types.GetMyTasksDocument;
@@ -31,6 +32,8 @@ const documents: Documents = {
     types.CreateTaskDocument,
   '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n':
     types.DeleteTaskDocument,
+  '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n':
+    types.UpdateTaskDocument,
   '\n  query GetAllTasks {\n    tasks(input: {}) {\n      ...TaskFields\n    }\n  }\n  \n':
     types.GetAllTasksDocument,
   '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n':
@@ -77,6 +80,12 @@ export function gql(
 export function gql(
   source: '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n'
 ): (typeof documents)['\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n'];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n'
+): (typeof documents)['\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

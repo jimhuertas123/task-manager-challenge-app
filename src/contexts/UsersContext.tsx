@@ -21,7 +21,7 @@ export const UsersProvider: React.FC<{ children: React.ReactNode }> = ({
   const { data, loading, error, refetch } = useQuery<
     GetAllUsersQuery,
     GetAllUsersQueryVariables
-  >(GetAllUsersDocument);
+  >(GetAllUsersDocument, { fetchPolicy: 'cache-first' });
 
   return (
     <UsersContext.Provider value={{ data, loading, error, refetch }}>
