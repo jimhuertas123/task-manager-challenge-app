@@ -42,9 +42,11 @@ export const AccordingLists = ({
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="AccordionContent">
-          {(tasks as TaskFieldsFragment[])?.map((task, index) => (
-            <ListTaskCard key={task.id} task={task} index={index} />
-          ))}
+          {(tasks as TaskFieldsFragment[])
+            ?.sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
+            .map((task) => (
+              <ListTaskCard key={task.id} task={task} index={task.position} />
+            ))}
         </Accordion.Content>
       </Accordion.Item>
     </Accordion.Root>

@@ -37,10 +37,6 @@ export const GridCard = ({
     >
       <div className="flex justify-between items-start tracking-[0.8px] pr-[1.45%]">
         <h2 className="text-lg font-[500]">{task.name}</h2>
-        {/* <ThreeDotsIcon
-          className="inline-block fill-neutro-2 my-auto rounded-[50%]  h-6.5 w-6.5 p-1
-            hover:scale-105 hover:bg-neutro-3 active:scale-95 cursor-pointer "
-        /> */}
         <Popover
           side="bottom"
           button={
@@ -79,9 +75,11 @@ export const GridCard = ({
           {assignee?.fullName ? (
             <CircleAvatar fullName={assignee.fullName} size={'10px'} />
           ) : (
+            //TODO: Replace with default avatar image
             <div></div>
           )}
         </div>
+        {/* TODO: Generate random states for this */}
         <div className="flex items-end gap-x-4 h-full pr-2">
           <div className="flex items-center h-full">
             {/* <span className=""> 5</span> */}

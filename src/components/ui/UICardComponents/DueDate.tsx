@@ -13,13 +13,30 @@ export const DueDate = ({
 }) => {
   const dueDateType = new Date(dueDate as string | number | Date);
   const now = new Date();
-  const isToday = dueDateType.toDateString() === now.toDateString();
 
-  const yesterday = new Date(now);
-  yesterday.setDate(now.getDate() - 1);
-  const isYesterday = dueDateType.toDateString() === yesterday.toDateString();
+  const getUTCDateParts = (date: Date) => [
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+  ];
 
-  const expired = dueDateType <= yesterday;
+  const isSameUTCDay = (a: Date, b: Date) => {
+    const [ay, am, ad] = getUTCDateParts(a);
+    const [by, bm, bd] = getUTCDateParts(b);
+    return ay === by && am === bm && ad === bd;
+  };
+
+  const isToday = isSameUTCDay(dueDateType, now);
+
+  const yesterdayUTC = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1)
+  );
+  const isYesterday = isSameUTCDay(dueDateType, yesterdayUTC);
+
+  const todayUTC = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+  );
+  const expired = dueDateType.getTime() < todayUTC.getTime();
 
   let calculatedDueDate: string;
   if (isToday) {
@@ -27,9 +44,13 @@ export const DueDate = ({
   } else if (isYesterday) {
     calculatedDueDate = 'YESTERDAY';
   } else {
-    const day = dueDateType.getDate();
-    const month = dueDateType.toLocaleString('default', { month: 'short' });
-    const year = dueDateType.getFullYear();
+    // Always use UTC for display
+    const day = dueDateType.getUTCDate();
+    const month = dueDateType.toLocaleString('default', {
+      month: 'short',
+      timeZone: 'UTC',
+    });
+    const year = dueDateType.getUTCFullYear();
     calculatedDueDate = `${day} ${month}, ${year}`;
   }
 

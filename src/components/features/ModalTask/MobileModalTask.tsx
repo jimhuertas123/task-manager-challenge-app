@@ -1,15 +1,28 @@
-import React, { useRef, useState } from 'react';
+import { XIcon } from '@/assets/icons';
+import type { NewTaskData } from '@/schema/schemaNewTask';
+import React, { useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 export const MobileModalTask = ({
   open,
   setOpen,
+  children,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
+  children: React.ReactNode;
 }) => {
   const [translateY, setTranslateY] = useState(0);
   const startYRef = useRef<number | null>(null);
   const draggingRef = useRef(false);
+
+  const { reset } = useFormContext<NewTaskData>();
+
+  useEffect(() => {
+    if (open) {
+      reset();
+    }
+  }, [open, reset]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     startYRef.current = e.touches[0].clientY;
@@ -68,7 +81,7 @@ export const MobileModalTask = ({
       <div
         className={`
           fixed left-0 right-0 bottom-0
-          bg-neutro-4 rounded-t-2xl p-4
+          bg-neutro-5 rounded-t-2xl p-4
           transition-transform duration-500 ease-in
           min-h-full
         `}
@@ -83,13 +96,13 @@ export const MobileModalTask = ({
       >
         <div className="w-12 h-1 bg-gray-400 rounded-full mx-auto mb-4" />
         <button
-          className="absolute top-4 right-4 text-2xl text-neutro-1"
+          className="absolute top-7 left-5 text-2xl text-neutro-1 p-1.5 rounded-full hover:bg-white/10 active:bg-neutro-5 transition-colors duration-200"
           onClick={() => setOpen(false)}
           aria-label="Close"
         >
-          x
+          <XIcon className="fill-neutro-2  w-6 h-6" />
         </button>
-        <div className="text-neutro-1">MobileModalTask</div>
+        {children}
       </div>
     </>
   );

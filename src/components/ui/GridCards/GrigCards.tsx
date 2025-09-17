@@ -76,6 +76,7 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
             <div className="flex-1 overflow-y-auto">
               {(tasks as TaskFieldsFragment[])
                 .filter((task) => task.status === status)
+                .sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
                 .map((task) => (
                   <GridCard
                     key={task.id}
