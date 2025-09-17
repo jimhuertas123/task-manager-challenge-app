@@ -23,13 +23,14 @@ export const DashboardPage = () => {
     GetAllTasksQuery,
     GetAllTasksQueryVariables
   >(GetAllTasksDocument, {
+    variables: { input: {} },
     fetchPolicy: 'cache-first',
   });
 
   const { open, setOpen, task } = useEditTaskModal();
 
   return (
-    <div className="h-full w-full">
+    <div key={'dashboard'} className="h-full w-full">
       <div className="grid grid-rows-[40px_1fr] gap-y-3 sm:gap-y-2 sm:grid-rows-[63px_1fr] h-full w-full">
         <ViewModeSwitch
           isSmallDevice={isSmallDevice}
