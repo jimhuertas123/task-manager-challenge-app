@@ -2,6 +2,7 @@ import { DashboardIcon, ListIcon, AddIcon } from '@/assets/icons';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MobileModalTask } from '../features/ModalTask/MobileModalTask';
+import { MobileFormTask } from '../features/FormNewTask/MobileFormTask';
 
 export const PhoneNavBar = () => {
   const [isMiddleActive, setIsMiddleActive] = useState(false);
@@ -64,7 +65,9 @@ export const PhoneNavBar = () => {
             }}
           </NavLink>
         </div>
-        <MobileModalTask open={openModal} setOpen={setOpenModal} />
+        <MobileModalTask open={openModal} setOpen={setOpenModal}>
+          <MobileFormTask onClose={() => setOpenModal(false)} />
+        </MobileModalTask>
       </div>
     </aside>
   );

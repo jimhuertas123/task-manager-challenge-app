@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { CalendarPicker } from './CalendarPicker';
 
-export const CalendarField = () => {
+export const DueDateField = () => {
   const [isDueDatePopoverClose, setIsDueDatePopoverClose] = useState(false);
   const {
     watch,

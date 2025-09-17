@@ -3,6 +3,8 @@ import { useState, useRef } from 'react';
 import { flushSync } from 'react-dom';
 import { useFormContext } from 'react-hook-form';
 
+// TODO: instead of not receving nothing when there is no label, we should receive a '' empty string so
+// the zod dont show an strange error
 export const TitleLabelField = () => {
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

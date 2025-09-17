@@ -24,15 +24,11 @@ import {
   AssigneeField,
   TitleLabelField,
   LabelTagField,
-  CalendarField,
+  DueDateField,
 } from './';
-export const FormNewTask = ({
-  usersData,
-  onClose,
-}: {
-  usersData: UserFieldsFragment[] | undefined;
-  onClose: () => void;
-}) => {
+import { useUsers } from '@/context/useUsers';
+
+export const FormNewTask = ({ onClose }: { onClose: () => void }) => {
   const {
     handleSubmit,
     formState: { isSubmitting, isValid },
@@ -42,6 +38,9 @@ export const FormNewTask = ({
     CreateTaskMutation,
     CreateTaskMutationVariables
   >(CreateTaskDocument);
+
+  //TODO: CREATE AN ERROR STATE IF USERS QUERY FAILS
+  const { data: usersData, loading: usersLoading } = useUsers();
 
   const onSubmit = async (data: NewTaskData) => {
     try {
@@ -100,7 +99,9 @@ export const FormNewTask = ({
 
           {/* assignee field */}
           <div className="w-full max-w-full">
-            <AssigneeField usersData={usersData} />
+            <AssigneeField
+              usersData={usersData?.users as UserFieldsFragment[] | undefined}
+            />
           </div>
 
           {/* label field */}
@@ -110,7 +111,7 @@ export const FormNewTask = ({
 
           {/* due date field */}
           <div className="w-full max-w-full">
-            <CalendarField />
+            <DueDateField />
           </div>
         </div>
 
@@ -125,7 +126,7 @@ export const FormNewTask = ({
           <button
             className="flex text-nav-bar-m min-w-20 max-h-[40px] bg-primary-4 justify-center text-neutro-1 py-2 px-4 rounded-[8px] disabled:opacity-50 hover:scale-105 active:scale-95 transition-all duration-200"
             type="submit"
-            disabled={!isValid || isSubmitting || loading}
+            disabled={!isValid || isSubmitting || loading || usersLoading}
           >
             {isSubmitting ? (
               <AnimatedLoading />

@@ -27,3 +27,4 @@ export { AnimatedFailed } from './AnimatedStatus/AnimatedFailed';
 export { AnimatedSuccess } from './AnimatedStatus/AnimatedSuccess';
 export { PencilIcon } from './PencilIcon';
 export { TrashIcon } from './TrashIcon';
+export { XIcon } from './XIcon';

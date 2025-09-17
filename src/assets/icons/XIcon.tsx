@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
 
-export const TwoRightArrows = (props: SVGProps<SVGSVGElement>) => (
+export const XIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
     width="14"
