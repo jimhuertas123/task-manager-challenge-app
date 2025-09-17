@@ -20,7 +20,7 @@ export const DashboardPage = () => {
     GetAllTasksQuery,
     GetAllTasksQueryVariables
   >(GetAllTasksDocument, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-and-network',
   });
 
   return (

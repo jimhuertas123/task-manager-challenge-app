@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import { NavBar } from '../NavBar';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { PhoneNavBar } from '../PhoneNavBar';
-import { SearchTasks } from '../SearchTasks';
 
 export const MainLayout = () => {
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
@@ -20,7 +19,6 @@ export const MainLayout = () => {
     >
       {!isSmallDevice && <NavBar />}
       <main className="grid grid-rows-[64px_1fr] flex-1 w-full gap-y-3.5 sm:gap-y-6 text-neutro-1">
-        <SearchTasks />
         <Outlet />
       </main>
 

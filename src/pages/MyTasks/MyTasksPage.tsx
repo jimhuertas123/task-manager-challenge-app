@@ -1,5 +1,5 @@
-// import { gql } from '@apollo/client';
-// import { useQuery } from '@apollo/client/react';
+import { gql } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 
 export const MyTasksPage = () => {
   const styles = {
@@ -18,37 +18,37 @@ export const MyTasksPage = () => {
     },
   };
 
-  // const GET_MY_TASKS = gql`
-  //   query GetMyTasks {
-  //     tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {
-  //       id
-  //       name
-  //       status
-  //       pointEstimate
-  //       position
-  //       dueDate
-  //       creator {
-  //         id
-  //         fullName
-  //         avatar
-  //       }
-  //       assignee {
-  //         id
-  //         fullName
-  //         avatar
-  //       }
-  //       tags
-  //     }
-  //   }
-  // `;
+  const GET_MY_TASKS = gql`
+    query GetMyTasks {
+      tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {
+        id
+        name
+        status
+        pointEstimate
+        position
+        dueDate
+        creator {
+          id
+          fullName
+          avatar
+        }
+        assignee {
+          id
+          fullName
+          avatar
+        }
+        tags
+      }
+    }
+  `;
 
-  // const { data, loading, error } = useQuery(GET_MY_TASKS);
+  const { data, loading, error } = useQuery(GET_MY_TASKS);
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error.message}</p>;
-  // if (data) {
-  //   console.log('Fetched users:', data);
-  // }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  if (data) {
+    console.log('Fetched users:', data);
+  }
 
   return (
     <div style={styles.container}>
