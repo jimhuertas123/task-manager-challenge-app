@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo } from 'react';
+import React, { createContext, useState, useMemo, useCallback } from 'react';
 import {
   GetAllTasksDocument,
   type GetAllTasksQuery,
@@ -15,6 +15,7 @@ type TasksContextType = {
   setFilter: (input: GetAllTasksQueryVariables['input']) => void;
   filter: GetAllTasksQueryVariables['input'];
   allTasks: TaskFieldsFragment[];
+  refetchTasks: (input?: GetAllTasksQueryVariables['input']) => void;
 };
 
 const TasksContext = createContext<TasksContextType | undefined>(undefined);
@@ -22,7 +23,7 @@ const TasksContext = createContext<TasksContextType | undefined>(undefined);
 export const TasksProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { data, loading, error } = useQuery<GetAllTasksQuery>(
+  const { data, loading, error, refetch } = useQuery<GetAllTasksQuery>(
     GetAllTasksDocument,
     {
       variables: { input: {} },
@@ -35,6 +36,13 @@ export const TasksProvider: React.FC<{ children: React.ReactNode }> = ({
   const allTasks = useMemo(
     () => ((data as GetAllTasksQuery)?.tasks as TaskFieldsFragment[]) ?? [],
     [data]
+  );
+
+  const refetchTasks = useCallback(
+    (input?: GetAllTasksQueryVariables['input']) => {
+      refetch({ input: input ?? {} });
+    },
+    [refetch]
   );
 
   const tasks = useMemo(() => {
@@ -76,6 +84,7 @@ export const TasksProvider: React.FC<{ children: React.ReactNode }> = ({
         setFilter,
         filter,
         allTasks,
+        refetchTasks,
       }}
     >
       {children}

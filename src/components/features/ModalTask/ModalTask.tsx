@@ -12,7 +12,7 @@ export const ModalTask = ({
   onClose: () => void;
   children: React.ReactNode;
   className: string;
-  // type that make lint tailwind styles
+  // TODO: search about a type that make lint tailwind styles
   backgroundStyle?: string;
 } & React.HTMLAttributes<HTMLDialogElement>) => {
   //for reset the validation field messages

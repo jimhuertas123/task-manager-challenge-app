@@ -44,7 +44,6 @@ export const DueDate = ({
   } else if (isYesterday) {
     calculatedDueDate = 'YESTERDAY';
   } else {
-    // Always use UTC for display
     const day = dueDateType.getUTCDate();
     const month = dueDateType.toLocaleString('default', {
       month: 'short',
