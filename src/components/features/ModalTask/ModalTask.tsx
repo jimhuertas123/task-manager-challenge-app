@@ -32,7 +32,7 @@ export const ModalTask = ({
   return createPortal(
     <dialog
       open={isOpen}
-      className={`${backgroundStyle ? backgroundStyle : ''} w-full h-full fixed inset-0 flex items-center justify-center p-4 transition-colors duration-300`}
+      className={`${backgroundStyle ? backgroundStyle : ''} w-full h-full fixed inset-0 flex items-center justify-center p-4 transition-colors duration-300 z-1`}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

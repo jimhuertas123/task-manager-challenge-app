@@ -28,6 +28,7 @@ export const TasksProvider: React.FC<{ children: React.ReactNode }> = ({
     {
       variables: { input: {} },
       fetchPolicy: 'cache-first',
+      refetchWritePolicy: 'merge',
     }
   );
 
@@ -53,23 +54,24 @@ export const TasksProvider: React.FC<{ children: React.ReactNode }> = ({
         if (key === 'name') {
           return task.name.toLowerCase().includes(String(value).toLowerCase());
         }
+        //for mytasks
         if (key === 'assigneeId') {
           return (task.assignee as UserFieldsFragment)?.id === value;
         }
         if (key === 'dueDate') {
           return task.dueDate?.slice(0, 10) === String(value).slice(0, 10);
         }
-        if (key === 'status') {
-          return task.status === value;
-        }
-        if (key === 'tags') {
-          return Array.isArray(value)
-            ? value.every((v) => task.tags.includes(v))
-            : task.tags.includes(value);
-        }
-        if (key === 'pointEstimate' || key === 'estimate') {
-          return task.pointEstimate === value;
-        }
+        // if (key === 'status') {
+        //   return task.status === value;
+        // }
+        // if (key === 'tags') {
+        //   return Array.isArray(value)
+        //     ? value.every((v) => task.tags.includes(v))
+        //     : task.tags.includes(value);
+        // }
+        // if (key === 'pointEstimate' || key === 'estimate') {
+        //   return task.pointEstimate === value;
+        // }
         return true;
       });
     });

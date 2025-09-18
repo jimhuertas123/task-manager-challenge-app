@@ -84,6 +84,7 @@ export const MobileModalTask = ({
           bg-neutro-5 rounded-t-2xl p-4
           transition-transform duration-500 ease-in
           min-h-full
+          z-9
         `}
         style={{
           transform: open ? `translateY(${translateY}px)` : 'translateY(100%)',

@@ -25,7 +25,7 @@ export const MainLayout = () => {
       </main>
 
       {isSmallDevice && (
-        <div className="block fixed bottom-0 left-0 w-full">
+        <div className="block fixed bottom-0 left-0 w-full z-2">
           <PhoneNavBar />
         </div>
       )}

@@ -16,9 +16,15 @@ export const PhoneNavBar = () => {
 
   return (
     <aside className="col-span-1">
-      <div className="flex flex-col h-20 w-full bg-neutro-4 ">
-        <div className="grid grid-cols-[35%_1fr_31%] w-full h-full items-center justify-items-center text-nav-bar-s tracking-[1.5px]">
-          <NavLink to="/" onClick={() => setIsMiddleActive(false)}>
+      <div className="flex flex-col h-20 w-full">
+        <div className="bg-neutro-4 grid grid-cols-[35%_1fr_31%] w-full h-full items-center justify-items-center text-nav-bar-s tracking-[1.5px] z-10">
+          <NavLink
+            to="/"
+            onClick={() => {
+              setIsMiddleActive(false);
+              setOpenModal(false);
+            }}
+          >
             {({ isActive }) => {
               return (
                 <div
@@ -48,7 +54,13 @@ export const PhoneNavBar = () => {
             <span>Add Project</span>
           </div>
 
-          <NavLink to="/mytasks" onClick={() => setIsMiddleActive(false)}>
+          <NavLink
+            to="/mytasks"
+            onClick={() => {
+              setIsMiddleActive(false);
+              setOpenModal(false);
+            }}
+          >
             {({ isActive }) => {
               return (
                 <div
