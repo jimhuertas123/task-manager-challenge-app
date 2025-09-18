@@ -24,36 +24,24 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     DeleteTaskMutationVariables
   >(DELETE_TASK);
 
-  //TODO EDIT OPEN IN MODAL FORM WITH THE TASK DATA
-  // const handleEdit = (taskId: string) => {
-
-  // };
-
-  function isTaskFieldsFragment(
-    task: GetAllTasksQuery['tasks'][number]
-  ): task is TaskFieldsFragment {
-    return task && task.__typename === 'Task';
-  }
-
   const handleDelete = async (taskId: string) => {
     await deleteTask({
       variables: { input: { id: taskId } },
       update: (cache, { data }) => {
-        if (!data?.deleteTask?.id) return;
-        const existing = cache.readQuery<GetAllTasksQuery>({
+        const existing = cache.readQuery<{ tasks: TaskFieldsFragment[] }>({
           query: GetAllTasksDocument,
+          variables: { input: {} },
         });
-        if (existing && existing.tasks) {
-          cache.writeQuery<GetAllTasksQuery>({
-            query: GetAllTasksDocument,
-            data: {
-              tasks: existing.tasks.filter(
-                (task) =>
-                  isTaskFieldsFragment(task) && task.id !== data.deleteTask!.id
-              ),
-            },
-          });
-        }
+        if (!existing || !data?.deleteTask) return;
+        cache.writeQuery({
+          query: GetAllTasksDocument,
+          variables: { input: {} },
+          data: {
+            tasks: existing.tasks.filter(
+              (task) => task.id !== data.deleteTask.id
+            ),
+          },
+        });
       },
     });
   };
