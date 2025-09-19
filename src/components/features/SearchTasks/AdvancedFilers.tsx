@@ -4,7 +4,13 @@ import {
   Status,
   type UserFieldsFragment,
 } from '@/__generated__/graphql';
+import {
+  AnimatedResetIcon,
+  ArrowsVertical,
+  CalendarIcon,
+} from '@/assets/icons';
 import { useUsers } from '@/contexts/useUsers';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useLocation } from 'react-router-dom';
 
 export const AdvancedFilters = ({
@@ -36,77 +42,106 @@ export const AdvancedFilters = ({
   const isMyTasks = location.pathname === '/mytasks';
   const { data } = useUsers();
 
+  const isSmallDevice = useMediaQuery('(max-width: 1050px)');
+
   const myId = '2c69a930-16ed-41c0-afb3-a7564471d307';
   return (
-    <div className="flex gap-2 items-center flex-wrap bg-neutro-4 p-3 rounded-bl-[20px] ml-5 w-full">
-      <select
-        value={status}
-        onChange={(e) => setStatus(e.target.value as Status)}
-        className="rounded px-2 py-1 border"
-      >
-        <option value="">Status</option>
-        {Object.values(Status).map((s) => (
-          <option key={s} value={s}>
-            {s}
-          </option>
-        ))}
-      </select>
-      <select
-        value={isMyTasks ? myId : assigneeId}
-        onChange={(e) => setAssigneeId(e.target.value)}
-        className="rounded px-2 py-1 border"
-        disabled={isMyTasks}
-      >
-        <option value="">Assignee</option>
-        {(data?.users as UserFieldsFragment[]).map((a) => (
-          <option key={a.id} value={a.id}>
-            {a.fullName}
-          </option>
-        ))}
-      </select>
-      <select
-        value={pointEstimate}
-        onChange={(e) => setPointEstimate(e.target.value as PointEstimate)}
-        className="rounded px-2 py-1 border"
-      >
-        <option value="">Estimate</option>
-        {Object.values(PointEstimate).map((p) => (
-          <option key={p} value={p}>
-            {p}
-          </option>
-        ))}
-      </select>
-      <select
-        value={tag}
-        onChange={(e) => setTag(e.target.value as TaskTag)}
-        className="rounded px-2 py-1 border"
-      >
-        <option value="">Tag</option>
-        {Object.values(TaskTag).map((t) => (
-          <option key={t} value={t}>
-            {t}
-          </option>
-        ))}
-      </select>
-      <div className=" bg-neutro-3 rounded-[8px] shadow mt-2">
+    <div
+      className={
+        'grid gap-2 items-center bg-neutro-4 p-3 text-neutro-2-3 w-full shadow-neutro-1/30 shadow rounded-bl-[10px] mb-[2px]' +
+        (isSmallDevice
+          ? ' grid-rows-[repeat(2,1fr)]'
+          : ' grid-cols-[repeat(5,1fr)_5%]')
+      }
+    >
+      <div className="relative w-full h-full">
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value as Status)}
+          className="rounded px-2 py-1 border w-full"
+        >
+          <option value="">Status</option>
+          {Object.values(Status).map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <ArrowsVertical className="w-5 h-5 fill-neutro-2" />
+        </span>
+      </div>
+      <div className="relative w-full h-full">
+        <select
+          value={isMyTasks ? myId : assigneeId}
+          onChange={(e) => setAssigneeId(e.target.value)}
+          className="rounded px-2 py-1 border w-full"
+          disabled={isMyTasks}
+        >
+          <option value="">Assignee</option>
+          {(data?.users as UserFieldsFragment[]).map((a) => (
+            <option key={a.id} value={a.id}>
+              {a.fullName}
+            </option>
+          ))}
+        </select>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <ArrowsVertical className="w-5 h-5 fill-neutro-2" />
+        </span>
+      </div>
+      <div className="relative w-full h-full">
+        <select
+          value={pointEstimate}
+          onChange={(e) => setPointEstimate(e.target.value as PointEstimate)}
+          className="rounded px-2 py-1 border w-full"
+        >
+          <option value="">Estimate</option>
+          {Object.values(PointEstimate).map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <ArrowsVertical className="w-5 h-5 fill-neutro-2" />
+        </span>
+      </div>
+      <div className="relative w-full h-full">
+        <select
+          value={tag}
+          onChange={(e) => setTag(e.target.value as TaskTag)}
+          className="rounded px-2 py-1 border w-full"
+        >
+          <option value="">Tag</option>
+          {Object.values(TaskTag).map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <ArrowsVertical className="w-5 h-5 fill-neutro-2" />
+        </span>
+      </div>
+      <div className="relative flex items-center h-full w-full">
         <input
           type="date"
           value={dueDate}
           onChange={(e) => {
             setDueDate(e.target.value);
           }}
-          className="rounded px-2 py-1 border"
+          className=" rounded px-2 py-1 border w-[calc(100%+25px)] "
         />
+        <span className="absolute right-3 pointer-events-none">
+          <CalendarIcon className="w-5 h-5 fill-neutro-2 " />
+        </span>
       </div>
-      <button
+      <div
         onClick={handleClearFilters}
-        className="ml-2 px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+        className="flex lg:justify-end justify-center lg:w-fit w-full  bg-primary-4 active:scale-95 hover:bg-primary-4/80 rounded transition-all duration-200 cursor-pointer p-1"
       >
-        Clear
-      </button>
+        <AnimatedResetIcon className="lg:w-7 w-10 lg:h-7 h-10 fill-primary-1 cursor-pointer p-1.5 " />
+      </div>
     </div>
   );
 };
-
-//2025-09-19T00:00:00.000Z
-//2025-09-18T00:00:00.000Z

@@ -3,7 +3,8 @@
 @theme {
   --font-sans: 'SF Pro Display', sans-serif;
   --breakpoint-sm: 681px;
-  --breakpoint-lg: 1290px;
+  --breakpoint-lg: 1051px;
+  --breakpoint-xl: 1290px;
   --color-primary-1: #f4ccc8;
   --color-primary-2: #eba59e;
   --color-primary-3: #e27d73;
@@ -25,4 +26,18 @@
   --text-nav-bar-l: 18px;
   --text-nav-bar-m: 15px;
   --text-nav-bar-s: 13px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+}
+
+input[type='date'] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
 }

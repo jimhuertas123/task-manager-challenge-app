@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CircleXIcon, SearchIcon } from '@/assets/icons';
 import { SuggestionNavigation } from './SuggestionNavigation';
 
@@ -12,13 +13,19 @@ export const InputSearch = ({
   popoverSuggestions: string[];
   handleSuggestionClick: (s: string) => void;
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <div className="flex relative bg-neutro-4 sm:bg-transparent items-center pl-6.5 h-full w-full rounded-[16px] justify-start flex-1">
+    <div className="flex rounded-[16px] relative bg-neutro-4 sm:bg-transparent items-center pl-6.5 h-full w-full justify-start flex-1">
       <SearchIcon className="fill-neutro-2 mr-3" />
       <label htmlFor="search-tasks" className="sr-only text-neutro-2">
         Search tasks
       </label>
-      <div className="relative flex-1">
+      <div
+        className="relative flex-1"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
         <input
           id="search-tasks"
           type="text"
@@ -39,7 +46,7 @@ export const InputSearch = ({
           </button>
         )}
         {/* Suggestions */}
-        {popoverSuggestions.length > 0 && (
+        {popoverSuggestions.length > 0 && isFocused && (
           <SuggestionNavigation
             handleSuggestionClick={handleSuggestionClick}
             popoverSuggestions={popoverSuggestions}

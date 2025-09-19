@@ -1,4 +1,4 @@
-import { NotificationIcon, XIcon } from '@/assets/icons';
+import { FilterCloseIcon, FilterIcon, NotificationIcon } from '@/assets/icons';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Avatar1 from '@/assets/avatar1.png';
 import { useTasks } from '@/hooks/useTasks';
@@ -41,6 +41,7 @@ export const SearchTasks = () => {
   const [dueDate, setDueDate] = useState<string>('');
   const { tasks, setFilter, refetchTasks } = useTasks();
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  const [openAccordion, setOpenAccordion] = useState(false);
 
   const location = useLocation();
 
@@ -105,10 +106,10 @@ export const SearchTasks = () => {
   };
 
   return (
-    <header className="rounded-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex flex-col gap-2 pr-4 sm:pr-6 py-2 z-1">
+    <header className="flex header-search rounded-t-[16px] rounded-br-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex-col gap-2 pr-4 py-2 z-1">
       <Accordion.Root type="single" collapsible className="w-full">
         <Accordion.Item value="item-1">
-          <Accordion.Header className="flex justify-between items-center h-full">
+          <Accordion.Header className="grid grid-cols-[1fr_90px] sm:grid-cols-[1fr_100px] items-center h-full ">
             <div className="flex items-center w-full h-[50px]">
               <InputSearch
                 search={search}
@@ -117,11 +118,21 @@ export const SearchTasks = () => {
                 handleSuggestionClick={handleSuggestionClick}
               />
             </div>
-            <div className="flex items-center h-full w-28 justify-between">
-              <Accordion.Trigger className={`AccordionTrigger`}>
-                <XIcon className="fill-neutro-1" />
+            <div className="flex items-center w-full h-full justify-between gap-x-1">
+              <Accordion.Trigger
+                className="AccordionTrigger"
+                onClick={() => {
+                  setOpenAccordion(!openAccordion);
+                }}
+              >
+                <div
+                  className={`relative w-5 h-5 ${openAccordion ? 'open' : ''}`}
+                >
+                  <FilterIcon className="filter-toggle-icon filter-open-rotate fill-neutro-2 w-5 h-5" />
+                  <FilterCloseIcon className="filter-toggle-icon filter-close-rotate fill-neutro-2 w-5 h-5" />
+                </div>
               </Accordion.Trigger>
-              <NotificationIcon className="fill-neutro-2 ml-4" />
+              <NotificationIcon className="fill-neutro-2 " />
               <img
                 src={Avatar1}
                 alt="User Avatar"
@@ -129,7 +140,7 @@ export const SearchTasks = () => {
               />
             </div>
           </Accordion.Header>
-          <Accordion.Content className="AccordionContent flex z-auto">
+          <Accordion.Content className="search AccordionContent w-full sm:pr-1 sm:mt-1 -mt-2.5 pr-24">
             {/*filters below the input */}
             <AdvancedFilters
               setStatus={setStatus}

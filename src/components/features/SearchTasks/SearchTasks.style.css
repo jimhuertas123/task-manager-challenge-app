@@ -24,9 +24,15 @@
   transform: rotate(360deg);
 }
 
-.AccordionTrigger[data-state='closed'] {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+.AccordionTrigger[data-state='closed'] ~ .header-search,
+.header-search:has(.AccordionTrigger[data-state='closed']) {
+  border-bottom-left-radius: 16px;
+  transition: border-bottom-left-radius 0ms linear 300ms;
+}
+
+.search-rounded:has(.AccordionTrigger[data-state='open']) .input-search {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 @keyframes slideDown {
@@ -45,4 +51,38 @@
   to {
     height: 0;
   }
+}
+
+.filter-toggle-icon {
+  transition:
+    transform 0.5s cubic-bezier(0.87, 0, 0.13, 1),
+    opacity 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+  will-change: transform, opacity;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.filter-toggle-icon.filter-open-rotate {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  z-index: 1;
+}
+
+.filter-toggle-icon.filter-close-rotate {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.8);
+  z-index: 0;
+}
+
+.open .filter-toggle-icon.filter-open-rotate {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.8);
+  z-index: 0;
+}
+
+.open .filter-toggle-icon.filter-close-rotate {
+  opacity: 1;
+  transform: rotate(0deg) scale(1.1);
+  z-index: 1;
 }
