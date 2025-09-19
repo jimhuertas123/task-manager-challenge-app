@@ -2,34 +2,28 @@ import { ListCards } from '@/components/ui/ListCards';
 import { GridCards } from '@/components/ui/GridCards';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ViewModeSwitch } from '@/components/ui';
-import { useQuery } from '@apollo/client/react';
-import {
-  GetAllTasksDocument,
-  type GetAllTasksQuery,
-  type GetAllTasksQueryVariables,
-} from '@/__generated__/graphql';
 import { ModalTask } from '@/components/features/ModalTask/ModalTask';
 import { FormNewTask } from '@/components/features/FormNewTask';
 import { useEditTaskModal } from '@/contexts/useEditTaskModal';
+import { useTasks } from '@/hooks/useTasks';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
-  const { data, loading, error } = useQuery<
-    GetAllTasksQuery,
-    GetAllTasksQueryVariables
-  >(GetAllTasksDocument, {
-    fetchPolicy: 'cache-first',
-  });
+  const { tasks, loading, error, setFilter } = useTasks();
+
+  useEffect(() => {
+    setFilter({});
+  }, [setFilter]);
 
   const { open, setOpen, task } = useEditTaskModal();
 
   return (
-    <div className="h-full w-full">
+    <div key={'dashboard'} className="h-full w-full">
       <div className="grid grid-rows-[40px_1fr] gap-y-3 sm:gap-y-2 sm:grid-rows-[63px_1fr] h-full w-full">
         <ViewModeSwitch
           isSmallDevice={isSmallDevice}
@@ -47,7 +41,7 @@ export const DashboardPage = () => {
                   : 'opacity-0 pointer-events-none'
               }`}
             >
-              <GridCards tasks={data?.tasks ?? []} />
+              <GridCards tasks={tasks ?? []} />
             </div>
             <div
               className={`absolute min-h-full h-full w-full inset-0 transition-opacity duration-300 ${
@@ -56,7 +50,7 @@ export const DashboardPage = () => {
                   : 'opacity-0 pointer-events-none'
               }`}
             >
-              <ListCards tasks={data?.tasks ?? []} />
+              <ListCards tasks={tasks ?? []} />
             </div>
           </div>
         )}

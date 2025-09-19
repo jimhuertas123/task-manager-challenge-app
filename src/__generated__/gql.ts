@@ -19,9 +19,9 @@ type Documents = {
   '\n  mutation CreateTask($input: CreateTaskInput!) {\n    createTask(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.CreateTaskDocument;
   '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n': typeof types.DeleteTaskDocument;
   '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n': typeof types.UpdateTaskDocument;
-  '\n  query GetAllTasks {\n    tasks(input: {}) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.GetAllTasksDocument;
+  '\n  query GetAllTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.GetAllTasksDocument;
   '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n': typeof types.GetAllUsersDocument;
-  '\n    query GetMyTasks {\n      tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ': typeof types.GetMyTasksDocument;
+  '\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ': typeof types.GetMyTasksDocument;
 };
 const documents: Documents = {
   '\n  fragment TaskFields on Task {\n    id\n    name\n    assignee {\n      ...UserFields\n    }\n    creator {\n      ...UserFields\n    }\n    dueDate\n    createdAt\n    pointEstimate\n    position\n    status\n    tags\n  }\n  \n':
@@ -34,11 +34,11 @@ const documents: Documents = {
     types.DeleteTaskDocument,
   '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n':
     types.UpdateTaskDocument,
-  '\n  query GetAllTasks {\n    tasks(input: {}) {\n      ...TaskFields\n    }\n  }\n  \n':
+  '\n  query GetAllTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n':
     types.GetAllTasksDocument,
   '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n':
     types.GetAllUsersDocument,
-  '\n    query GetMyTasks {\n      tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ':
+  '\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ':
     types.GetMyTasksDocument,
 };
 
@@ -90,8 +90,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query GetAllTasks {\n    tasks(input: {}) {\n      ...TaskFields\n    }\n  }\n  \n'
-): (typeof documents)['\n  query GetAllTasks {\n    tasks(input: {}) {\n      ...TaskFields\n    }\n  }\n  \n'];
+  source: '\n  query GetAllTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n'
+): (typeof documents)['\n  query GetAllTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -102,8 +102,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n    query GetMyTasks {\n      tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  '
-): (typeof documents)['\n    query GetMyTasks {\n      tasks(input: { assigneeId: "2c69a930-16ed-41c0-afb3-a7564471d307" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  '];
+  source: '\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  '
+): (typeof documents)['\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  '];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

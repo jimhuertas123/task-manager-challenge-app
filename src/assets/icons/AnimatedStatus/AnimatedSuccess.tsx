@@ -1,5 +1,5 @@
 import type { SVGProps } from 'react';
-import './AnimatedStatus.style.css';
+import '../styles/AnimatedStatus.style.css';
 
 export const AnimatedSuccess = (props: SVGProps<SVGSVGElement>) => (
   <svg

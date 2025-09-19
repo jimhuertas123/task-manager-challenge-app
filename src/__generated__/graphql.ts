@@ -216,7 +216,9 @@ export type UpdateTaskMutation = {
   };
 };
 
-export type GetAllTasksQueryVariables = Exact<{ [key: string]: never }>;
+export type GetAllTasksQueryVariables = Exact<{
+  input: FilterTaskInput;
+}>;
 
 export type GetAllTasksQuery = {
   __typename?: 'Query';
@@ -651,6 +653,22 @@ export const GetAllTasksDocument = {
       kind: 'OperationDefinition',
       operation: 'query',
       name: { kind: 'Name', value: 'GetAllTasks' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'FilterTaskInput' },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
@@ -661,7 +679,10 @@ export const GetAllTasksDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'input' },
-                value: { kind: 'ObjectValue', fields: [] },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
               },
             ],
             selectionSet: {
@@ -810,10 +831,10 @@ export const GetMyTasksDocument = {
                   fields: [
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'assigneeId' },
+                      name: { kind: 'Name', value: 'name' },
                       value: {
                         kind: 'StringValue',
-                        value: '2c69a930-16ed-41c0-afb3-a7564471d307',
+                        value: 'ticket',
                         block: false,
                       },
                     },

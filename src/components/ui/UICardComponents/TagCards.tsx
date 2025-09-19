@@ -11,7 +11,7 @@ const tagColors: { [key in TaskTag]: { color: string; bg: string } } = {
 const TagCard = ({ tag }: { tag: TaskTag }) => (
   <div
     className={
-      'flex rounded-md px-2 lg:px-4 py-1 w-fit text-nav-bar-s lg:text-nav-bar-m'
+      'flex rounded-md px-2 xl:px-4 py-1 w-fit text-nav-bar-s xl:text-nav-bar-m'
     }
     style={{
       color: tagColors[tag].color,
@@ -37,7 +37,7 @@ export const TagCards = ({
         <TagCard key={index} tag={tag} />
       ))}
       {extraCount > 0 && (
-        <div className="flex text-nav-bar-s lg:text-nav-bar-m rounded-md px-2 lg:px-4 py-1 w-fit bg-neutro-3 text-neutro-2">
+        <div className="flex text-nav-bar-s xl:text-nav-bar-m rounded-md px-2 xl:px-4 py-1 w-fit bg-neutro-3 text-neutro-2">
           +{extraCount}
         </div>
       )}
