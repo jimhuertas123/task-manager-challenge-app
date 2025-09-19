@@ -28,3 +28,8 @@ export { AnimatedSuccess } from './AnimatedStatus/AnimatedSuccess';
 export { PencilIcon } from './PencilIcon';
 export { TrashIcon } from './TrashIcon';
 export { XIcon } from './XIcon';
+export { AnimatedResetIcon } from './AnimatedResetIcon';
+export { ArrowsVertical } from './ArrowsVertical';
+export { FilterIcon } from './FilterIcon';
+export { FilterCloseIcon } from './FilterCloseIcon';
+export { FilterResetIcon } from './FilterResetIcon';

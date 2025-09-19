@@ -15,12 +15,12 @@ export const Popover = ({
   onOpenChange?: (open: boolean) => void;
 }) => {
   return (
-    <PopoverComponent.Root open={open} onOpenChange={onOpenChange}>
+    <PopoverComponent.Root open={open} onOpenChange={onOpenChange} modal={true}>
       <PopoverComponent.Trigger asChild>{button}</PopoverComponent.Trigger>
       <PopoverComponent.Portal>
         <PopoverComponent.Content
           side={side}
-          className="PopoverContent"
+          className="PopoverContent flex z-[50]"
           onOpenAutoFocus={(event) => {
             event.preventDefault();
           }}

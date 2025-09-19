@@ -10,11 +10,14 @@ import { GetAllTasksDocument } from '@/__generated__/graphql';
 import { DELETE_TASK } from '@/graphql/mutations/deleteTask';
 import { GridCard } from '@/components/features';
 import { useMutation } from '@apollo/client/react';
+import { useTasks } from '@/hooks/useTasks';
 
 export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
+  const { filter } = useTasks();
+
   const allStatuses = Object.values(Status) as Status[];
   const endStatuses: Status[] = [Status.Done, Status.Cancelled];
-  const statusOrder: Status[] = [
+  let statusOrder: Status[] = [
     ...allStatuses.filter((status) => !endStatuses.includes(status)),
     ...endStatuses.filter((status) => allStatuses.includes(status)),
   ];
@@ -24,39 +27,39 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     DeleteTaskMutationVariables
   >(DELETE_TASK);
 
-  //TODO EDIT OPEN IN MODAL FORM WITH THE TASK DATA
-  // const handleEdit = (taskId: string) => {
-
-  // };
-
-  function isTaskFieldsFragment(
-    task: GetAllTasksQuery['tasks'][number]
-  ): task is TaskFieldsFragment {
-    return task && task.__typename === 'Task';
-  }
-
   const handleDelete = async (taskId: string) => {
     await deleteTask({
       variables: { input: { id: taskId } },
       update: (cache, { data }) => {
-        if (!data?.deleteTask?.id) return;
-        const existing = cache.readQuery<GetAllTasksQuery>({
+        const existing = cache.readQuery<{ tasks: TaskFieldsFragment[] }>({
           query: GetAllTasksDocument,
+          variables: { input: {} },
         });
-        if (existing && existing.tasks) {
-          cache.writeQuery<GetAllTasksQuery>({
-            query: GetAllTasksDocument,
-            data: {
-              tasks: existing.tasks.filter(
-                (task) =>
-                  isTaskFieldsFragment(task) && task.id !== data.deleteTask!.id
-              ),
-            },
-          });
-        }
+        if (!existing || !data?.deleteTask) return;
+        cache.writeQuery({
+          query: GetAllTasksDocument,
+          variables: { input: {} },
+          data: {
+            tasks: existing.tasks.filter(
+              (task) => task.id !== data.deleteTask.id
+            ),
+          },
+        });
       },
     });
   };
+
+  if (!tasks || tasks.length === 0) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <h2 className="text-neutro-1 text-2xl">No tasks found</h2>
+      </div>
+    );
+  }
+
+  if (filter.status) {
+    statusOrder = [filter.status];
+  }
 
   return (
     <div className="w-full overflow-x-auto">

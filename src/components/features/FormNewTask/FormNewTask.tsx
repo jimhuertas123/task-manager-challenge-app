@@ -133,15 +133,17 @@ export const FormNewTask = ({
           update: (cache, { data }) => {
             const existing = cache.readQuery<{ tasks: TaskFieldsFragment[] }>({
               query: GetAllTasksDocument,
+              variables: { input: {} },
             });
-            if (!existing || !data?.updateTask || data.__typename === undefined)
-              return;
-            const updatedTask = data.updateTask as TaskFieldsFragment;
+            if (!existing || !data?.updateTask) return;
             cache.writeQuery({
               query: GetAllTasksDocument,
+              variables: { input: {} },
               data: {
                 tasks: existing.tasks.map((task) =>
-                  task.id === updatedTask.id ? updatedTask : task
+                  task.id === (data.updateTask as TaskFieldsFragment).id
+                    ? data.updateTask
+                    : task
                 ),
               },
             });
@@ -165,13 +167,14 @@ export const FormNewTask = ({
         update: (cache, { data }) => {
           const existing = cache.readQuery<{ tasks: TaskFieldsFragment[] }>({
             query: GetAllTasksDocument,
+            variables: { input: {} },
           });
+          if (!existing || !data?.createTask) return;
           cache.writeQuery({
             query: GetAllTasksDocument,
+            variables: { input: {} },
             data: {
-              tasks: data?.createTask
-                ? [data.createTask, ...(existing?.tasks ?? [])]
-                : [...(existing?.tasks ?? [])],
+              tasks: [data.createTask, ...existing.tasks],
             },
           });
         },

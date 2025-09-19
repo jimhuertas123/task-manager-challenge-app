@@ -10,6 +10,7 @@ import { newTaskDataSchema, type NewTaskData } from './schema/schemaNewTask';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UsersProvider } from './contexts/UsersContext';
 import { EditTaskModalProvider } from './contexts/EditTaskModalContext';
+import { TasksProvider } from './contexts/SearchTaskContext';
 
 export const TodoManagerApp = () => {
   const methods = useForm<NewTaskData>({
@@ -24,13 +25,15 @@ export const TodoManagerApp = () => {
       )}
     >
       <ApolloProvider client={apolloClient}>
-        <EditTaskModalProvider>
-          <UsersProvider>
-            <FormProvider {...methods}>
-              <RouterProvider router={router} />
-            </FormProvider>
-          </UsersProvider>
-        </EditTaskModalProvider>
+        <TasksProvider>
+          <EditTaskModalProvider>
+            <UsersProvider>
+              <FormProvider {...methods}>
+                <RouterProvider router={router} />
+              </FormProvider>
+            </UsersProvider>
+          </EditTaskModalProvider>
+        </TasksProvider>
       </ApolloProvider>
     </ErrorBoundary>
   );

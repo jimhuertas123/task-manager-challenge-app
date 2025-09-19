@@ -6,7 +6,11 @@ import {
   type TaskFieldsFragment,
 } from '@/__generated__/graphql';
 
+import { useTasks } from '@/hooks/useTasks';
+
 export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
+  const { filter } = useTasks();
+
   const listTitleStyle =
     'flex bg-neutro-4 pl-4 items-center font-normal text-nav-bar-m w-full tracking-[2px]';
 
@@ -15,10 +19,22 @@ export const ListCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
 
   const allStatuses = Object.values(Status);
   const endStatuses: Status[] = [Status.Done, Status.Cancelled];
-  const statusOrder = [
+  let statusOrder = [
     ...allStatuses.filter((status) => !endStatuses.includes(status)),
     ...endStatuses.filter((status) => allStatuses.includes(status)),
   ];
+
+  if (!tasks || tasks.length === 0) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <h2 className="text-neutro-1 text-2xl">No tasks found</h2>
+      </div>
+    );
+  }
+
+  if (filter.status) {
+    statusOrder = [filter.status];
+  }
 
   return (
     <div className="w-full h-full pt-2 overflow-x-auto ">

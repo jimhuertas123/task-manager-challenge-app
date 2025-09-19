@@ -1,8 +1,3 @@
-import {
-  GetAllTasksDocument,
-  type GetAllTasksQuery,
-  type GetAllTasksQueryVariables,
-} from '@/__generated__/graphql';
 import { FormNewTask } from '@/components/features/FormNewTask';
 import { ModalTask } from '@/components/features/ModalTask/ModalTask';
 import { ViewModeSwitch } from '@/components/ui';
@@ -10,22 +5,18 @@ import { GridCards } from '@/components/ui/GridCards';
 import { ListCards } from '@/components/ui/ListCards';
 import { useEditTaskModal } from '@/contexts/useEditTaskModal';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useQuery } from '@apollo/client/react';
-import { useState } from 'react';
+import { useTasks } from '@/hooks/useTasks';
+import { useEffect, useState } from 'react';
 
 export const MyTasksPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
-  const { data, loading, error } = useQuery<
-    GetAllTasksQuery,
-    GetAllTasksQueryVariables
-  >(GetAllTasksDocument, {
-    variables: {
-      input: { assigneeId: '2c69a930-16ed-41c0-afb3-a7564471d307' },
-    },
-    fetchPolicy: 'cache-first',
-  });
+  const { tasks, loading, error, setFilter } = useTasks();
+
+  useEffect(() => {
+    setFilter({ assigneeId: '2c69a930-16ed-41c0-afb3-a7564471d307' });
+  }, [setFilter]);
 
   const { open, setOpen, task } = useEditTaskModal();
 
@@ -48,7 +39,7 @@ export const MyTasksPage = () => {
                   : 'opacity-0 pointer-events-none'
               }`}
             >
-              <GridCards tasks={data?.tasks ?? []} />
+              <GridCards tasks={tasks ?? []} />
             </div>
             <div
               className={`absolute min-h-full h-full w-full inset-0 transition-opacity duration-300 ${
@@ -57,7 +48,7 @@ export const MyTasksPage = () => {
                   : 'opacity-0 pointer-events-none'
               }`}
             >
-              <ListCards tasks={data?.tasks ?? []} />
+              <ListCards tasks={tasks ?? []} />
             </div>
           </div>
         )}
