@@ -33,7 +33,7 @@ import {
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 import { useMutation } from '@apollo/client/react';
 import { numberToPointEstimate } from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
-import { useUsers } from '@/contexts/useUsers';
+import { useUsers } from '@/hooks/useUsers';
 
 export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
   const {

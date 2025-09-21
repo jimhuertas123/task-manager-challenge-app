@@ -33,7 +33,7 @@ import {
   DueDateField,
   normalizeUTCDate,
 } from './';
-import { useUsers } from '@/contexts/useUsers';
+import { useUsers } from '@/hooks/useUsers';
 import { useEffect } from 'react';
 
 export const FormNewTask = ({

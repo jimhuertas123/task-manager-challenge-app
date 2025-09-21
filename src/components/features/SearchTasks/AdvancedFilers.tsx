@@ -9,7 +9,7 @@ import {
   ArrowsVertical,
   CalendarIcon,
 } from '@/assets/icons';
-import { useUsers } from '@/contexts/useUsers';
+import { useUsers } from '@/hooks/useUsers';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useLocation } from 'react-router-dom';
 
