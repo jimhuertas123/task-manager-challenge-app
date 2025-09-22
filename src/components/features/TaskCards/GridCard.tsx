@@ -16,35 +16,78 @@ import {
   type TaskFieldsFragment,
 } from '@/__generated__/graphql';
 import { useFragment } from '@/__generated__';
-import { useEditTaskModal } from '@/contexts/useEditTaskModal';
+import { useDraggable, useDroppable } from '@dnd-kit/core';
+import { useEditTaskModal } from '@/hooks/useEditTaskModal';
+import { useState } from 'react';
 
 export const GridCard = ({
+  isActive,
   task,
   onDelete,
 }: {
+  isActive: boolean;
   task?: TaskFieldsFragment;
   onDelete: (id: string) => void;
 }) => {
   const assignee = useFragment(UserFieldsFragmentDoc, task?.assignee);
 
-  const { setOpen, setTask } = useEditTaskModal();
+  const {
+    attributes,
+    listeners,
+    setNodeRef: setDragRef,
+    transform,
+  } = useDraggable({
+    id: (task as TaskFieldsFragment)?.id,
+  });
+  const { setNodeRef: setDropRef } = useDroppable({
+    id: (task as TaskFieldsFragment)?.id,
+  });
 
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  const { setOpen, setTask } = useEditTaskModal();
   if (!task || task.__typename !== 'Task') {
     return <div className="bg-neutro-4 w-full h-[208px] mb-3">No Task</div>;
   }
 
-  return (
+  const style = transform
+    ? {
+        opacity: 1,
+        transform: `translate(${transform?.x ?? 0}px, ${transform?.y ?? 0}px)`,
+        zIndex: 1000,
+      }
+    : undefined;
+
+  return isActive ? (
+    <div className="h-[204px] bg-neutro-3/20 mb-4 border-[2px] border-dashed border-primary-4" />
+  ) : (
     <div
-      key={task.id}
+      ref={(node) => {
+        setDragRef(node);
+        setDropRef(node);
+      }}
+      style={style}
       className="grid grid-rows-[1fr_1fr_1fr_1fr] gap-y-3 bg-neutro-4 w-full h-[208px] mb-3 pl-4 pr-[0.68rem] pb-4 pt-4 text-nav-bar-m tracking-[0.8px] font-[500]"
     >
       <div className="flex justify-between items-start tracking-[0.8px] pr-[1.45%]">
         <h2 className="text-lg font-[500]">{task.name}</h2>
+        <span
+          {...listeners}
+          {...attributes}
+          className="cursor-grab active:cursor-grabbing mr-2"
+          style={{ touchAction: 'none' }}
+        >
+          <svg width="18" height="18" fill="currentColor">
+            <circle cx="9" cy="9" r="8" />
+          </svg>
+        </span>
         <Popover
+          open={popoverOpen}
+          onOpenChange={setPopoverOpen}
           side="bottom"
           button={
             <ThreeDotsIcon
-              className="inline-block fill-neutro-2 my-auto rounded-[50%]  h-6.5 w-6.5 p-1
+              className="flex fill-neutro-2 my-auto rounded-[50%]  h-6.5 w-6.5 p-1
             hover:scale-105 hover:bg-neutro-3 active:bg-neutro-3 active:scale-95 cursor-pointer "
             />
           }
@@ -54,6 +97,7 @@ export const GridCard = ({
               onClick={() => {
                 setTask(task);
                 setOpen(true);
+                setPopoverOpen(false);
               }}
               className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200"
             >
@@ -63,6 +107,7 @@ export const GridCard = ({
             <div
               onClick={() => {
                 onDelete(task.id);
+                setPopoverOpen(false);
               }}
               className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200"
             >
