@@ -44,7 +44,7 @@ export const DueDateField = () => {
         />
       </Popover>
       <div className="w-full">
-        <span className="text-primary-4 text-nav-bar-s">
+        <span key={'dueDateError'} className="text-primary-4 text-nav-bar-s">
           {errors.dueDate?.message}
         </span>
       </div>

@@ -35,7 +35,7 @@ export const AssigneeOptions = ({
             </div>
           ))
         ) : (
-          <span className="text-neutro-2 text-nav-bar-m">
+          <span key={'noUsers'} className="text-neutro-2 text-nav-bar-m">
             No users available
           </span>
         )}

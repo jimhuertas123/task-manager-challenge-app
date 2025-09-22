@@ -44,7 +44,7 @@ export const EstimateField = () => {
         />
       </Popover>
       <div className="w-full">
-        <span className="text-primary-4 text-nav-bar-s">
+        <span key={'estimateError'} className="text-primary-4 text-nav-bar-s">
           {errors.estimate?.message}
         </span>
       </div>

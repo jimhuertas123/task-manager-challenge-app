@@ -62,7 +62,7 @@ export const AssigneeField = ({
         />
       </Popover>
       <div className="w-full">
-        <span className="text-primary-4 text-nav-bar-s">
+        <span key={'assigneeError'} className="text-primary-4 text-nav-bar-s">
           {errors.assigneeId?.message}
         </span>
       </div>

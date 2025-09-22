@@ -68,14 +68,16 @@ export const FormNewTask = ({
           </div>
 
           {/* assignee field */}
-          {usersError ? (
-            <div>
-              <p className="text-red-500">Error loading users</p>
+          {!usersError ? (
+            <div className="w-full max-w-full">
+              <AssigneeField
+                usersData={usersData?.users as UserFieldsFragment[] | undefined}
+              />
             </div>
           ) : (
-            <AssigneeField
-              usersData={usersData?.users as UserFieldsFragment[] | undefined}
-            />
+            <div>
+              <p className="text-primary-4">Error loading users</p>
+            </div>
           )}
 
           {/* label field */}
