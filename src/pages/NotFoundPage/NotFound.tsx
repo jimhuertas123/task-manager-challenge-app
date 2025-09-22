@@ -1,24 +1,8 @@
 export const NotFoundPage = () => {
-  const styles = {
-    container: {
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-    },
-    header: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      marginBottom: '10px',
-    },
-    content: {
-      fontSize: '16px',
-      color: '#333',
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>404 - Page Not Found</h1>
-      <div style={styles.content}>
+    <div className="bg-neutro-4 w-full h-full p-2 pr-10 flex flex-col ">
+      <h1 className="text-2xl font-bold mb-4">404 - Page Not Found</h1>
+      <div className="text-lg text-neutro-2">
         <p>Sorry, the page you are looking for does not exist.</p>
       </div>
     </div>

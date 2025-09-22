@@ -1,11 +1,12 @@
 import { ArrowIcon } from '@/assets/icons';
 import './ListCard.style.css';
 import * as Accordion from '@radix-ui/react-accordion';
-import { ListTaskCard } from './ListTaskCard';
+
 import type {
   GetAllTasksQuery,
   TaskFieldsFragment,
 } from '@/__generated__/graphql';
+import { ListTaskCard } from '@/components/features';
 
 export const AccordingLists = ({
   listTitleStyle,

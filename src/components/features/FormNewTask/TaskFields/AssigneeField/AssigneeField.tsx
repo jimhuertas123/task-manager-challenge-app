@@ -8,7 +8,6 @@ import { useFormContext } from 'react-hook-form';
 import { AssigneeOptions } from './AssigneeOptions';
 
 export const AssigneeField = ({
-  //TODO: create a context for get users query and instead of passing the prop here, use the context
   usersData,
 }: {
   usersData: UserFieldsFragment[] | undefined;

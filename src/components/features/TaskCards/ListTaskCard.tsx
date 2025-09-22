@@ -1,6 +1,6 @@
-import { TagCards } from '../UICardComponents/TagCards';
-import { CircleAvatar } from '../UICardComponents/CircleAvatar';
-import { DueDate } from '../UICardComponents/DueDate';
+import { TagCards } from '../../ui/UICardComponents/TagCards';
+import { CircleAvatar } from '../../ui/UICardComponents/CircleAvatar';
+import { DueDate } from '../../ui/UICardComponents/DueDate';
 import { ChatBubbleIcon, RightArrowIcon, ThreatIcon } from '@/assets/icons';
 import {
   type TaskFieldsFragment,
