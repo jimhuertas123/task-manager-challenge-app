@@ -4,11 +4,10 @@ import { CircleAvatar } from '../UICardComponents/CircleAvatar';
 import { DueDate } from '../UICardComponents/DueDate';
 import { ChatBubbleIcon, RightArrowIcon, ThreatIcon } from '@/assets/icons';
 import {
-  UserFieldsFragmentDoc,
   type TaskFieldsFragment,
   type TaskTag,
+  type UserFieldsFragment,
 } from '@/__generated__/graphql';
-import { useFragment } from '@/__generated__';
 
 export const ListTaskCard = ({
   index,
@@ -25,8 +24,6 @@ export const ListTaskCard = ({
     REACT: { color: '#DA584B' },
   };
 
-  const assignee = useFragment(UserFieldsFragmentDoc, task?.assignee);
-
   if (!task || task.__typename !== 'Task') {
     return (
       <div className="bg-neutro-4 w-full h-14 border-x-[1px] border-b-[1px] border-neutro-3">
@@ -35,6 +32,13 @@ export const ListTaskCard = ({
     );
   }
 
+  if (!(task.assignee as UserFieldsFragment)) {
+    return (
+      <div className="bg-neutro-4 w-full h-14 border-x-[1px] border-b-[1px] border-neutro-3">
+        No assignee
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-[45%_15.1%_12.6%_15%_auto] gap-x-[1px] bg-neutro-3 w-full h-14 items-center pr-[1px] pl-[1px] pb-[1px]">
       <div className="flex items-center bg-neutro-4 h-full justify-between w-full pr-3">
@@ -68,9 +72,12 @@ export const ListTaskCard = ({
         <span>{pointEstimateToNumber(task.pointEstimate)} Points</span>
       </div>
       <div className="flex items-center bg-neutro-4 h-full pl-2">
-        <CircleAvatar fullName={assignee?.fullName ?? ''} size={'12px'} />
+        <CircleAvatar
+          userId={(task.assignee as UserFieldsFragment)?.id}
+          size={30}
+        />
         <span className="ml-2 truncate max-w-[100px] overflow-ellipsis">
-          {assignee?.fullName}
+          {(task.assignee as UserFieldsFragment)?.fullName}
         </span>
       </div>
       <div className="flex items-center bg-neutro-4 h-full">
