@@ -1,4 +1,4 @@
-import { useState, type JSX } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 import { ModalTask } from '../ModalTask/ModalTask';
 import {
   TitleLabelField,
@@ -11,7 +11,7 @@ import {
   AnimatedFailed,
   AnimatedLoading,
   AnimatedSuccess,
-  CalendarIcon,
+  CalendarFilledIcon,
   LabelIcon,
   PlusMinusIcon,
   ProfileIcon,
@@ -46,6 +46,7 @@ export const MobileFormTask = ({
   const usersData = usersQuery?.users as UserFieldsFragment[] | undefined;
 
   const {
+    reset,
     watch,
     setValue,
     formErrors,
@@ -65,6 +66,10 @@ export const MobileFormTask = ({
       ? { users: usersData as UserFieldsFragment[] }
       : undefined,
   });
+
+  useEffect(() => {
+    if (!defaultValues) reset();
+  }, [reset, defaultValues]);
 
   const modalContent: Map<string, JSX.Element> = new Map([
     [
@@ -106,6 +111,7 @@ export const MobileFormTask = ({
           </div>
           {/* estimate field */}
           <button
+            type="button"
             className="w-full "
             onClick={() => {
               setSelectedField('estimate');
@@ -132,6 +138,7 @@ export const MobileFormTask = ({
 
           {/* label field */}
           <button
+            type="button"
             className="w-full"
             onClick={() => {
               setSelectedField('labels');
@@ -141,13 +148,14 @@ export const MobileFormTask = ({
             <div
               className={
                 'flex h-[32px] w-full items-center py-2 rounded-[4px] cursor-pointer' +
-                (watch('tags') ? '' : ' px-4') +
+                (watch('tags') && watch('tags').length > 0 ? '' : ' px-4') +
                 (formErrors.tags ? ' border border-primary-4' : '')
               }
               style={{
-                backgroundColor: !watch('tags')
-                  ? 'rgba(148, 151, 154, 0.1)'
-                  : '',
+                backgroundColor:
+                  !watch('tags') || watch('tags').length === 0
+                    ? 'rgba(148, 151, 154, 0.1)'
+                    : '',
               }}
             >
               {Array.isArray(watch('tags')) && watch('tags').length > 0 ? (
@@ -175,6 +183,7 @@ export const MobileFormTask = ({
 
           {/* assignee field */}
           <button
+            type="button"
             className="w-full"
             onClick={() => {
               setSelectedField('assignee');
@@ -213,6 +222,7 @@ export const MobileFormTask = ({
 
           {/* due date field */}
           <button
+            type="button"
             className="w-full"
             onClick={() => {
               setSelectedField('dueDate');
@@ -230,8 +240,8 @@ export const MobileFormTask = ({
                 backgroundColor: 'rgba(148, 151, 154, 0.1)',
               }}
             >
-              {/* TODO: calendar icon must be filled one*/}
-              <CalendarIcon className="fill-neutro-1" />
+              {/* TODO: calendar icon must be the filled one*/}
+              <CalendarFilledIcon className="fill-neutro-1" />
               <h2 className="text-neutro-1 font-[500] text-nav-bar-m tracking-[0.9px]">
                 {watch('dueDate') || 'Due Date'}
               </h2>

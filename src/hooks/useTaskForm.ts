@@ -76,8 +76,14 @@ export function useTaskForm({
         )?.id || '',
       dueDate: defaultValues ? normalizeUTCDate(defaultValues.dueDate) : '',
       estimate: defaultValues
-        ? pointEstimateToNumber(defaultValues.pointEstimate)
-        : '0',
+        ? (pointEstimateToNumber(defaultValues.pointEstimate) as
+            | ''
+            | '0'
+            | '1'
+            | '2'
+            | '4'
+            | '8')
+        : ('' as NewTaskData['estimate']),
       tags: defaultValues?.tags ?? [],
     };
 

@@ -34,7 +34,7 @@ export const DashboardPage = () => {
         {!loading && !error && (
           <div className="relative h-full w-full">
             <div
-              className={`absolute h-full w-full  inset-0 transition-opacity duration-300 ${
+              className={`absolute h-full w-full inset-0 transition-opacity duration-300 flex ${
                 isGridViewMode
                   ? 'opacity-100 pointer-events-auto'
                   : 'opacity-0 pointer-events-none'

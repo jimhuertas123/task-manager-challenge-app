@@ -35,3 +35,4 @@ export { FilterCloseIcon } from './FilterCloseIcon';
 export { FilterResetIcon } from './FilterResetIcon';
 export { ErrorAlertIcon } from './ErrorAlertIcon';
 export { BlankTaskIcon } from './BlankTaskIcon';
+export { CalendarFilledIcon } from './CalendarFilledIcon';
