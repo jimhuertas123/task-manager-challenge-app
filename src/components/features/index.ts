@@ -1,3 +1,3 @@
 export * from './SearchTasks/SearchTasks';
 export * from './TaskCards/GridCard';
-export * from './TaskCards/ListCard';
+export * from './TaskCards/ListTaskCard';

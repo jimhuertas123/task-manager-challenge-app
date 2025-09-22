@@ -8,7 +8,6 @@ import {
 } from '@/assets/icons';
 import { TagCards } from '@/components/ui/UICardComponents/TagCards';
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
-import { pointEstimateToNumber } from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
 import { DueDate } from '@/components/ui/UICardComponents/DueDate';
 import { Popover } from '@/components/ui';
 import {
@@ -19,6 +18,7 @@ import { useFragment } from '@/__generated__';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { useEditTaskModal } from '@/hooks/useEditTaskModal';
 import { useState } from 'react';
+import { pointEstimateToNumber } from '@/utils';
 
 export const GridCard = ({
   isActive,
@@ -140,8 +140,10 @@ export const GridCard = ({
           {assignee?.fullName ? (
             <CircleAvatar userId={assignee.id} size={33} />
           ) : (
-            //TODO: Replace with default avatar image
-            <div></div>
+            <div className="bg-neutro-2 rounded-full h-8 w-8 text-nav-bar-l flex items-center justify-center">
+              {' '}
+              ?{' '}
+            </div>
           )}
         </div>
         {/* TODO: Generate random states for this */}

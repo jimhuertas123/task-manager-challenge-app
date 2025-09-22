@@ -98,10 +98,6 @@ export const MobileFormTask = ({
     ],
   ]);
 
-  // useEffect(() => {
-  //   reset();
-  // }, [reset]);
-
   return (
     <div className="flex">
       <form className="flex w-full" action="" onSubmit={handleSubmit(onSubmit)}>

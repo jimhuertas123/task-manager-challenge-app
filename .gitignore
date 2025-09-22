@@ -13,8 +13,6 @@ dist-ssr
 *.local
 
 #Only for now
-src/test/
-**/__tests__/
 
 #enviroment
 .env
