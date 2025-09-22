@@ -77,8 +77,19 @@ export const GridCard = ({
           className="cursor-grab active:cursor-grabbing mr-2"
           style={{ touchAction: 'none' }}
         >
-          <svg width="18" height="18" fill="currentColor">
-            <circle cx="9" cy="9" r="8" />
+          <svg
+            width="22"
+            height="18"
+            fill="currentColor"
+            aria-label="Drag handle"
+            className="fill-neutro-2"
+          >
+            <circle cx="5" cy="7" r="1.6" />
+            <circle cx="11" cy="7" r="1.6" />
+            <circle cx="17" cy="7" r="1.6" />
+            <circle cx="5" cy="12" r="1.6" />
+            <circle cx="11" cy="12" r="1.6" />
+            <circle cx="17" cy="12" r="1.6" />
           </svg>
         </span>
         <Popover

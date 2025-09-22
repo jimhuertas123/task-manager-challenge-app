@@ -112,7 +112,7 @@ export const SearchTasks = () => {
     <header className="flex header-search rounded-t-[16px] rounded-br-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex-col gap-2 pr-4 py-2 z-1">
       <Accordion.Root type="single" collapsible className="w-full">
         <Accordion.Item value="item-1">
-          <Accordion.Header className="grid grid-cols-[1fr_90px] sm:grid-cols-[1fr_100px] items-center h-full ">
+          <Accordion.Header className="grid grid-cols-[1fr_90px] md:grid-cols-[1fr_115px] gap-x-2 sm:gap-0 items-center h-full ">
             <div className="flex items-center w-full h-[50px]">
               <InputSearch
                 search={search}

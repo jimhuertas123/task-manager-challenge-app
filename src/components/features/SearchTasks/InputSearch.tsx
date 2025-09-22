@@ -42,10 +42,10 @@ export const InputSearch = ({
             onClick={() => setSearch('')}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-neutro-2 hover:text-primary-4 focus:outline-none"
           >
-            <CircleXIcon className="w-4.5 h-4.5 fill-neutro-2" />
+            <CircleXIcon className="w-3.5 h-3.5 fill-neutro-2" />
           </button>
         )}
-        {/* Suggestions */}
+        {/*suggestion nav */}
         {popoverSuggestions.length > 0 && isFocused && (
           <SuggestionNavigation
             handleSuggestionClick={handleSuggestionClick}

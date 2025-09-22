@@ -6,10 +6,11 @@ export const newTaskDataSchema = z.object({
     .string()
     .min(5, 'Title must be at least 5 characters')
     .max(20, 'Title must be at most 20 characters'),
-  estimate: z.enum(['0', '1', '2', '4', '8'], {
-    message: 'Estimate is empty',
-  }),
-
+  estimate: z
+    .string()
+    .refine((val) => ['0', '1', '2', '4', '8'].includes(val), {
+      message: 'Estimate is required',
+    }),
   assigneeId: z
     .string({ error: 'Assignee a valid user' })
     .min(1, 'Assignee is required'),

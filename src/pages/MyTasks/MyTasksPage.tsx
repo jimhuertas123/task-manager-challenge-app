@@ -1,7 +1,7 @@
 import { FormNewTask } from '@/components/features/FormNewTask';
 import { ModalTask } from '@/components/features/ModalTask/ModalTask';
 import { ViewModeSwitch } from '@/components/ui';
-import { GridCards } from '@/components/ui/GridCards';
+import { GridCards, GridCardsLoading } from '@/components/ui/GridCards';
 import { ListCards } from '@/components/ui/ListCards';
 import { useEditTaskModal } from '@/hooks/useEditTaskModal';
 
@@ -25,7 +25,7 @@ export const MyTasksPage = () => {
           isGridViewMode={isGridViewMode}
           setViewMode={setViewMode}
         />
-        {loading && <p>Loading...</p>}
+        {loading && <GridCardsLoading />}
         {error && <p>Error: {String(error.message)}</p>}
         {!loading && !error && (
           <div className="relative h-full w-full">

@@ -1,4 +1,5 @@
 import type { UserFieldsFragment } from '@/__generated__/graphql';
+import { CircleXIcon } from '@/assets/icons';
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 import { useUsers } from '@/hooks/useUsers';
 import { useNavigate } from 'react-router-dom';
@@ -24,9 +25,9 @@ export const ProfilePage = () => {
         onClick={() => {
           navigate(-1);
         }}
-        className="absolute p-2 top-4 right-10 text-neutro-2 text-[36px] w-10 h-10 flex justify-center items-center rounded-full hover:scale-105 active:scale-95 active:bg-white/10 hover:bg-white/10 hover:bg-opacity-80"
+        className="absolute p-2 top-4 right-10 text-neutro-2 text-[36px] w-13 h-13 flex justify-center items-center rounded-full hover:scale-105 active:scale-95 active:bg-white/10 hover:bg-white/10 hover:bg-opacity-80"
       >
-        X
+        <CircleXIcon className="w-full h-full fill-neutro-2" />
       </button>
       <div className="flex flex-col items-center w-full">
         <CircleAvatar
