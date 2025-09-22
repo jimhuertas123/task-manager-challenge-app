@@ -41,3 +41,12 @@ input[type='date'] {
   -moz-appearance: none;
   background: none;
 }
+
+body[data-dnd-kit-dragging='true'],
+[data-dnd-kit-dragging='true'] {
+  touch-action: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  overscroll-behavior: contain !important;
+}

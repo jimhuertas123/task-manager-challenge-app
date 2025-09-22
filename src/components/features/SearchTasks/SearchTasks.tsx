@@ -1,6 +1,5 @@
 import { FilterCloseIcon, FilterIcon, NotificationIcon } from '@/assets/icons';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Avatar1 from '@/assets/avatar1.png';
 import { useTasks } from '@/hooks/useTasks';
 import './SearchTasks.style.css';
 import {
@@ -14,6 +13,9 @@ import { InputSearch } from './InputSearch';
 
 import * as Accordion from '@radix-ui/react-accordion';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Popover } from '@/components/ui';
+import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
 
 const setFilterByRoute = (
   location: ReturnType<typeof useLocation>,
@@ -44,6 +46,7 @@ export const SearchTasks = () => {
   const [openAccordion, setOpenAccordion] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -133,11 +136,29 @@ export const SearchTasks = () => {
                 </div>
               </Accordion.Trigger>
               <NotificationIcon className="fill-neutro-2 " />
-              <img
-                src={Avatar1}
-                alt="User Avatar"
-                className="sm:w-10 sm:h-10 w-8 h-8 rounded-full bg-amber-400"
-              />
+
+              <Popover
+                button={
+                  <div className="sm:w-10 sm:h-10 w-8 h-8 rounded-full bg-neutro-2/50 hover:scale-105 active:scale-95 cursor-pointer flex justify-center items-center">
+                    <CircleAvatar
+                      userId="2c69a930-16ed-41c0-afb3-a7564471d307"
+                      size={38}
+                    />
+                  </div>
+                }
+                side="bottom"
+              >
+                <div className="p-1 bg-neutro-4 rounded-[8px] border-[1px] border-neutro-2 shadow mt-2 gap-y-1 flex flex-col w-40">
+                  <div
+                    onClick={() => {
+                      navigate('/settings');
+                    }}
+                    className="hover:bg-neutro-3 active:bg-neutro-3 active:scale-95 rounded-[4px] px-2 py-1 text-nav-bar-m text-neutro-2 cursor-pointer transition-all duration-200"
+                  >
+                    View Profile
+                  </div>
+                </div>
+              </Popover>
             </div>
           </Accordion.Header>
           <Accordion.Content className="search AccordionContent w-full sm:pr-1 sm:mt-1 -mt-2.5 pr-24">

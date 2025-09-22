@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { MainLayout } from '@/components/layout/MainLayout/MainLayout';
 import { DashboardPage, ErrorPage, MyTasksPage, NotFoundPage } from '@/pages';
+import { ProfilePage } from '@/pages/Profile/ProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -22,5 +23,9 @@ export const router = createBrowserRouter([
         element: <NotFoundPage />,
       },
     ],
+  },
+  {
+    path: '/settings',
+    element: <ProfilePage />,
   },
 ]);

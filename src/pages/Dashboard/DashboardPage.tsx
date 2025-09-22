@@ -2,23 +2,21 @@ import { ListCards } from '@/components/ui/ListCards';
 import { GridCards } from '@/components/ui/GridCards';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { ViewModeSwitch } from '@/components/ui';
 import { ModalTask } from '@/components/features/ModalTask/ModalTask';
 import { FormNewTask } from '@/components/features/FormNewTask';
-import { useEditTaskModal } from '@/contexts/useEditTaskModal';
 import { useTasks } from '@/hooks/useTasks';
+import { useEditTaskModal } from '@/hooks/useEditTaskModal';
+import { MobileModalTask } from '@/components/features/ModalTask/MobileModalTask';
+import { MobileFormTask } from '@/components/features/FormNewTask/MobileFormTask';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
   const isSmallDevice = useMediaQuery('(max-width: 680px)');
 
-  const { tasks, loading, error, setFilter } = useTasks();
-
-  useEffect(() => {
-    setFilter({});
-  }, [setFilter]);
+  const { tasks, loading, error } = useTasks();
 
   const { open, setOpen, task } = useEditTaskModal();
 
@@ -54,8 +52,7 @@ export const DashboardPage = () => {
             </div>
           </div>
         )}
-
-        {open && (
+        {open && !isSmallDevice && (
           <ModalTask
             isOpen={open}
             onClose={() => setOpen(false)}
@@ -69,6 +66,17 @@ export const DashboardPage = () => {
               />
             </div>
           </ModalTask>
+        )}
+
+        {open && isSmallDevice && (
+          <MobileModalTask open={open} setOpen={() => setOpen(false)}>
+            <div className="p-5">
+              <MobileFormTask
+                defaultValues={task}
+                onClose={() => setOpen(false)}
+              />
+            </div>
+          </MobileModalTask>
         )}
       </div>
     </div>

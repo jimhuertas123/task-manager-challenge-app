@@ -15,31 +15,31 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
   '\n  fragment TaskFields on Task {\n    id\n    name\n    assignee {\n      ...UserFields\n    }\n    creator {\n      ...UserFields\n    }\n    dueDate\n    createdAt\n    pointEstimate\n    position\n    status\n    tags\n  }\n  \n': typeof types.TaskFieldsFragmentDoc;
-  '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n  }\n': typeof types.UserFieldsFragmentDoc;
+  '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n    createdAt\n    updatedAt\n    avatar\n    type\n  }\n': typeof types.UserFieldsFragmentDoc;
   '\n  mutation CreateTask($input: CreateTaskInput!) {\n    createTask(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.CreateTaskDocument;
   '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n': typeof types.DeleteTaskDocument;
+  '\n  mutation EditStatusTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      id\n      status\n      position\n    }\n  }\n': typeof types.EditStatusTaskDocument;
   '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n': typeof types.UpdateTaskDocument;
   '\n  query GetAllTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n': typeof types.GetAllTasksDocument;
   '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n': typeof types.GetAllUsersDocument;
-  '\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ': typeof types.GetMyTasksDocument;
 };
 const documents: Documents = {
   '\n  fragment TaskFields on Task {\n    id\n    name\n    assignee {\n      ...UserFields\n    }\n    creator {\n      ...UserFields\n    }\n    dueDate\n    createdAt\n    pointEstimate\n    position\n    status\n    tags\n  }\n  \n':
     types.TaskFieldsFragmentDoc,
-  '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n  }\n':
+  '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n    createdAt\n    updatedAt\n    avatar\n    type\n  }\n':
     types.UserFieldsFragmentDoc,
   '\n  mutation CreateTask($input: CreateTaskInput!) {\n    createTask(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n':
     types.CreateTaskDocument,
   '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n':
     types.DeleteTaskDocument,
+  '\n  mutation EditStatusTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      id\n      status\n      position\n    }\n  }\n':
+    types.EditStatusTaskDocument,
   '\n  mutation UpdateTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      ...TaskFields\n    }\n  }\n':
     types.UpdateTaskDocument,
   '\n  query GetAllTasks($input: FilterTaskInput!) {\n    tasks(input: $input) {\n      ...TaskFields\n    }\n  }\n  \n':
     types.GetAllTasksDocument,
   '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n':
     types.GetAllUsersDocument,
-  '\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  ':
-    types.GetMyTasksDocument,
 };
 
 /**
@@ -66,8 +66,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n  }\n'
-): (typeof documents)['\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n  }\n'];
+  source: '\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n    createdAt\n    updatedAt\n    avatar\n    type\n  }\n'
+): (typeof documents)['\n  fragment UserFields on User {\n    id\n    fullName\n    email\n    type\n    createdAt\n    updatedAt\n    avatar\n    type\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -80,6 +80,12 @@ export function gql(
 export function gql(
   source: '\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n'
 ): (typeof documents)['\n  mutation DeleteTask($input: DeleteTaskInput!) {\n    deleteTask(input: $input) {\n      id\n    }\n  }\n'];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  mutation EditStatusTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      id\n      status\n      position\n    }\n  }\n'
+): (typeof documents)['\n  mutation EditStatusTask($input: UpdateTaskInput!) {\n    updateTask(input: $input) {\n      id\n      status\n      position\n    }\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -98,12 +104,6 @@ export function gql(
 export function gql(
   source: '\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n'
 ): (typeof documents)['\n  query GetAllUsers {\n    users {\n      ...UserFields\n    }\n  }\n  \n'];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(
-  source: '\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  '
-): (typeof documents)['\n    query GetMyTasks {\n      tasks(input: { name: "ticket" }) {\n        id\n        name\n        status\n        pointEstimate\n        position\n        dueDate\n        creator {\n          id\n          fullName\n          avatar\n        }\n        assignee {\n          id\n          fullName\n          avatar\n        }\n        tags\n      }\n    }\n  '];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

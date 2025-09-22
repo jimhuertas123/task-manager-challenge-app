@@ -1,5 +1,5 @@
+import { EditTaskModalContext } from '@/contexts/EditTaskModalContext';
 import { useContext } from 'react';
-import { EditTaskModalContext } from './EditTaskModalContext';
 
 export const useEditTaskModal = () => {
   const ctx = useContext(EditTaskModalContext);

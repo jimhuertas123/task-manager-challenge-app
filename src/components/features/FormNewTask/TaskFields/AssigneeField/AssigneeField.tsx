@@ -39,14 +39,8 @@ export const AssigneeField = ({
           >
             {watch('assigneeId') ? (
               <div className="flex items-center">
-                <CircleAvatar
-                  fullName={
-                    usersData?.find((user) => user.id === watch('assigneeId'))
-                      ?.fullName ?? 'No Name'
-                  }
-                  size={'12px'}
-                />
-                <span className="text-neutro-1 ml-2 font-[500] text-nav-bar-m overflow-ellipsis whitespace-nowrap overflow-hidden">
+                <CircleAvatar userId={watch('assigneeId')} size={30} />
+                <span className="text-neutro-1 ml-1.5 font-[500] text-nav-bar-m overflow-ellipsis whitespace-nowrap overflow-hidden">
                   {usersData?.find((user) => user.id === watch('assigneeId'))
                     ?.fullName ?? 'No Name'}
                 </span>

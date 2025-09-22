@@ -183,6 +183,9 @@ export type UserFieldsFragment = {
   fullName: string;
   email: string;
   type: UserType;
+  createdAt: any;
+  updatedAt: any;
+  avatar?: string | null;
 } & { ' $fragmentName'?: 'UserFieldsFragment' };
 
 export type CreateTaskMutationVariables = Exact<{
@@ -203,6 +206,20 @@ export type DeleteTaskMutationVariables = Exact<{
 export type DeleteTaskMutation = {
   __typename?: 'Mutation';
   deleteTask: { __typename?: 'Task'; id: string };
+};
+
+export type EditStatusTaskMutationVariables = Exact<{
+  input: UpdateTaskInput;
+}>;
+
+export type EditStatusTaskMutation = {
+  __typename?: 'Mutation';
+  updateTask: {
+    __typename?: 'Task';
+    id: string;
+    status: Status;
+    position: number;
+  };
 };
 
 export type UpdateTaskMutationVariables = Exact<{
@@ -240,34 +257,6 @@ export type GetAllUsersQuery = {
   >;
 };
 
-export type GetMyTasksQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetMyTasksQuery = {
-  __typename?: 'Query';
-  tasks: Array<{
-    __typename?: 'Task';
-    id: string;
-    name: string;
-    status: Status;
-    pointEstimate: PointEstimate;
-    position: number;
-    dueDate: any;
-    tags: Array<TaskTag>;
-    creator: {
-      __typename?: 'User';
-      id: string;
-      fullName: string;
-      avatar?: string | null;
-    };
-    assignee?: {
-      __typename?: 'User';
-      id: string;
-      fullName: string;
-      avatar?: string | null;
-    } | null;
-  }>;
-};
-
 export const UserFieldsFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -284,6 +273,10 @@ export const UserFieldsFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fullName' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
         ],
       },
@@ -353,6 +346,10 @@ export const TaskFieldsFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fullName' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
         ],
       },
@@ -424,6 +421,10 @@ export const CreateTaskDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fullName' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
         ],
       },
@@ -528,6 +529,62 @@ export const DeleteTaskDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteTaskMutation, DeleteTaskMutationVariables>;
+export const EditStatusTaskDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'EditStatusTask' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'UpdateTaskInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'updateTask' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'position' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  EditStatusTaskMutation,
+  EditStatusTaskMutationVariables
+>;
 export const UpdateTaskDocument = {
   kind: 'Document',
   definitions: [
@@ -593,6 +650,10 @@ export const UpdateTaskDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'fullName' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
         ],
       },
@@ -712,6 +773,10 @@ export const GetAllTasksDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'fullName' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
         ],
       },
     },
@@ -804,98 +869,12 @@ export const GetAllUsersDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'fullName' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
         ],
       },
     },
   ],
 } as unknown as DocumentNode<GetAllUsersQuery, GetAllUsersQueryVariables>;
-export const GetMyTasksDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetMyTasks' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'tasks' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'name' },
-                      value: {
-                        kind: 'StringValue',
-                        value: 'ticket',
-                        block: false,
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'pointEstimate' },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'position' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'dueDate' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'creator' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullName' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'assignee' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'fullName' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
-                      },
-                    ],
-                  },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'tags' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetMyTasksQuery, GetMyTasksQueryVariables>;

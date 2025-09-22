@@ -9,7 +9,7 @@ import {
   ArrowsVertical,
   CalendarIcon,
 } from '@/assets/icons';
-import { useUsers } from '@/contexts/useUsers';
+import { useUsers } from '@/hooks/useUsers';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useLocation } from 'react-router-dom';
 
@@ -56,6 +56,7 @@ export const AdvancedFilters = ({
     >
       <div className="relative w-full h-full">
         <select
+          id="status-select"
           value={status}
           onChange={(e) => setStatus(e.target.value as Status)}
           className="rounded px-2 py-1 border w-full"
@@ -73,6 +74,7 @@ export const AdvancedFilters = ({
       </div>
       <div className="relative w-full h-full">
         <select
+          id="assignee-select"
           value={isMyTasks ? myId : assigneeId}
           onChange={(e) => setAssigneeId(e.target.value)}
           className="rounded px-2 py-1 border w-full"
@@ -91,6 +93,7 @@ export const AdvancedFilters = ({
       </div>
       <div className="relative w-full h-full">
         <select
+          id="point-estimate-select"
           value={pointEstimate}
           onChange={(e) => setPointEstimate(e.target.value as PointEstimate)}
           className="rounded px-2 py-1 border w-full"
@@ -108,6 +111,7 @@ export const AdvancedFilters = ({
       </div>
       <div className="relative w-full h-full">
         <select
+          id="tag-select"
           value={tag}
           onChange={(e) => setTag(e.target.value as TaskTag)}
           className="rounded px-2 py-1 border w-full"
