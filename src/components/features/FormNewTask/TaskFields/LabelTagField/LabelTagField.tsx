@@ -29,7 +29,11 @@ export const LabelTagField = () => {
           >
             <LabelIcon className="fill-neutro-1" />
             <h2 className="text-neutro-1 ml-2 font-[500] text-nav-bar-m">
-              {watch('tags') ? watch('tags')[0] : 'Label'}
+              {watch('tags')
+                ? watch('tags').length > 0
+                  ? watch('tags')[0]
+                  : 'Label'
+                : 'Label'}
             </h2>
           </div>
         }

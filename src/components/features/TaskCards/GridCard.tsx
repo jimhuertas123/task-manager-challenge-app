@@ -127,7 +127,7 @@ export const GridCard = ({
       <div className="flex justify-between">
         <div className="flex items-center mb-auto">
           {assignee?.fullName ? (
-            <CircleAvatar fullName={assignee.fullName} size={'10px'} />
+            <CircleAvatar userId={assignee.id} size={33} />
           ) : (
             //TODO: Replace with default avatar image
             <div></div>
