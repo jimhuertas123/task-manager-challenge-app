@@ -68,7 +68,7 @@ export const FormNewTask = ({
           </div>
 
           {/* assignee field */}
-          {!usersError ? (
+          {usersError ? (
             <div>
               <p className="text-red-500">Error loading users</p>
             </div>
