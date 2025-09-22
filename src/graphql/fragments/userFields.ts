@@ -6,5 +6,9 @@ export const USER_FIELDS = gql`
     fullName
     email
     type
+    createdAt
+    updatedAt
+    avatar
+    type
   }
 `;

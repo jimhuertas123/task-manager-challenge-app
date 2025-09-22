@@ -28,7 +28,7 @@ export const AssigneeOptions = ({
                 closeAction(false);
               }}
             >
-              <CircleAvatar fullName={user.fullName} size={'10px'} />
+              <CircleAvatar userId={user.id} size={30} />
               <span className="text-neutro-1 ml-2 font-[500] text-nav-bar-m">
                 {user.fullName}
               </span>
