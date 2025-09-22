@@ -20,7 +20,7 @@ export const Popover = ({
       <PopoverComponent.Portal>
         <PopoverComponent.Content
           side={side}
-          className="PopoverContent flex z-[50]"
+          className="PopoverContent flex z-[100]"
           onOpenAutoFocus={(event) => {
             event.preventDefault();
           }}

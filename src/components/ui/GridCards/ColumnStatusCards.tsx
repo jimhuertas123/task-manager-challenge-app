@@ -42,7 +42,7 @@ export const ColumnStatusCards = ({
     <div
       ref={setNodeRef}
       key={status}
-      className=" w-full h-[calc(100vh-220px)] flex flex-col pt-1 overflow-hidden z-[1]"
+      className=" w-full h-[calc(100vh-220px)] flex flex-col pt-1 overflow-hidden"
     >
       <h3 className="text-lg font-bold tracking-wide pb-5">
         {status.charAt(0) + status.slice(1).toLowerCase().replace('_', ' ')}

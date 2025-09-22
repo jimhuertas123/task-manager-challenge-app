@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from 'react';
+import { useState, type JSX } from 'react';
 import { ModalTask } from '../ModalTask/ModalTask';
 import {
   TitleLabelField,
@@ -7,8 +7,6 @@ import {
   AssigneeOptions,
   LabelTagOptions,
 } from './';
-import { useFormContext } from 'react-hook-form';
-import { newTaskDataSchema, type NewTaskData } from '@/schema/schemaNewTask';
 import {
   AnimatedFailed,
   AnimatedLoading,
@@ -20,32 +18,25 @@ import {
 } from '@/assets/icons';
 import {} from './TaskFields/EstimateField/EstimateOptions';
 import {
-  CreateTaskDocument,
-  GetAllTasksDocument,
-  Status,
-  TaskTag,
-  type CreateTaskMutation,
-  type CreateTaskMutationVariables,
   type TaskFieldsFragment,
   type UserFieldsFragment,
 } from '@/__generated__/graphql';
 
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
-import { useMutation } from '@apollo/client/react';
-import { numberToPointEstimate } from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
 import { useUsers } from '@/hooks/useUsers';
+import { useTaskForm } from '@/hooks/useTaskForm';
 
-export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
-  const {
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useFormContext<NewTaskData>();
-
+export const MobileFormTask = ({
+  onClose,
+  defaultValues,
+}: {
+  onClose: () => void;
+  defaultValues?: TaskFieldsFragment | null;
+}) => {
   const [selectedField, setSelectedField] = useState<string>('dueDate');
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const {
     data: usersQuery,
     loading: usersLoading,
@@ -53,6 +44,27 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
   } = useUsers();
 
   const usersData = usersQuery?.users as UserFieldsFragment[] | undefined;
+
+  const {
+    watch,
+    setValue,
+    formErrors,
+    handleSubmit,
+    isSubmitting,
+    data,
+    loading,
+    error,
+    editData,
+    loadingEdit,
+    errorEdit,
+    onSubmit,
+  } = useTaskForm({
+    onClose,
+    defaultValues,
+    usersData: usersData
+      ? { users: usersData as UserFieldsFragment[] }
+      : undefined,
+  });
 
   const modalContent: Map<string, JSX.Element> = new Map([
     [
@@ -81,52 +93,9 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
     ],
   ]);
 
-  const [createTask, { data, loading, error, reset: resetMutation }] =
-    useMutation<CreateTaskMutation, CreateTaskMutationVariables>(
-      CreateTaskDocument
-    );
-
-  useEffect(() => {
-    resetMutation();
-  }, [resetMutation]);
-
-  const onSubmit = async (data: NewTaskData) => {
-    try {
-      const validatedData = newTaskDataSchema.parse(data);
-
-      await createTask({
-        variables: {
-          input: {
-            name: validatedData.name,
-            assigneeId: validatedData.assigneeId,
-            dueDate: validatedData.dueDate,
-            pointEstimate: numberToPointEstimate(validatedData.estimate),
-            status: Status.Backlog,
-            tags: validatedData.tags as TaskTag[],
-          },
-        },
-        update: (cache, { data }) => {
-          const existing = cache.readQuery<{ tasks: TaskFieldsFragment[] }>({
-            query: GetAllTasksDocument,
-          });
-          cache.writeQuery({
-            query: GetAllTasksDocument,
-            data: {
-              tasks: data?.createTask
-                ? [data.createTask, ...(existing?.tasks ?? [])]
-                : [...(existing?.tasks ?? [])],
-            },
-          });
-        },
-      });
-
-      setTimeout(() => {
-        onClose();
-      }, 1000);
-    } catch (errorCatch) {
-      throw new Error((errorCatch as Error)?.message);
-    }
-  };
+  // useEffect(() => {
+  //   reset();
+  // }, [reset]);
 
   return (
     <div className="flex">
@@ -146,7 +115,7 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
             <div
               className={
                 'flex h-[32px] w-full items-center py-2 px-4.5 rounded-[4px] cursor-pointer gap-x-2.5' +
-                (errors.estimate ? ' border border-primary-4' : '')
+                (formErrors.estimate ? ' border border-primary-4' : '')
               }
               style={{
                 backgroundColor: !watch('estimate')
@@ -173,7 +142,7 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
               className={
                 'flex h-[32px] w-full items-center py-2 rounded-[4px] cursor-pointer' +
                 (watch('tags') ? '' : ' px-4') +
-                (errors.tags ? ' border border-primary-4' : '')
+                (formErrors.tags ? ' border border-primary-4' : '')
               }
               style={{
                 backgroundColor: !watch('tags')
@@ -215,7 +184,7 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
             <div
               className={
                 'flex h-[32px] w-full items-center py-2 px-5 rounded-[4px] cursor-pointer gap-x-2.5' +
-                (errors.assigneeId ? ' border border-primary-4' : '')
+                (formErrors.assigneeId ? ' border border-primary-4' : '')
               }
               style={{
                 backgroundColor: !watch('assigneeId')
@@ -261,7 +230,7 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
             <div
               className={
                 'flex h-[32px] w-full items-center py-2 px-4.5 rounded-[4px] cursor-pointer gap-x-2.5' +
-                (errors.dueDate ? ' border border-primary-4' : '')
+                (formErrors.dueDate ? ' border border-primary-4' : '')
               }
               style={{
                 backgroundColor: 'rgba(148, 151, 154, 0.1)',
@@ -278,13 +247,13 @@ export const MobileFormTask = ({ onClose }: { onClose: () => void }) => {
           <button
             type="submit"
             className="disabled:text-neutro-4 active:scale-95 absolute top-7 right-5 py-3 px-5 text-nav-bar-l text-neutro-2 rounded-[10px] hover:scale-105 hover:bg-white/10 active:bg-neutro-5 transition-colors duration-200 "
-            disabled={isSubmitting || loading || usersLoading}
+            disabled={isSubmitting || loading || usersLoading || loadingEdit}
           >
             {isSubmitting ? (
               <AnimatedLoading />
-            ) : data ? (
+            ) : data || editData ? (
               <AnimatedSuccess width={25} stroke="#70B252" />
-            ) : error ? (
+            ) : error || errorEdit ? (
               <AnimatedFailed
                 width={30}
                 className="w-4 h-4 p-0 m-0"

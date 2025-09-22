@@ -30,14 +30,8 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     DeleteTaskMutationVariables
   >(DELETE_TASK);
 
-  const {
-    overId,
-    activeTask,
-    handleDragEnd,
-    handleDragMove,
-    handleDragOver,
-    handleDragStart,
-  } = useTaskDnD(tasks as TaskFieldsFragment[], statusOrder);
+  const { overId, activeTask, handleDragEnd, handleDragOver, handleDragStart } =
+    useTaskDnD(tasks as TaskFieldsFragment[], statusOrder);
 
   const handleDelete = async (taskId: string) => {
     await deleteTask({
@@ -78,11 +72,10 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
       >
         <DndContext
           onDragStart={handleDragStart}
-          onDragMove={handleDragMove}
           onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
         >
-          <DragOverlay>
+          <DragOverlay className="shadow-sm shadow-white/25">
             {activeTask ? (
               <GridCard
                 isActive={false}
