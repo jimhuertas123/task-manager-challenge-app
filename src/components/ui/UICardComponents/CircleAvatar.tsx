@@ -15,17 +15,21 @@ export const CircleAvatar = ({
   const users = data?.users ?? [];
   const avatarCount = 5;
 
-  const userIndex = (users as UserFieldsFragment[]).findIndex(
-    (user: { id: string }) => user.id === userId
-  );
+  let index = 0;
 
-  const index =
-    userIndex !== -1
-      ? userIndex % avatarCount
-      : userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) %
-        avatarCount;
+  if (userId) {
+    const userIndex = (users as UserFieldsFragment[]).findIndex(
+      (user: { id: string }) => user.id === userId
+    );
 
-  if (!userId) return <AvatarImage index={0} size={size} />;
+    index =
+      userIndex !== -1
+        ? userIndex % avatarCount
+        : userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) %
+          avatarCount;
+  }
+
+  if (!userId) return <AvatarImage index={index} size={size} />;
   return (
     <div
       className="border-[1px] border-neutro-1 bg-neutro-2 overflow-hidden rounded-full"
