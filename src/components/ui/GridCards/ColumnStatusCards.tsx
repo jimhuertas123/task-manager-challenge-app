@@ -2,6 +2,7 @@ import type {
   GetAllTasksQuery,
   TaskFieldsFragment,
 } from '@/__generated__/graphql';
+import { BlankTaskIcon } from '@/assets/icons';
 import { GridCard } from '@/components/features';
 import { useDroppable } from '@dnd-kit/core';
 import { Fragment } from 'react/jsx-runtime';
@@ -38,6 +39,36 @@ export const ColumnStatusCards = ({
     }
   }
 
+  if (columnTasks.length === 0 || !tasks) {
+    return (
+      <div
+        ref={setNodeRef}
+        key={status}
+        className="relative w-full h-[calc(100vh-220px)] flex flex-col pt-1 overflow-hidden"
+        style={{}}
+      >
+        <h3 className="text-lg font-bold tracking-wide pb-5">
+          {status.charAt(0) + status.slice(1).toLowerCase().replace('_', ' ')}
+          {` (00)`}
+        </h3>
+        <div className="flex-1 overflow-y-auto overflow-x-hidden">
+          {placeholderIndex === 0 && (
+            <div className="h-[204px] bg-neutro-3/20 mb-4 border-[2px] border-dashed border-primary-4" />
+          )}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-y-2">
+            <BlankTaskIcon
+              className="w-25 h-25 fill-neutro-2/30  stroke-neutro-5"
+              fill="rgba(148, 151, 154, 0.3)"
+            />
+            <h3 className="text-nav-bar-m tracking-wide pb-5 text-neutro-2/60 italic">
+              All clear! No tasks assigned to this status.
+            </h3>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={setNodeRef}
@@ -62,7 +93,6 @@ export const ColumnStatusCards = ({
             />
           </Fragment>
         ))}
-        {/* If placeholder should be at the end */}
         {placeholderIndex === columnTasks.length && (
           <div className="h-[204px] bg-neutro-3/20 mb-4 border-[2px] border-dashed border-primary-4" />
         )}

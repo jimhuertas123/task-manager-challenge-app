@@ -1,5 +1,5 @@
 import { ListCards } from '@/components/ui/ListCards';
-import { GridCards } from '@/components/ui/GridCards';
+import { GridCards, GridCardsLoading } from '@/components/ui/GridCards';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useState } from 'react';
@@ -20,6 +20,8 @@ export const DashboardPage = () => {
 
   const { open, setOpen, task } = useEditTaskModal();
 
+  if (error) throw new Error(error.message);
+
   return (
     <div key={'dashboard'} className="h-full w-full">
       <div className="grid grid-rows-[40px_1fr] gap-y-3 sm:gap-y-2 sm:grid-rows-[63px_1fr] h-full w-full">
@@ -28,8 +30,7 @@ export const DashboardPage = () => {
           isGridViewMode={isGridViewMode}
           setViewMode={setViewMode}
         />
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {String(error.message)}</p>}
+        {loading && <GridCardsLoading />}
         {!loading && !error && (
           <div className="relative h-full w-full">
             <div

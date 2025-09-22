@@ -45,7 +45,7 @@ export const InputSearch = ({
             <CircleXIcon className="w-4.5 h-4.5 fill-neutro-2" />
           </button>
         )}
-        {/* Suggestions */}
+        {/*suggestion nav */}
         {popoverSuggestions.length > 0 && isFocused && (
           <SuggestionNavigation
             handleSuggestionClick={handleSuggestionClick}

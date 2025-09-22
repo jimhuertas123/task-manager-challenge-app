@@ -129,6 +129,7 @@ export const AdvancedFilters = ({
       </div>
       <div className="relative flex items-center h-full w-full">
         <input
+          name="due-date"
           type="date"
           value={dueDate}
           onChange={(e) => {
