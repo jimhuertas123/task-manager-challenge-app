@@ -14,7 +14,6 @@ dist-ssr
 
 #Only for now
 src/test/
-**/__tests__/
 
 #enviroment
 .env

@@ -16,10 +16,10 @@ import {
   type UserFieldsFragment,
 } from '@/__generated__/graphql';
 import {
+  normalizeUTCDate,
   numberToPointEstimate,
   pointEstimateToNumber,
-} from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
-import { normalizeUTCDate } from '@/components/features/FormNewTask';
+} from '@/utils';
 
 export function useTaskForm({
   onClose,

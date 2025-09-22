@@ -1,5 +1,4 @@
 import { TagCards } from '../UICardComponents/TagCards';
-import { pointEstimateToNumber } from '../../features/FormNewTask/TaskFields/EstimateField/pointEstimate';
 import { CircleAvatar } from '../UICardComponents/CircleAvatar';
 import { DueDate } from '../UICardComponents/DueDate';
 import { ChatBubbleIcon, RightArrowIcon, ThreatIcon } from '@/assets/icons';
@@ -8,6 +7,7 @@ import {
   type TaskTag,
   type UserFieldsFragment,
 } from '@/__generated__/graphql';
+import { pointEstimateToNumber } from '@/utils';
 
 export const ListTaskCard = ({
   index,

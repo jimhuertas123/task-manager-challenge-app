@@ -25,8 +25,11 @@ export const FormNewTask = ({
   onClose: () => void;
   defaultValues?: TaskFieldsFragment | null;
 }) => {
-  //TODO: CREATE AN ERROR STATE IF USERS QUERY FAILS
-  const { data: usersData, loading: usersLoading } = useUsers();
+  const {
+    data: usersData,
+    loading: usersLoading,
+    error: usersError,
+  } = useUsers();
 
   const {
     handleSubmit,
@@ -65,11 +68,15 @@ export const FormNewTask = ({
           </div>
 
           {/* assignee field */}
-          <div className="w-full max-w-full">
+          {!usersError ? (
+            <div>
+              <p className="text-red-500">Error loading users</p>
+            </div>
+          ) : (
             <AssigneeField
               usersData={usersData?.users as UserFieldsFragment[] | undefined}
             />
-          </div>
+          )}
 
           {/* label field */}
           <div className="w-full max-w-full">

@@ -1,7 +1,7 @@
 import { PointEstimate } from '@/__generated__/graphql';
 import { PlusMinusIcon } from '@/assets/icons';
-import { pointEstimateToNumber } from '@/components/features/FormNewTask/TaskFields/EstimateField/pointEstimate';
 import type { NewTaskData } from '@/schema/schemaNewTask';
+import { pointEstimateToNumber } from '@/utils';
 import type { UseFormSetValue } from 'react-hook-form';
 
 export const EstimateOptions = ({

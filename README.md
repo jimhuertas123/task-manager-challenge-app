@@ -10,21 +10,22 @@ This application is a task management dashboard that allows users to organize, t
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - npm or yarn
 
 ### Installation & Development
 
-````bash
+```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/jimhuertas123/task-manager-challenge-app
 cd task-manager-app
 
 # Install dependencies
-yarn install
+yarn
 
 # Start development server
 yarn dev
+```
 
 ### Available Scripts
 
@@ -37,7 +38,7 @@ npm run lint:fix     # Fix ESLint issues
 npm run format       # Format code with Prettier
 npm run type-check   # TypeScript type checking
 npm run codegen      # Generate GraphQL types
-````
+```
 
 ## 🛠 Technologies/Libraries Used
 
@@ -74,64 +75,77 @@ npm run codegen      # Generate GraphQL types
 src/
 ├── components/
 │   ├── ui/
+│   │   ├── ListCards/
+│   │   ├── GridCards/
+│   │   ├── Popover/
+│   │   └── UICardComponents/
 │   ├── layout/
+|   |   └── MainLayout/
 │   └── features/
+│       ├── FormNewTask/
+│       │   ├── FormNewTask.tsx
+│       │   ├── MobileFormTask.tsx
+│       ├── ModalTask/
+│       └── TaskCards/
+│           └── GridCard.tsx
 ├── pages/
+│   ├── Dashboard/
+│   │   └── DashboardPage.tsx
+│   ├── MyTasks/
+│   │   └── MyTasksPage.tsx
 ├── hooks/
+│   ├── useTaskForm.ts
+│   ├── useUsers.ts
+│   ├── useTasks.ts
+│   └── useEditTaskModal.ts
 ├── graphql/
-├── lib/
 ├── utils/
-├── types/
-└── styles/
+│   ├── pointEstimate.ts
+│   ├── dateUtils.ts
+│   └── index.ts
+├── assets/
+│   ├── avatars/
+│   │   └── AvatarImage.tsx
+│   └── icons/
+│       ├── BlankTaskIcon.tsx
+│       └── index.ts
+└── schema/
+    └── schemaNewTask.ts
 ```
 
-## 📝 Development Progress
+## ✅ Current Status
 
-### ✅ Completed (Day 1 - Sept 9, 2025)
+The project is nearly complete and includes:
 
-**Project Setup & Configuration:**
+- Full dashboard layout with sidebar navigation
+- Task board with status columns and drag & drop support
+- Task cards displaying all required information
+- Routing with NotFound and Error pages
+- GraphQL integration for CRUD operations
+- Search and filtering functionality
+- User settings/profile page
+- Responsive design for mobile and desktop
+- Animations and interactive UI elements
+- Robust error handling and loading states
+- Modern development tooling and CI/CD pipeline
 
-- [x] Initial React + TypeScript + Vite setup
-- [x] GraphQL stack configuration (Apollo Client + Code Generator)
-- [x] Development tooling setup (ESLint, Prettier, Husky)
-- [x] CI/CD pipeline with GitHub Actions
-- [x] Vercel deployment configuration with SPA routing
-- [x] Project architecture planning and folder structure design
-- [x] Error boundary strategy with react-error-boundary
+## 🎯 Features Roadmap
 
-**Quality Assurance Setup:**
-
-- [x] Pre-commit hooks with Husky
-- [x] Automated linting and formatting
-- [x] TypeScript strict mode configuration
-- [x] GitHub Actions workflow for testing and deployment
-- [x] Proper SPA routing configuration for Vercel
-
-### 🔄 Next Steps (Day 2 - Sept 10, 2025)
-
-- [ ] Implement folder structure and core architecture
-- [ ] Setup Apollo Client with GraphQL endpoint
-- [ ] Create layout components (Sidebar, Header, MainLayout)
-- [ ] Implement routing with React Router and error pages
-- [ ] Begin dashboard UI development
+All core features have been implemented. Any remaining improvements will focus on polish, performance, and additional enhancements as needed.
 
 ## 🎯 Features Roadmap
 
 ### Week 1: Foundation & Core UI
 
-- [ ] Dashboard layout with sidebar navigation
-- [ ] Task board with status columns
-- [ ] Task cards with all required information
-- [ ] Basic routing setup with NotFound and Error pages
-- [ ] SCSS styling architecture
+- [x] Dashboard layout with sidebar navigation
+- [x] Task board with status columns
+- [x] Task cards with all required information
+- [x] Basic routing setup with NotFound and Error pages
+- [x] Feature-Driven Architecture
 
 ### Week 2: Functionality & Advanced Features
 
-- [ ] GraphQL integration for CRUD operations
-- [ ] Search and filtering functionality
-- [ ] User settings page
-- [ ] Bonus features (drag & drop, animations, etc.)
-
-## 🚧 Current Status
-
-**Day 1 Complete** - Project foundation and development environment fully configured with modern tooling, CI/CD pipeline, error handling, and deployment strategy.
+- [x] GraphQL integration for CRUD operations
+- [x] Search and filtering functionality
+- [x] User settings page
+- [x] Bonus features (drag & drop, animations, etc.)

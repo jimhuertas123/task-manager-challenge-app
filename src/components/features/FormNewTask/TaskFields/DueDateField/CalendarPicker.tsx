@@ -1,9 +1,8 @@
 import { DayPicker } from 'react-day-picker';
-import { parseLocalDate } from './parseLocalDate';
 import type { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import type { NewTaskData } from '@/schema/schemaNewTask';
 import { CalendarNavbar } from './CalendarNavbar';
-import { normalizeDate } from './normalizeDate';
+import { normalizeDate, parseLocalDate } from '@/utils';
 
 export const CalendarPicker = ({
   watch,
