@@ -32,7 +32,11 @@ export const TagCards = ({
   const visibleTags = tags.slice(0, limitShow);
   const extraCount = tags.length - limitShow;
   return (
-    <div className="flex gap-x-2 items-center">
+    <div
+      id="tag-cards"
+      data-testid={tags.length === 0 ? 'tag-cards-empty' : undefined}
+      className="flex gap-x-2 items-center"
+    >
       {visibleTags.map((tag, index) => (
         <TagCard key={index} tag={tag} />
       ))}

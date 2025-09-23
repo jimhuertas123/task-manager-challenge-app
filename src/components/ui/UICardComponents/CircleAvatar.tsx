@@ -32,10 +32,15 @@ export const CircleAvatar = ({
   if (!userId) return <AvatarImage index={index} size={size} />;
   return (
     <div
+      role="img"
       className="border-[1px] border-neutro-1 bg-neutro-2 overflow-hidden rounded-full"
       style={{ width: size, height: size }}
     >
-      <AvatarImage index={index} size={avatarSize} />
+      <AvatarImage
+        index={index}
+        size={avatarSize}
+        alt={`Avatar of ${userId}`}
+      />
     </div>
   );
 };

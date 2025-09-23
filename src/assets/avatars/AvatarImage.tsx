@@ -23,6 +23,7 @@ export const AvatarImage = ({
 
   return (
     <img
+      role="img"
       src={src}
       alt={alt}
       className={className}
