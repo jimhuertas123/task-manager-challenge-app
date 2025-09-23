@@ -61,6 +61,8 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  padding-top: 25%;
+  padding-inline: 28%;
 }
 
 .filter-toggle-icon.filter-open-rotate {

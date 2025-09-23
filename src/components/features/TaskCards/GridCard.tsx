@@ -76,12 +76,16 @@ export const GridCard = ({
           {...attributes}
           className="cursor-grab active:cursor-grabbing mr-2"
           style={{ touchAction: 'none' }}
+          tabIndex={0}
+          role="button"
+          aria-label="Drag to move task card"
         >
           <svg
             width="22"
             height="18"
             fill="currentColor"
-            aria-label="Drag handle"
+            aria-hidden="true"
+            role="presentation"
             className="fill-neutro-2"
           >
             <circle cx="5" cy="7" r="1.6" />
@@ -97,14 +101,22 @@ export const GridCard = ({
           onOpenChange={setPopoverOpen}
           side="bottom"
           button={
-            <ThreeDotsIcon
-              className="flex fill-neutro-2 my-auto rounded-[50%]  h-6.5 w-6.5 p-1
+            <button
+              id="task-options-button"
+              aria-label="Open task options"
+              type="button"
+              className=" my-auto rounded-[50%] h-6.5 w-6.5 p-1
             hover:scale-105 hover:bg-neutro-3 active:bg-neutro-3 active:scale-95 cursor-pointer "
-            />
+            >
+              <ThreeDotsIcon className="flex fill-neutro-2" />
+            </button>
           }
         >
           <div className="p-2 bg-neutro-3 rounded-[8px] border-[1px] border-neutro-2 shadow mt-2 gap-y-1 flex flex-col">
-            <div
+            <button
+              id="edit-button"
+              aria-label="Edit Task"
+              type="button"
               onClick={() => {
                 setTask(task);
                 setOpen(true);
@@ -112,19 +124,22 @@ export const GridCard = ({
               }}
               className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200"
             >
-              <PencilIcon className="fill-neutro-1" />
+              <PencilIcon role="img" className="fill-neutro-1" />
               <p className="text-sm">Edit</p>
-            </div>
-            <div
+            </button>
+            <button
+              id="delete-button"
+              aria-label="Delete Task"
+              type="button"
               onClick={() => {
                 onDelete(task.id);
                 setPopoverOpen(false);
               }}
               className="flex text-nav-bar-m text-neutro-1 gap-x-2 rounded-[4px] active:scale-95 active:bg-neutro-5/90 hover:bg-neutro-5/90 w-full h-full pl-4 pr-11 py-3 cursor-pointer hover:scale-105 transition-transform duration-200"
             >
-              <TrashIcon className="fill-neutro-1" />
+              <TrashIcon role="img" className="fill-neutro-1" />
               <p className="text-sm">Delete</p>
-            </div>
+            </button>
           </div>
         </Popover>
       </div>

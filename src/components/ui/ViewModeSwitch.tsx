@@ -32,16 +32,31 @@ export const ViewModeSwitch = ({
         <div className=" w-full flex justify-between items-center text-neutro-2">
           <div className="flex">
             <ListIcon
+              aria-label="List view"
+              role="button"
+              type="button"
+              id="list-view-button"
+              tabIndex={0}
               onClick={() => setViewMode(false)}
               className={`${viewModeStyle} ${!isGridViewMode ? ' border-primary-4 fill-primary-4' : 'border-transparent'}`}
             />
             <DashboardIcon
+              aria-label="Dashboard view"
+              role="button"
+              type="button"
+              id="dashboard-view-button"
+              tabIndex={0}
               onClick={() => setViewMode(true)}
               className={`${viewModeStyle} ${isGridViewMode ? 'border-primary-4 fill-primary-4' : 'border-transparent'}`}
             />
           </div>
 
           <PlusIcon
+            aria-label="Add new task"
+            role="button"
+            type="button"
+            id="add-new-task-button"
+            tabIndex={0}
             onClick={() => setOpenModalNewTask(true)}
             className="w-[40px] h-[40px] bg-primary-4 fill-neutro-1 p-2 rounded-[8px] transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95 cursor-pointer"
           />

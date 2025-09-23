@@ -47,10 +47,10 @@ export const ColumnStatusCards = ({
         className="relative w-full h-[calc(100vh-220px)] flex flex-col pt-1 overflow-hidden"
         style={{}}
       >
-        <h3 className="text-lg font-bold tracking-wide pb-5">
+        <h1 className="text-lg font-bold tracking-wide pb-5">
           {status.charAt(0) + status.slice(1).toLowerCase().replace('_', ' ')}
           {` (00)`}
-        </h3>
+        </h1>
         <div className="flex-1 overflow-y-auto overflow-x-hidden">
           {placeholderIndex === 0 && (
             <div className="h-[204px] bg-neutro-3/20 mb-4 border-[2px] border-dashed border-primary-4" />
@@ -60,9 +60,9 @@ export const ColumnStatusCards = ({
               className="w-25 h-25 fill-neutro-2/30  stroke-neutro-5"
               fill="rgba(148, 151, 154, 0.3)"
             />
-            <h3 className="text-nav-bar-m tracking-wide pb-5 text-neutro-2/60 italic">
+            <h2 className="text-nav-bar-m tracking-wide pb-5 text-neutro-2/60 italic">
               All clear! No tasks assigned to this status.
-            </h3>
+            </h2>
           </div>
         </div>
       </div>

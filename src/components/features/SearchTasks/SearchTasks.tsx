@@ -112,7 +112,7 @@ export const SearchTasks = () => {
     <header className="flex header-search rounded-t-[16px] rounded-br-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex-col gap-2 pr-4 py-2 z-1">
       <Accordion.Root type="single" collapsible className="w-full">
         <Accordion.Item value="item-1">
-          <Accordion.Header className="grid grid-cols-[1fr_90px] md:grid-cols-[1fr_115px] gap-x-2 sm:gap-0 items-center h-full ">
+          <Accordion.Header className="grid grid-cols-[1fr_90px] md:grid-cols-[1fr_120px] gap-x-2 sm:gap-0 items-center h-full ">
             <div className="flex items-center w-full h-[50px]">
               <InputSearch
                 search={search}
@@ -121,42 +121,71 @@ export const SearchTasks = () => {
                 handleSuggestionClick={handleSuggestionClick}
               />
             </div>
-            <div className="flex items-center w-full h-full justify-between gap-x-1">
+            <div className="grid grid-cols-[1fr_1fr_1fr] items-center w-full h-full justify-between gap-x-1">
               <Accordion.Trigger
-                className="AccordionTrigger"
+                aria-label="Toggle Filters"
+                id="filter-toggle-button"
+                role="button"
+                tabIndex={0}
+                className="AccordionTrigger flex w-full h-full justify-center items-center "
                 onClick={() => {
                   setOpenAccordion(!openAccordion);
                 }}
               >
                 <div
-                  className={`relative w-5 h-5 ${openAccordion ? 'open' : ''}`}
+                  className={`relative w-full h-full rounded hover:cursor-pointer ${openAccordion ? 'open' : ''}`}
                 >
-                  <FilterIcon className="filter-toggle-icon filter-open-rotate fill-neutro-2 w-5 h-5" />
-                  <FilterCloseIcon className="filter-toggle-icon filter-close-rotate fill-neutro-2 w-5 h-5" />
+                  <FilterIcon
+                    id="filter-icon"
+                    className="filter-toggle-icon filter-open-rotate fill-neutro-2 active:fill-neutro-1"
+                    aria-label="Filter"
+                  />
+                  <FilterCloseIcon
+                    id="filter-close-icon"
+                    className="filter-toggle-icon filter-close-rotate fill-neutro-2"
+                    aria-label="Close filter"
+                  />
                 </div>
               </Accordion.Trigger>
-              <NotificationIcon className="fill-neutro-2 " />
+              <NotificationIcon
+                id="notification-bell-icon"
+                tabIndex={0}
+                role="button"
+                aria-label="Notifications"
+                className="fill-neutro-2 flex self-center w-full h-full hover:fill-neutro-1 p-2"
+              />
 
               <Popover
                 button={
-                  <div className="sm:w-10 sm:h-10 w-8 h-8 rounded-full bg-neutro-2/50 hover:scale-105 active:scale-95 cursor-pointer flex justify-center items-center">
+                  <button
+                    role="button"
+                    aria-label="User Avatar"
+                    type="button"
+                    id="user-avatar-button"
+                    className="sm:w-10 sm:h-10 w-8 h-8 rounded-full bg-neutro-2/50 hover:scale-105 active:scale-95 cursor-pointer flex justify-center items-center"
+                  >
                     <CircleAvatar
                       userId="2c69a930-16ed-41c0-afb3-a7564471d307"
                       size={38}
                     />
-                  </div>
+                  </button>
                 }
                 side="bottom"
               >
                 <div className="p-1 bg-neutro-4 rounded-[8px] border-[1px] border-neutro-2 shadow mt-2 gap-y-1 flex flex-col w-40">
-                  <div
+                  <button
+                    id="user-profile-button"
+                    aria-label="View Profile"
+                    role="button"
+                    type="button"
+                    tabIndex={0}
                     onClick={() => {
                       navigate('/settings');
                     }}
                     className="hover:bg-neutro-3 active:bg-neutro-3 active:scale-95 rounded-[4px] px-2 py-1 text-nav-bar-m text-neutro-2 cursor-pointer transition-all duration-200"
                   >
                     View Profile
-                  </div>
+                  </button>
                 </div>
               </Popover>
             </div>
