@@ -56,7 +56,7 @@ export const CalendarPicker = ({
                   const day = String(today.getDate()).padStart(2, '0');
                   const year = today.getFullYear();
                   const formatted = `${monthShort}. ${day} ${year}`;
-                  setValue('dueDate', formatted);
+                  setValue('dueDate', formatted, { shouldValidate: true });
                   closeAction(false);
                 }}
               >

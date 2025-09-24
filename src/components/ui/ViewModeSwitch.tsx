@@ -1,8 +1,6 @@
 import { DashboardIcon, ListIcon, PlusIcon } from '@/assets/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ModalTask } from '../features/ModalTask/ModalTask';
-import type { NewTaskData } from '@/schema/schemaNewTask';
-import { useFormContext } from 'react-hook-form';
 import { FormNewTask } from '../features/FormNewTask';
 
 export const ViewModeSwitch = ({
@@ -18,13 +16,6 @@ export const ViewModeSwitch = ({
     'w-10 h-10 fill-neutro-1 p-2.5 border-rad-[8px] border-[1px]  rounded-[8px] cursor-pointer hover:fill-primary-4';
 
   const [openModalNewTask, setOpenModalNewTask] = useState(false);
-
-  const { reset } = useFormContext<NewTaskData>();
-  useEffect(() => {
-    if (openModalNewTask) {
-      reset();
-    }
-  }, [openModalNewTask, reset]);
 
   return (
     <>

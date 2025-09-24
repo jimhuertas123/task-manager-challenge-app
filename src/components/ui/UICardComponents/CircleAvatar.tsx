@@ -29,11 +29,22 @@ export const CircleAvatar = ({
           avatarCount;
   }
 
-  if (!userId) return <AvatarImage index={index} size={size} />;
+  if (!userId) {
+    return (
+      <div
+        style={{ width: size, height: size }}
+        className="bg-neutro-2 rounded-full text-nav-bar-l flex items-center justify-center"
+      >
+        {' '}
+        ?{' '}
+      </div>
+    );
+  }
+
   return (
     <div
       role="img"
-      className="border-[1px] border-neutro-1 bg-neutro-2 overflow-hidden rounded-full"
+      className="border-[1px] border-neutro-1 bg-neutro-2 overflow-hidden rounded-full hover:scale-105 active:scale-95 transition-transform duration-200"
       style={{ width: size, height: size }}
     >
       <AvatarImage

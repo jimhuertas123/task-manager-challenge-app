@@ -11,7 +11,6 @@ export default defineConfig({
     setupFiles: ['@testing-library/jest-dom'],
     globals: true,
     environment: 'jsdom',
-    css: true,
     alias: {
       '@': resolve(__dirname, './src'),
     },

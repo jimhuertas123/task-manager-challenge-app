@@ -21,10 +21,12 @@ import { useState } from 'react';
 import { pointEstimateToNumber } from '@/utils';
 
 export const GridCard = ({
+  isDragging = false,
   isActive,
   task,
   onDelete,
 }: {
+  isDragging?: boolean;
   isActive: boolean;
   task?: TaskFieldsFragment;
   onDelete: (id: string) => void;
@@ -67,7 +69,10 @@ export const GridCard = ({
         setDropRef(node);
       }}
       style={style}
-      className="grid grid-rows-[1fr_1fr_1fr_1fr] gap-y-3 bg-neutro-4 w-full h-[208px] mb-3 pl-4 pr-[0.68rem] pb-4 pt-4 text-nav-bar-m tracking-[0.8px] font-[500]"
+      className={
+        `grid grid-rows-[1fr_1fr_1fr_1fr] gap-y-3  w-full h-[208px] mb-3 pl-4 pr-[0.68rem] pb-4 pt-4 text-nav-bar-m tracking-[0.8px] font-[500]` +
+        (isDragging ? ' bg-neutro-3/50' : ' bg-neutro-4')
+      }
     >
       <div className="flex justify-between items-start tracking-[0.8px] pr-[1.45%]">
         <h2 className="text-lg font-[500]">{task.name}</h2>
@@ -152,7 +157,7 @@ export const GridCard = ({
       <TagCards tags={task.tags} />
       <div className="flex justify-between">
         <div className="flex items-center mb-auto">
-          {assignee?.fullName ? (
+          {assignee ? (
             <CircleAvatar userId={assignee.id} size={33} />
           ) : (
             <div className="bg-neutro-2 rounded-full h-8 w-8 text-nav-bar-l flex items-center justify-center">

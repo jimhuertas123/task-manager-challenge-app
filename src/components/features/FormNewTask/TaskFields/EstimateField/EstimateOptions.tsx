@@ -17,6 +17,7 @@ export const EstimateOptions = ({
       {Object.values(PointEstimate).map((point) => (
         <button
           key={point}
+          id={`estimate-option-${point}`}
           className="flex w-[calc(100%-11px)] ml-1.5 px-1.5 gap-x-2 items-center py-1 rounded cursor-pointer text-nav-bar-m hover:bg-neutro-2"
           onClick={() => {
             setValue('estimate', pointEstimateToNumber(point), {
