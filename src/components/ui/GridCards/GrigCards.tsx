@@ -85,10 +85,11 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
           onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
         >
-          <DragOverlay className="shadow-sm shadow-white/25">
+          <DragOverlay className="shadow-sm shadow-white/2">
             {activeTask ? (
               <GridCard
                 isActive={false}
+                isDragging={true}
                 task={activeTask}
                 onDelete={() => {}}
               />

@@ -24,9 +24,8 @@ export const EstimateField = () => {
         side="bottom"
         button={
           <div
-            role="button"
             tabIndex={0}
-            aria-label="Estimate points"
+            role="button"
             className="flex h-[32px] w-full justify-center items-center py-2 rounded-[4px] cursor-pointer"
             style={{
               backgroundColor: !watch('estimate')
