@@ -102,6 +102,7 @@ export const FormNewTask = ({
           <button
             className="flex text-nav-bar-m min-w-20 max-h-[40px] bg-primary-4 justify-center text-neutro-1 py-2 px-4 rounded-[8px] disabled:opacity-50 hover:scale-105 active:scale-95 transition-all duration-200"
             type="submit"
+            //TODO: for some reason textfield is not validating properly when all fields are correct filled
             disabled={
               !isValid || isSubmitting || loading || usersLoading || loadingEdit
             }

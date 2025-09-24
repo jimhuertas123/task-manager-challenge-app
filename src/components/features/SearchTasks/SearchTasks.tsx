@@ -35,7 +35,8 @@ const setFilterByRoute = (
 };
 
 export const SearchTasks = () => {
-  const [search, setSearch] = useState('');
+  //use-hook-form instead
+  const [search, setSearch] = useState(''); //crear un objeto de filtros
   const [status, setStatus] = useState<Status | ''>('');
   const [assigneeId, setAssigneeId] = useState('');
   const [pointEstimate, setPointEstimate] = useState<PointEstimate | ''>('');
@@ -49,6 +50,7 @@ export const SearchTasks = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    //change this to onchange for input
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(() => {
