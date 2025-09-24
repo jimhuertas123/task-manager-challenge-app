@@ -49,22 +49,20 @@ export const SearchTasks = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    //change this to onchange for input
+  const handleOnChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(() => {
-      if (search === '') {
+      if (value === '') {
         setFilterByRoute(location, {}, dueDate, setFilter);
       } else {
-        setFilterByRoute(location, { name: search }, dueDate, setFilter);
+        setFilterByRoute(location, { name: value }, dueDate, setFilter);
       }
     }, 300);
-
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [search, setFilter, dueDate, location]);
+  };
 
   useEffect(() => {
     const filters: FilterTaskInput | undefined = {};
@@ -117,6 +115,7 @@ export const SearchTasks = () => {
           <Accordion.Header className="grid grid-cols-[1fr_90px] sm:grid-cols-[1fr_120px] gap-x-2 sm:gap-0 items-center h-full ">
             <div className="flex items-center w-full h-[50px]">
               <InputSearch
+                handleOnChangeSearch={handleOnChangeSearch}
                 search={search}
                 setSearch={setSearch}
                 popoverSuggestions={popoverSuggestions}

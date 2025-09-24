@@ -7,11 +7,13 @@ export const InputSearch = ({
   setSearch,
   popoverSuggestions,
   handleSuggestionClick,
+  handleOnChangeSearch,
 }: {
   search: string;
   setSearch: (value: string) => void;
   popoverSuggestions: string[];
   handleSuggestionClick: (s: string) => void;
+  handleOnChangeSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -30,7 +32,7 @@ export const InputSearch = ({
           id="search-tasks"
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleOnChangeSearch}
           className="text-neutro-2 placeholder-neutro-2 border-none outline-none w-full pl-3.5 pr-8 focus:placeholder-transparent"
           placeholder="Search"
           autoComplete="off"
@@ -39,7 +41,10 @@ export const InputSearch = ({
           <button
             type="button"
             aria-label="Clear search"
-            onClick={() => setSearch('')}
+            onClick={() => {
+              setSearch('');
+              handleSuggestionClick('');
+            }}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-neutro-2 hover:text-primary-4 focus:outline-none"
           >
             <CircleXIcon className="w-3.5 h-3.5 fill-neutro-2" />

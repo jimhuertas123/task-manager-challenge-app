@@ -35,10 +35,8 @@ export const FormNewTask = ({
     handleSubmit,
     isSubmitting,
     data,
-    loading,
     error,
     editData,
-    loadingEdit,
     errorEdit,
     onSubmit,
   } = useTaskForm({
@@ -49,7 +47,7 @@ export const FormNewTask = ({
       : undefined,
   });
 
-  if (loading || usersLoading || loadingEdit) {
+  if (usersLoading) {
     return (
       <div className="flex w-full h-[156.5px] justify-center items-center">
         <AnimatedLoading />
