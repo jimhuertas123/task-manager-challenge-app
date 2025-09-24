@@ -1,18 +1,14 @@
 import { DashboardIcon, ListIcon, AddIcon } from '@/assets/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MobileModalTask } from '../features/ModalTask/MobileModalTask';
 import { MobileFormTask } from '../features/FormNewTask/MobileFormTask';
+import { useEditTaskModal } from '@/hooks/useEditTaskModal';
 
 export const PhoneNavBar = () => {
   const [isMiddleActive, setIsMiddleActive] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    if (!openModal) {
-      setIsMiddleActive(false);
-    }
-  }, [openModal]);
+  const { open, setOpen, task, setTask } = useEditTaskModal();
 
   return (
     <aside className="col-span-1">
@@ -22,7 +18,7 @@ export const PhoneNavBar = () => {
             to="/"
             onClick={() => {
               setIsMiddleActive(false);
-              setOpenModal(false);
+              setOpen(false);
             }}
           >
             {({ isActive }) => {
@@ -44,7 +40,8 @@ export const PhoneNavBar = () => {
           <div
             onClick={() => {
               setIsMiddleActive(true);
-              setOpenModal(true);
+              setOpen(true);
+              setTask(null);
             }}
             className={`flex flex-col items-center hover:text-primary-4 ${
               isMiddleActive ? 'text-primary-4' : 'text-neutro-2'
@@ -58,7 +55,7 @@ export const PhoneNavBar = () => {
             to="/mytasks"
             onClick={() => {
               setIsMiddleActive(false);
-              setOpenModal(false);
+              setOpen(false);
             }}
           >
             {({ isActive }) => {
@@ -77,8 +74,22 @@ export const PhoneNavBar = () => {
             }}
           </NavLink>
         </div>
-        <MobileModalTask open={openModal} setOpen={setOpenModal}>
-          <MobileFormTask onClose={() => setOpenModal(false)} />
+
+        <MobileModalTask
+          open={open}
+          setOpen={() => {
+            setOpen(false);
+            setIsMiddleActive(false);
+            setTask(null);
+          }}
+        >
+          <MobileFormTask
+            onClose={() => {
+              console.log('closing');
+              setOpen(false);
+            }}
+            defaultValues={task}
+          />
         </MobileModalTask>
       </div>
     </aside>

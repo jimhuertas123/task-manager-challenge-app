@@ -21,9 +21,6 @@ export const Popover = ({
         <PopoverComponent.Content
           side={side}
           className="PopoverContent flex z-[100]"
-          onOpenAutoFocus={(event) => {
-            event.preventDefault();
-          }}
           onEscapeKeyDown={(event) => {
             event.preventDefault();
           }}

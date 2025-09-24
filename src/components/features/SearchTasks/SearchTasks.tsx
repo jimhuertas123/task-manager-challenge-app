@@ -49,22 +49,20 @@ export const SearchTasks = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    //change this to onchange for input
+  const handleOnChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(() => {
-      if (search === '') {
+      if (value === '') {
         setFilterByRoute(location, {}, dueDate, setFilter);
       } else {
-        setFilterByRoute(location, { name: search }, dueDate, setFilter);
+        setFilterByRoute(location, { name: value }, dueDate, setFilter);
       }
     }, 300);
-
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [search, setFilter, dueDate, location]);
+  };
 
   useEffect(() => {
     const filters: FilterTaskInput | undefined = {};
@@ -114,9 +112,10 @@ export const SearchTasks = () => {
     <header className="flex header-search rounded-t-[16px] rounded-br-[16px] bg-transparent sm:bg-neutro-4 text-neutro-2 flex-col gap-2 pr-4 py-2 z-1">
       <Accordion.Root type="single" collapsible className="w-full">
         <Accordion.Item value="item-1">
-          <Accordion.Header className="grid grid-cols-[1fr_90px] md:grid-cols-[1fr_120px] gap-x-2 sm:gap-0 items-center h-full ">
+          <Accordion.Header className="grid grid-cols-[1fr_90px] sm:grid-cols-[1fr_120px] gap-x-2 sm:gap-0 items-center h-full ">
             <div className="flex items-center w-full h-[50px]">
               <InputSearch
+                handleOnChangeSearch={handleOnChangeSearch}
                 search={search}
                 setSearch={setSearch}
                 popoverSuggestions={popoverSuggestions}
@@ -139,23 +138,25 @@ export const SearchTasks = () => {
                 >
                   <FilterIcon
                     id="filter-icon"
-                    className="filter-toggle-icon filter-open-rotate fill-neutro-2 active:fill-neutro-1"
+                    className="pl-1 pr-4 mt-1 sm:pl-3 sm:pr-1 filter-toggle-icon filter-open-rotate fill-neutro-2 active:fill-neutro-1"
                     aria-label="Filter"
                   />
                   <FilterCloseIcon
                     id="filter-close-icon"
-                    className="filter-toggle-icon filter-close-rotate fill-neutro-2"
+                    className="pl-1 pr-4 mt-1 sm:pl-3 sm:pr-1 filter-toggle-icon filter-close-rotate fill-neutro-2"
                     aria-label="Close filter"
                   />
                 </div>
               </Accordion.Trigger>
-              <NotificationIcon
-                id="notification-bell-icon"
-                tabIndex={0}
-                role="button"
-                aria-label="Notifications"
-                className="fill-neutro-2 flex self-center w-full h-full hover:fill-neutro-1 p-2"
-              />
+              <div className="flex">
+                <NotificationIcon
+                  id="notification-bell-icon"
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Notifications"
+                  className="fill-neutro-2 flex self-center w-full h-full hover:fill-neutro-1 sm:p-2 p-1"
+                />
+              </div>
 
               <Popover
                 button={

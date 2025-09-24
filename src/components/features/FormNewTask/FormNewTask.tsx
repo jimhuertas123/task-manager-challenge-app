@@ -34,12 +34,9 @@ export const FormNewTask = ({
   const {
     handleSubmit,
     isSubmitting,
-    isValid,
     data,
-    loading,
     error,
     editData,
-    loadingEdit,
     errorEdit,
     onSubmit,
   } = useTaskForm({
@@ -50,6 +47,14 @@ export const FormNewTask = ({
       : undefined,
   });
 
+  if (usersLoading) {
+    return (
+      <div className="flex w-full h-[156.5px] justify-center items-center">
+        <AnimatedLoading />
+      </div>
+    );
+  }
+
   return (
     <div className="flex w-full focus:outline-none focus:ring-0">
       <form
@@ -57,42 +62,68 @@ export const FormNewTask = ({
         action=""
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="w-full h-[50px] flex flex-col mb-3">
+        <div
+          id="title"
+          aria-label="Title"
+          tabIndex={0}
+          className="w-full h-[50px] flex flex-col mb-3"
+        >
           <TitleLabelField />
         </div>
 
         <div className="grid grid-cols-[auto_22%_22%_26%] w-full gap-x-4">
           {/* estimate field */}
-          <div className="w-full max-w-full">
+          <div
+            id="estimate"
+            aria-label="Estimate"
+            className="w-full max-w-full"
+          >
             <EstimateField />
           </div>
 
           {/* assignee field */}
           {!usersError ? (
-            <div className="w-full max-w-full">
+            <div
+              id="assignee"
+              aria-label="Assignee"
+              tabIndex={0}
+              className="w-full max-w-full"
+            >
               <AssigneeField
                 usersData={usersData?.users as UserFieldsFragment[] | undefined}
               />
             </div>
           ) : (
-            <div>
-              <p className="text-primary-4">Error loading users</p>
+            <div id="assignee-error">
+              <p className="text-primary-4">!Error users</p>
             </div>
           )}
-
           {/* label field */}
-          <div className="w-full max-w-full">
+          <div
+            id="tag-label"
+            aria-label="Tag Label"
+            tabIndex={0}
+            className="w-full max-w-full"
+          >
             <LabelTagField />
           </div>
 
           {/* due date field */}
-          <div className="w-full max-w-full">
+          <div
+            id="due-date"
+            aria-label="Due Date"
+            tabIndex={0}
+            className="w-full max-w-full"
+          >
             <DueDateField />
           </div>
         </div>
 
         <div className="mt-6 flex justify-end gap-x-2">
           <button
+            id="cancel-button"
+            aria-label="Cancel"
+            tabIndex={0}
             className="hover:bg-white/10 hover:bg-opacity-80 py-2 px-4 rounded-[8px] text-neutro-1 text-nav-bar-m"
             type="button"
             onClick={onClose}
@@ -100,12 +131,11 @@ export const FormNewTask = ({
             cancel
           </button>
           <button
+            id="submit-button"
+            aria-label="Submit"
+            tabIndex={0}
             className="flex text-nav-bar-m min-w-20 max-h-[40px] bg-primary-4 justify-center text-neutro-1 py-2 px-4 rounded-[8px] disabled:opacity-50 hover:scale-105 active:scale-95 transition-all duration-200"
             type="submit"
-            //TODO: for some reason textfield is not validating properly when all fields are correct filled
-            disabled={
-              !isValid || isSubmitting || loading || usersLoading || loadingEdit
-            }
           >
             {isSubmitting ? (
               <AnimatedLoading />

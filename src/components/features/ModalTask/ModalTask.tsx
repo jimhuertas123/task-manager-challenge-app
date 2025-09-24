@@ -1,5 +1,4 @@
 import { createPortal } from 'react-dom';
-import { useEffect } from 'react';
 
 export const ModalTask = ({
   isOpen,
@@ -14,22 +13,16 @@ export const ModalTask = ({
   className: string;
   backgroundStyle?: string;
 } & React.HTMLAttributes<HTMLDialogElement>) => {
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', handleEsc);
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-    };
-  }, [isOpen, onClose]);
-
   return createPortal(
     <dialog
+      autoFocus
       open={isOpen}
       className={`${backgroundStyle ? backgroundStyle : ''} w-full h-full fixed inset-0 flex items-center justify-center p-4 transition-colors duration-300 z-[10]`}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

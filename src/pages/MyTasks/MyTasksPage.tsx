@@ -17,6 +17,8 @@ export const MyTasksPage = () => {
 
   const { open, setOpen, task } = useEditTaskModal();
 
+  if (error) throw new Error(error.message);
+
   return (
     <div key={'dashboard'} className="h-full w-full">
       <div className="grid grid-rows-[40px_1fr] gap-y-3 sm:gap-y-2 sm:grid-rows-[63px_1fr] h-full w-full">
@@ -26,7 +28,6 @@ export const MyTasksPage = () => {
           setViewMode={setViewMode}
         />
         {loading && <GridCardsLoading />}
-        {error && <p>Error: {String(error.message)}</p>}
         {!loading && !error && (
           <div className="relative h-full w-full">
             <div
@@ -50,7 +51,7 @@ export const MyTasksPage = () => {
           </div>
         )}
 
-        {open && (
+        {open && !isSmallDevice && (
           <ModalTask
             isOpen={open}
             onClose={() => setOpen(false)}

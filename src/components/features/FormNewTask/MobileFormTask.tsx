@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from 'react';
+import { useState, type JSX } from 'react';
 import { ModalTask } from '../ModalTask/ModalTask';
 import {
   TitleLabelField,
@@ -46,7 +46,6 @@ export const MobileFormTask = ({
   const usersData = usersQuery?.users as UserFieldsFragment[] | undefined;
 
   const {
-    reset,
     watch,
     setValue,
     formErrors,
@@ -66,10 +65,6 @@ export const MobileFormTask = ({
       ? { users: usersData as UserFieldsFragment[] }
       : undefined,
   });
-
-  useEffect(() => {
-    if (!defaultValues) reset();
-  }, [reset, defaultValues]);
 
   const modalContent: Map<string, JSX.Element> = new Map([
     [

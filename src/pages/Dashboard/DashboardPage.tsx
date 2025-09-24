@@ -9,8 +9,6 @@ import { ModalTask } from '@/components/features/ModalTask/ModalTask';
 import { FormNewTask } from '@/components/features/FormNewTask';
 import { useTasks } from '@/hooks/useTasks';
 import { useEditTaskModal } from '@/hooks/useEditTaskModal';
-import { MobileModalTask } from '@/components/features/ModalTask/MobileModalTask';
-import { MobileFormTask } from '@/components/features/FormNewTask/MobileFormTask';
 
 export const DashboardPage = () => {
   const [isGridViewMode, setViewMode] = useState<boolean>(true);
@@ -69,7 +67,7 @@ export const DashboardPage = () => {
           </ModalTask>
         )}
 
-        {open && isSmallDevice && (
+        {/* {open && isSmallDevice && (
           <MobileModalTask open={open} setOpen={() => setOpen(false)}>
             <div className="p-5">
               <MobileFormTask
@@ -78,7 +76,7 @@ export const DashboardPage = () => {
               />
             </div>
           </MobileModalTask>
-        )}
+        )} */}
       </div>
     </div>
   );
