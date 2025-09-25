@@ -85,7 +85,6 @@ export const PhoneNavBar = () => {
         >
           <MobileFormTask
             onClose={() => {
-              console.log('closing');
               setOpen(false);
             }}
             defaultValues={task}

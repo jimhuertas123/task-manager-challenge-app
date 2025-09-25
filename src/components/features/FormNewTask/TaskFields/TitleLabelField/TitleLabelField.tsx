@@ -24,6 +24,7 @@ export const TitleLabelField = () => {
     <>
       {editing ? (
         <input
+          aria-label="Task title input"
           role="textbox"
           className="text-nav-bar-xl flex w-full h-[30px] text-neutro-1 focus:outline-none focus:ring-0 focus:border-none"
           autoFocus

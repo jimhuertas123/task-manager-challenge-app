@@ -14,7 +14,11 @@ export const LabelTagOptions = ({
       <span className="text-neutro-2 text-nav-bar-xl pl-3">Tag Title</span>
       <div className="text-neutro-2 text-nav-bar-m pl-3 flex flex-col gap-2">
         {Object.values(TaskTag).map((tag) => (
-          <label key={tag} className="flex items-center gap-2 cursor-pointer">
+          <label
+            data-cy={`tag-option-${tag}`}
+            key={tag}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <input
               type="checkbox"
               value={tag}

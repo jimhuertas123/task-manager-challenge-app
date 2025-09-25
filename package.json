@@ -19,7 +19,10 @@
     "preview": "vite preview",
     "prepare": "husky",
     "codegen": "graphql-codegen --config codegen.ts",
-    "codegen:watch": "graphql-codegen --config codegen.yml --watch"
+    "codegen:watch": "graphql-codegen --config codegen.yml --watch",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:form": "cypress run --spec \"cypress/e2e/form_new_task.cy.ts\""
   },
   "lint-staged": {
     "src/**/!(*generated)/*.{ts,tsx,js,jsx}": [
@@ -67,6 +70,7 @@
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "autoprefixer": "^10.4.21",
+    "cypress": "^15.3.0",
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",

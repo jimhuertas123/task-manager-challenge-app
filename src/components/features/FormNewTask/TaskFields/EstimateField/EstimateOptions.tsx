@@ -16,6 +16,7 @@ export const EstimateOptions = ({
       <span className="text-neutro-2 text-nav-bar-xl pl-3">Estimate</span>
       {Object.values(PointEstimate).map((point) => (
         <button
+          data-cy={`estimate-option-${point}`}
           key={point}
           id={`estimate-option-${point}`}
           className="flex w-[calc(100%-11px)] ml-1.5 px-1.5 gap-x-2 items-center py-1 rounded cursor-pointer text-nav-bar-m hover:bg-neutro-2"

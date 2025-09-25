@@ -64,15 +64,25 @@ export const SearchTasks = () => {
     }, 300);
   };
 
+  const prevPathname = useRef(location.pathname);
   useEffect(() => {
     const filters: FilterTaskInput | undefined = {};
     if (status) filters.status = status;
     if (assigneeId) filters.assigneeId = assigneeId;
     if (pointEstimate) filters.pointEstimate = pointEstimate;
     if (tag) filters.tags = [tag];
-    refetchTasks(filters);
+
+    if (location.pathname !== '/mytasks' && assigneeId) {
+      filters.assigneeId = assigneeId;
+    }
 
     setFilterByRoute(location, filters, dueDate, setFilter);
+
+    if (prevPathname.current === location.pathname) {
+      refetchTasks(filters);
+    }
+
+    prevPathname.current = location.pathname;
   }, [
     status,
     assigneeId,
@@ -81,7 +91,7 @@ export const SearchTasks = () => {
     dueDate,
     refetchTasks,
     setFilter,
-    location,
+    location.pathname,
   ]);
 
   const suggestions = useMemo(

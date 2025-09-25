@@ -64,6 +64,7 @@ export const GridCard = ({
     <div className="h-[204px] bg-neutro-3/20 mb-4 border-[2px] border-dashed border-primary-4" />
   ) : (
     <div
+      data-cy={`task-card-${task.id}`}
       ref={(node) => {
         setDragRef(node);
         setDropRef(node);

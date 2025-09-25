@@ -138,11 +138,15 @@ export const FormNewTask = ({
             type="submit"
           >
             {isSubmitting ? (
-              <AnimatedLoading />
+              <AnimatedLoading data-cy="submit-loading" />
             ) : data || editData ? (
-              <AnimatedSuccess stroke="white" />
+              <AnimatedSuccess data-cy="submit-success" stroke="white" />
             ) : error || errorEdit ? (
-              <AnimatedFailed className="w-4 h-4 p-0 m-0" stroke="white" />
+              <AnimatedFailed
+                data-cy="submit-failed"
+                className="w-4 h-4 p-0 m-0"
+                stroke="white"
+              />
             ) : (
               <span>{defaultValues ? 'modify' : 'create'}</span>
             )}

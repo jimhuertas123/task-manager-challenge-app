@@ -19,6 +19,7 @@ export const AssigneeOptions = ({
         {usersData ? (
           usersData.map((user) => (
             <div
+              data-cy={`assignee-option-${user.fullName.replace(/\s/g, '-')}`}
               key={user.id}
               className="flex items-center gap-x-2 cursor-pointer hover:bg-neutro-2 px-5 py-3 rounded"
               onClick={() => {

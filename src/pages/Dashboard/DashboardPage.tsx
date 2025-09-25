@@ -66,17 +66,6 @@ export const DashboardPage = () => {
             </div>
           </ModalTask>
         )}
-
-        {/* {open && isSmallDevice && (
-          <MobileModalTask open={open} setOpen={() => setOpen(false)}>
-            <div className="p-5">
-              <MobileFormTask
-                defaultValues={task}
-                onClose={() => setOpen(false)}
-              />
-            </div>
-          </MobileModalTask>
-        )} */}
       </div>
     </div>
   );
