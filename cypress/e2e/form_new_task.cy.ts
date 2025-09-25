@@ -2,7 +2,7 @@
 
 describe('FormNewTask E2E', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173');
+    cy.visit('/');
     cy.get('svg[aria-label="Add new task"]').click();
   });
 
