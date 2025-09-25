@@ -137,7 +137,7 @@ All core features have been implemented. Any remaining improvements will focus o
 
 ### Git History using Gource
 
-![Git historie with Gource](https://github.com/user-attachments/assets/3663d020-b5df-4c07-93c4-63daad8ccc4f)
+https://github.com/user-attachments/assets/3663d020-b5df-4c07-93c4-63daad8ccc4f
 
 
 ### Madge: Dependencie Graph
