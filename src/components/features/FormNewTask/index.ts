@@ -8,3 +8,4 @@ export * from './TaskFields/EstimateField/EstimateField';
 export * from './TaskFields/EstimateField/EstimateOptions';
 export * from './TaskFields/LabelTagField/LabelTagField';
 export * from './TaskFields/LabelTagField/LabelTagOptions';
+export * from './MobileFormTask';

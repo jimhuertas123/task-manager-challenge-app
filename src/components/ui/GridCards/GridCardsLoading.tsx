@@ -6,7 +6,7 @@ const ColumnLoading = ({ keyIndex }: { keyIndex: number }) => {
     >
       <div
         key={`title-${keyIndex}`}
-        className="bg-neutro-4 p-4 grid grid-rows-4 h-full animate-pulse"
+        className="bg-neutro-4 p-4 grid grid-rows-4 h-full animate-pulse "
         style={{
           background:
             'linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))',
@@ -15,10 +15,10 @@ const ColumnLoading = ({ keyIndex }: { keyIndex: number }) => {
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
         }}
       />
-      {Array.from({ length: 3 }).map((_, i) => (
+      {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={`loading-skeleton-${keyIndex}-${i}`}
-          className="bg-neutro-4 p-4 grid grid-rows-4 h-full animate-pulse"
+          className="bg-neutro-4 p-4 grid grid-rows-4 h-full animate-pulse "
           style={{
             background:
               'linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))',
@@ -71,12 +71,12 @@ const ColumnLoading = ({ keyIndex }: { keyIndex: number }) => {
 };
 export const GridCardsLoading = () => {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-auto overflow-hidden max-h-[72dvh]">
       <div
-        className={`grid pt-[120px] grid-flow-col auto-cols-[minmax(338px,1fr)] sm:auto-cols-[minmax(348px,1fr)] gap-4 md:gap-x-[2.02rem] max-w-[3000px] md:m-auto`}
+        className={`grid pt-[120px] grid-flow-col auto-cols-[338px] sm:auto-cols-[348px] gap-4 md:gap-x-[2.02rem] max-w-[3000px] md:m-auto`}
         style={{ padding: '1rem 0' }}
       >
-        {Array.from({ length: 3 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_, i) => (
           <ColumnLoading key={i} keyIndex={i} />
         ))}
       </div>

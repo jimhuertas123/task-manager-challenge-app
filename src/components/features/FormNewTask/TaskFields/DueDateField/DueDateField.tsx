@@ -24,6 +24,7 @@ export const DueDateField = () => {
         side="bottom"
         button={
           <div
+            data-cy="due-date-trigger"
             className="flex h-[32px] w-full justify-center items-center rounded-[4px] cursor-pointer"
             style={{
               backgroundColor: 'rgba(148, 151, 154, 0.1)',

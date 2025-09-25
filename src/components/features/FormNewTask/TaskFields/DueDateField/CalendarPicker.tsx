@@ -2,7 +2,7 @@ import { DayPicker } from 'react-day-picker';
 import type { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import type { NewTaskData } from '@/schema/schemaNewTask';
 import { CalendarNavbar } from './CalendarNavbar';
-import { normalizeDate, parseLocalDate } from '@/utils';
+import { normalizeDate } from '@/utils';
 
 export const CalendarPicker = ({
   watch,
@@ -14,14 +14,15 @@ export const CalendarPicker = ({
   closeAction: (open: boolean) => void;
 }) => {
   return (
-    <div className="ml-1 mt-2 w-[266px] pt-2 bg-neutro-5 rounded-[8px] focus:ring-1 border-[1px] border-neutro-2">
+    <div
+      data-cy="calendar-picker"
+      className="ml-1 mt-2 w-[266px] pt-2 bg-neutro-5 rounded-[8px] focus:ring-1 border-[1px] border-neutro-2"
+    >
       <DayPicker
         mode="single"
-        selected={
-          watch('dueDate') ? parseLocalDate(watch('dueDate')) : undefined
-        }
+        selected={watch('dueDate') ? new Date(watch('dueDate')) : undefined}
         defaultMonth={
-          watch('dueDate') ? parseLocalDate(watch('dueDate')) : new Date()
+          watch('dueDate') ? new Date(watch('dueDate')) : new Date()
         }
         classNames={{
           month:

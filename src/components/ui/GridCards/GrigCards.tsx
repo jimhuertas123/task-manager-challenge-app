@@ -35,6 +35,7 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     useTaskDnD(tasks as TaskFieldsFragment[], statusOrder);
 
   const handleDelete = async (taskId: string) => {
+    // if (!confirm('Are you sure you want to delete this task?')) return;
     await deleteTask({
       variables: { input: { id: taskId } },
       update: (cache, { data }) => {
@@ -76,7 +77,7 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
     );
   }
   return (
-    <div className="w-full h-full overflow-x-auto overflow-y-hidden">
+    <div className="w-full h-full overflow-x-auto overflow-y-hidden ">
       <div
         className={`grid grid-flow-col auto-cols-[minmax(338px,1fr)] sm:auto-cols-[minmax(348px,1fr)] gap-4 md:gap-x-[2.02rem] max-w-[3000px]`}
       >

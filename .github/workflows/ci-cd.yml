@@ -37,3 +37,12 @@ jobs:
 
       - name: Build project
         run: yarn build
+
+      # - name: Start app server
+      #   run: yarn preview &
+
+      # - name: Wait for app to be ready
+      #   run: npx wait-on http://localhost:4173
+
+      # - name: Run E2E tests
+      #   run: yarn cypress:run
