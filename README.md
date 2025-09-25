@@ -133,6 +133,20 @@ The project is nearly complete and includes:
 
 All core features have been implemented. Any remaining improvements will focus on polish, performance, and additional enhancements as needed.
 
+## 📊 Software Visualization
+
+### Git History using Gource
+
+![Git Gource History](./src/assets/gource-fast.mp4)
+
+### Madge: Dependencie Graph
+
+![Repository Madge Diagram](./src/assets/diagram.png)
+
+### Project Structure
+
+![Repository Dependencies Diagram](./src/assets/diagram-GitDiagram.png)
+
 ## 🎯 Features Roadmap
 
 ### Week 1: Foundation & Core UI
