@@ -5,7 +5,10 @@ describe('Create, Edit and Delete Task E2E', () => {
 
   beforeEach(() => {
     cy.visit('/');
-    cy.get('svg[aria-label="Add new task"]').click();
+    cy.get('[data-cy="grid-cards-loading"]').should('not.exist');
+    cy.get('svg[aria-label="Add new task"]')
+      .should('be.visible')
+      .click({ force: true });
   });
 
   it('Create, edit and delete a task', () => {
