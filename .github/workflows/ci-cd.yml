@@ -38,11 +38,9 @@ jobs:
       - name: Build project
         run: yarn build
 
-      # - name: Start app server
-      #   run: yarn preview &
-
-      # - name: Wait for app to be ready
-      #   run: npx wait-on http://localhost:4173
-
-      # - name: Run E2E tests
-      #   run: yarn cypress:run
+      - name: Wait for app to be ready
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm preview
+          wait-on: 'http://localhost:4173'
+          browser: electron
