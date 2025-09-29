@@ -55,7 +55,10 @@ export const TagCards = ({
             </div>
           }
         >
-          <div className="bg-neutro-5 p-2 rounded flex gap-x-1 mt-2">
+          <div
+            data-cy="tag-cards-extra-popover"
+            className="bg-neutro-5 p-2 rounded flex gap-x-1 mt-2"
+          >
             {extraTags.map((tag, index) => (
               <TagCard key={index} tag={tag} />
             ))}

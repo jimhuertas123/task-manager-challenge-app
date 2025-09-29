@@ -76,7 +76,7 @@ describe('FilterATask E2E', () => {
               cy.wrap($tagCards)
                 .find('[data-cy="tag-cards-extra-button"]')
                 .click();
-              cy.get('.bg-neutro-2\\/20')
+              cy.get('[data-cy="tag-cards-extra-popover"]')
                 .should('be.visible')
                 .contains(tag)
                 .should('exist');
@@ -99,17 +99,13 @@ describe('FilterATask E2E', () => {
     cy.get('[data-cy="grid-cards-loading"]').should('not.exist');
 
     cy.get('body').then(($body) => {
-      if (
-        $body.find('[data-cy^="task-card-"] [data-cy="due-date-label"]')
-          .length === 0
-      ) {
-        expect(true).to.be.true;
-      } else {
-        cy.get('[data-cy^="task-card-"] [data-cy="due-date-label"]').each(
-          ($el) => {
-            cy.wrap($el).should('have.text', 'TODAY');
-          }
-        );
+      const labels = $body.find(
+        '[data-cy^="task-card-"] [data-cy="due-date-label"]'
+      );
+      if (labels.length > 0) {
+        cy.wrap(labels).each(($el) => {
+          cy.wrap($el).should('have.text', 'TODAY');
+        });
       }
     });
   });
