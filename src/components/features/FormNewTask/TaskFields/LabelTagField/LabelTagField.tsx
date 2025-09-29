@@ -24,33 +24,30 @@ export const LabelTagField = () => {
           <div className="relative">
             {watch('tags') && watch('tags').length > 3 && (
               <div
-                className="absolute left-3 -top-3 w-full h-full rounded-[4px] z-0"
+                className="absolute left-3 -top-4.5 w-full h-full rounded-[4px] z-0"
                 style={{
-                  backgroundColor: '#565a60',
-                  boxShadow: '0 2px 8px 0 rgba(20, 133, 255, 0.08)',
+                  backgroundColor: '#585e64',
                 }}
               />
             )}
             {watch('tags') && watch('tags').length > 2 && (
               <div
-                className="absolute left-2 -top-2 w-full h-full rounded-[4px] z-0"
+                className="absolute left-2 -top-3 w-full h-full rounded-[4px] z-0"
                 style={{
-                  backgroundColor: '#44474d',
-                  boxShadow: '0 2px 8px 0 rgba(20, 133, 255, 0.10)',
+                  backgroundColor: '#474c51',
                 }}
               />
             )}
             {watch('tags') && watch('tags').length > 1 && (
               <div
-                className="absolute left-1 -top-1 w-full h-full rounded-[4px] z-0"
+                className="absolute left-1 -top-1.5 w-full h-full rounded-[4px] z-0"
                 style={{
-                  background: '#3a3d42',
-                  boxShadow: '0 1px 4px 0 rgba(20, 133, 255, 0.12)',
+                  background: '#2f3337',
                 }}
               />
             )}
             <div
-              className="flex h-[32px] w-full justify-center items-center py-2 rounded-[4px] cursor-pointer relative z-10"
+              className="flex h-[32px] w-full justify-center items-center py-1 rounded-[4px] cursor-pointer relative z-10"
               style={{
                 backgroundColor: 'rgba(66, 70, 74, 1)',
               }}

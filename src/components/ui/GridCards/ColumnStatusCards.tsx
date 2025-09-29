@@ -42,10 +42,10 @@ export const ColumnStatusCards = ({
   if (columnTasks.length === 0 || !tasks) {
     return (
       <div
+        id={`empty-column-${status}`}
         ref={setNodeRef}
         key={status}
         className="relative w-full h-[calc(100vh-220px)] flex flex-col pt-1 overflow-hidden"
-        style={{}}
       >
         <h1 className="text-lg font-bold tracking-wide pb-5">
           {status.charAt(0) + status.slice(1).toLowerCase().replace('_', ' ')}
@@ -71,6 +71,8 @@ export const ColumnStatusCards = ({
 
   return (
     <div
+      data-cy={`column-${status}`}
+      id={`column-${status}`}
       ref={setNodeRef}
       key={status}
       className=" w-full h-[calc(100vh-220px)] flex flex-col pt-1 overflow-hidden"

@@ -71,7 +71,11 @@ const ColumnLoading = ({ keyIndex }: { keyIndex: number }) => {
 };
 export const GridCardsLoading = () => {
   return (
-    <div className="w-full overflow-x-auto overflow-hidden max-h-[72dvh]">
+    <div
+      data-cy="grid-cards-loading"
+      id="grid-cards-loading"
+      className="w-full overflow-x-auto overflow-hidden max-h-[72dvh]"
+    >
       <div
         className={`grid pt-[120px] grid-flow-col auto-cols-[338px] sm:auto-cols-[348px] gap-4 md:gap-x-[2.02rem] max-w-[3000px] md:m-auto`}
         style={{ padding: '1rem 0' }}

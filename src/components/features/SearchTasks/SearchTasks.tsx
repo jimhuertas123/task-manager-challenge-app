@@ -16,6 +16,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Popover } from '@/components/ui';
 import { CircleAvatar } from '@/components/ui/UICardComponents/CircleAvatar';
+import { useUsers } from '@/hooks/useUsers';
 
 const setFilterByRoute = (
   location: ReturnType<typeof useLocation>,
@@ -63,6 +64,9 @@ export const SearchTasks = () => {
       }
     }, 300);
   };
+
+  const { loading } = useTasks();
+  const { loading: userLoading } = useUsers();
 
   const prevPathname = useRef(location.pathname);
   useEffect(() => {
@@ -142,16 +146,19 @@ export const SearchTasks = () => {
                 onClick={() => {
                   setOpenAccordion(!openAccordion);
                 }}
+                disabled={loading || userLoading}
               >
                 <div
                   className={`relative w-full h-full rounded hover:cursor-pointer ${openAccordion ? 'open' : ''}`}
                 >
                   <FilterIcon
+                    data-cy="filter-icon"
                     id="filter-icon"
                     className="pl-1 pr-4 mt-1 sm:pl-3 sm:pr-1 filter-toggle-icon filter-open-rotate fill-neutro-2 active:fill-neutro-1"
                     aria-label="Filter"
                   />
                   <FilterCloseIcon
+                    data-cy="filter-close-icon"
                     id="filter-close-icon"
                     className="pl-1 pr-4 mt-1 sm:pl-3 sm:pr-1 filter-toggle-icon filter-close-rotate fill-neutro-2"
                     aria-label="Close filter"

@@ -48,6 +48,7 @@ export const CalendarPicker = ({
           Footer: () => (
             <div className="w-full border-t border-neutro-2 p-0">
               <button
+                data-cy="due-date-today-button"
                 className="w-full text-primary-4 text-nav-bar-m rounded-bl-[2px] rounded-br-[2px] hover:bg-primary-4 hover:text-neutro-1 py-2 active:scale-95 transition-all duration-200"
                 onClick={() => {
                   const today = new Date();

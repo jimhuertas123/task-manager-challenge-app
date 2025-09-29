@@ -55,6 +55,7 @@ export const DueDate = ({
 
   return (
     <div
+      data-cy="due-date-label"
       className={`rounded-[4px] ${showBgColor ? 'px-4' : 'px-0'} flex justify-center items-center mr-[2%]`}
       style={{
         backgroundColor: showBgColor

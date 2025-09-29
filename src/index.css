@@ -50,3 +50,7 @@ body[data-dnd-kit-dragging='true'],
   -webkit-touch-callout: none !important;
   overscroll-behavior: contain !important;
 }
+
+*:focus {
+  outline-color: var(--color-primary-4);
+}

@@ -11,9 +11,11 @@ vi.mock('../../hooks/useUsers', () => ({
 }));
 
 it('renders CircleAvatar with correct attributes', () => {
-  render(<CircleAvatar userId="1" size={40} />);
+  const userTest = { id: '1', fullName: 'User1' };
 
-  const avatarImg = screen.getByAltText('Avatar of 1');
+  render(<CircleAvatar userId={userTest.id} size={40} />);
+
+  const avatarImg = screen.getByAltText(`Avatar of ${userTest.fullName}`);
   expect(avatarImg).toBeInTheDocument();
   expect(avatarImg).toHaveAttribute('width', '40');
   expect(avatarImg).toHaveAttribute('height', '40');

@@ -231,7 +231,6 @@ export const MobileFormTask = ({
                 backgroundColor: 'rgba(148, 151, 154, 0.1)',
               }}
             >
-              {/* TODO: calendar icon must be the filled one*/}
               <CalendarFilledIcon className="fill-neutro-1" />
               <h2 className="text-neutro-1 font-[500] text-nav-bar-m tracking-[0.9px]">
                 {watch('dueDate') || 'Due Date'}

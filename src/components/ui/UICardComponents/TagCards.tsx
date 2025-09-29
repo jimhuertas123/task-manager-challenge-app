@@ -1,4 +1,5 @@
 import type { TaskTag } from '@/__generated__/graphql';
+import { Popover } from '../Popover/Popover';
 
 const tagColors: { [key in TaskTag]: { color: string; bg: string } } = {
   RAILS: { color: '#FFFFFF', bg: 'rgba(148, 151, 154, 0.1)' },
@@ -30,9 +31,11 @@ export const TagCards = ({
   limitShow?: number;
 }) => {
   const visibleTags = tags.slice(0, limitShow);
+  const extraTags = tags.slice(limitShow);
   const extraCount = tags.length - limitShow;
   return (
     <div
+      data-cy="tag-cards"
       id="tag-cards"
       data-testid={tags.length === 0 ? 'tag-cards-empty' : undefined}
       className="flex gap-x-2 items-center"
@@ -41,9 +44,23 @@ export const TagCards = ({
         <TagCard key={index} tag={tag} />
       ))}
       {extraCount > 0 && (
-        <div className="flex text-nav-bar-s xl:text-nav-bar-m rounded-md px-2 xl:px-4 py-1 w-fit bg-neutro-3 text-neutro-2">
-          +{extraCount}
-        </div>
+        <Popover
+          side="bottom"
+          button={
+            <div
+              data-cy="tag-cards-extra-button"
+              className="flex hover:cursor-pointer active:text-neutro-1 hover:text-neutro-1 text-nav-bar-s xl:text-nav-bar-m rounded-md px-2 xl:px-4 py-1 w-fit bg-neutro-3 text-neutro-2"
+            >
+              +{extraCount}
+            </div>
+          }
+        >
+          <div className="bg-neutro-5 p-2 rounded flex gap-x-1 mt-2">
+            {extraTags.map((tag, index) => (
+              <TagCard key={index} tag={tag} />
+            ))}
+          </div>
+        </Popover>
       )}
     </div>
   );

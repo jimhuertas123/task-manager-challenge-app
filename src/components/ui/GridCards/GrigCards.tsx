@@ -63,7 +63,10 @@ export const GridCards = ({ tasks }: { tasks: GetAllTasksQuery['tasks'] }) => {
 
   if (!tasks || tasks.length === 0) {
     return (
-      <div className="flex-1 overflow-y-auto overflow-x-hidden">
+      <div
+        data-cy="empty-tasks-state"
+        className="flex-1 overflow-y-auto overflow-x-hidden"
+      >
         <div className="pt-[16%] inset-0 flex flex-col items-center justify-center gap-y-2">
           <BlankTaskIcon
             className="w-25 h-25 fill-neutro-2/30  stroke-neutro-5"

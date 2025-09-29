@@ -36,6 +36,18 @@ export const InputSearch = ({
           className="text-neutro-2 placeholder-neutro-2 border-none outline-none w-full pl-3.5 pr-8 focus:placeholder-transparent"
           placeholder="Search"
           autoComplete="off"
+          onKeyDown={(e) => {
+            if (
+              (e.key === 'ArrowDown' || e.key === 'ArrowUp') &&
+              popoverSuggestions.length > 0
+            ) {
+              e.preventDefault();
+              const suggestionList = document.querySelector(
+                '[data-cy="suggestion-list"]'
+              ) as HTMLDivElement | null;
+              if (suggestionList) suggestionList.focus();
+            }
+          }}
         />
         {search && (
           <button

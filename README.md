@@ -48,6 +48,12 @@ npm run codegen      # Generate GraphQL types
 - **TypeScript**
 - **Vite**
 - **React Router DOM**
+- **react-error-boundary**
+- **react-date-picker**
+- **tailwindcss**
+- **@radix/popover**
+- **@radix/accordion**
+- **zod, react-hook-form, @hookform/resolvers**
 
 ### GraphQL & State Management
 
@@ -60,7 +66,10 @@ npm run codegen      # Generate GraphQL types
 - **Prettier**
 - **Husky**
 - **lint-staged**
-- **react-error-boundary**
+- **vitest**
+- **wait on**
+- **jsdom**
+- **cypress**
 
 ### CI/CD
 
@@ -138,7 +147,6 @@ All core features have been implemented. Any remaining improvements will focus o
 ### Git History using Gource
 
 https://github.com/user-attachments/assets/3663d020-b5df-4c07-93c4-63daad8ccc4f
-
 
 ### Madge: Dependencie Graph
 

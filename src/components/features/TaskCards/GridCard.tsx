@@ -69,6 +69,7 @@ export const GridCard = ({
         setDragRef(node);
         setDropRef(node);
       }}
+      id={`task-card-${task.id}`}
       style={style}
       className={
         `grid grid-rows-[1fr_1fr_1fr_1fr] gap-y-3  w-full h-[208px] mb-3 pl-4 pr-[0.68rem] pb-4 pt-4 text-nav-bar-m tracking-[0.8px] font-[500]` +
@@ -80,7 +81,7 @@ export const GridCard = ({
         <span
           {...listeners}
           {...attributes}
-          className="cursor-grab active:cursor-grabbing mr-2"
+          className={`mr-2 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
           style={{ touchAction: 'none' }}
           tabIndex={0}
           role="button"
@@ -108,6 +109,7 @@ export const GridCard = ({
           side="bottom"
           button={
             <button
+              data-cy="task-options-button"
               id="task-options-button"
               aria-label="Open task options"
               type="button"
@@ -120,6 +122,7 @@ export const GridCard = ({
         >
           <div className="p-2 bg-neutro-3 rounded-[8px] border-[1px] border-neutro-2 shadow mt-2 gap-y-1 flex flex-col">
             <button
+              data-cy="edit-button"
               id="edit-button"
               aria-label="Edit Task"
               type="button"
@@ -134,6 +137,7 @@ export const GridCard = ({
               <p className="text-sm">Edit</p>
             </button>
             <button
+              data-cy="delete-button"
               id="delete-button"
               aria-label="Delete Task"
               type="button"
@@ -150,7 +154,12 @@ export const GridCard = ({
         </Popover>
       </div>
       <div className="flex justify-between">
-        <p className="flex items-center">
+        <p
+          className="flex items-center"
+          id="estimate-label"
+          data-cy="estimate-label"
+          aria-label={`Estimate: ${pointEstimateToNumber(task.pointEstimate)} Points`}
+        >
           {pointEstimateToNumber(task.pointEstimate)} Points
         </p>
         <DueDate dueDate={task.dueDate} />

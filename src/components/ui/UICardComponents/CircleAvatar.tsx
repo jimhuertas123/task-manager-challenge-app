@@ -12,13 +12,14 @@ export const CircleAvatar = ({
   avatarSize?: number;
 }) => {
   const { data } = useUsers();
-  const users = data?.users ?? [];
+  const users: UserFieldsFragment[] =
+    (data?.users as UserFieldsFragment[]) ?? [];
   const avatarCount = 5;
 
   let index = 0;
 
   if (userId) {
-    const userIndex = (users as UserFieldsFragment[]).findIndex(
+    const userIndex = users.findIndex(
       (user: { id: string }) => user.id === userId
     );
 
@@ -28,6 +29,8 @@ export const CircleAvatar = ({
         : userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) %
           avatarCount;
   }
+
+  const userName = users.find((user) => user.id === userId)?.fullName || 'User';
 
   if (!userId) {
     return (
@@ -43,6 +46,8 @@ export const CircleAvatar = ({
 
   return (
     <div
+      id={`user-avatar-${userId}`}
+      aria-label={`Avatar of ${userName}`}
       role="img"
       className="border-[1px] border-neutro-1 bg-neutro-2 overflow-hidden rounded-full hover:scale-105 active:scale-95 transition-transform duration-200"
       style={{ width: size, height: size }}
@@ -50,7 +55,7 @@ export const CircleAvatar = ({
       <AvatarImage
         index={index}
         size={avatarSize}
-        alt={`Avatar of ${userId}`}
+        alt={`Avatar of ${userName}`}
       />
     </div>
   );

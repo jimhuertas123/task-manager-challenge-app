@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
 describe('FormNewTask E2E', () => {
+  const uniqueTitle = `Test ${Date.now()}`;
+
   beforeEach(() => {
     cy.visit('/');
     cy.get('svg[aria-label="Add new task"]').click();
@@ -8,7 +10,7 @@ describe('FormNewTask E2E', () => {
 
   it('should fill and submit the new task form', () => {
     cy.get('span[aria-label="Task title"]').click();
-    cy.get('input[aria-label="Task title input"]').type('My Cypress Test');
+    cy.get('input[aria-label="Task title input"]').type(uniqueTitle);
 
     cy.get('#estimate').click();
     cy.get('[data-cy="estimate-option-EIGHT"]').click();
@@ -33,7 +35,17 @@ describe('FormNewTask E2E', () => {
 
     cy.get('form').should('not.exist');
 
-    cy.contains('My Cypress Task').should('exist');
+    cy.contains(uniqueTitle)
+      .should('exist')
+      .parents('[data-cy^="task-card-"]')
+      .within(() => {
+        cy.get('[data-cy="task-options-button"]').click();
+      });
+
+    cy.get('[data-cy="delete-button"]').click();
+
+    //validate that the same card must not exist
+    cy.contains(uniqueTitle).should('not.exist');
   });
 
   it('should show validation errors if required fields are empty', () => {
