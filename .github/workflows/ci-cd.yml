@@ -38,9 +38,14 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Wait for app to be ready
+      - name: Run E2E tests
         uses: cypress-io/github-action@v6
         with:
+          install: false
           start: yarn preview
           wait-on: 'http://localhost:4173'
+          wait-on-timeout: 120
           browser: chrome
+        env:
+          DISPLAY: ':99'
+          DBUS_SESSION_BUS_ADDRESS: '/dev/null'
