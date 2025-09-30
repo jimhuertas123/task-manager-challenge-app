@@ -43,4 +43,4 @@ jobs:
         with:
           start: yarn preview
           wait-on: 'http://localhost:4173'
-          browser: electron
+          browser: chrome
